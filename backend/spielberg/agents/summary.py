@@ -55,7 +55,8 @@ class SummaryAgent(BaseAgent):
                     result=AgentResult.ERROR,
                     message="Summary failed due to LLM error.",
                 )
-            output_text_content.text = llm_response.content
+            summary = llm_response.content
+            output_text_content.text = summary
             output_text_content.status = MsgStatus.success
             output_text_content.status_message = "Summary generated successfully."
             self.output_message.publish()
@@ -68,6 +69,6 @@ class SummaryAgent(BaseAgent):
 
         return AgentResponse(
             result=AgentResult.SUCCESS,
-            message="Summary generated.",
-            data={"message": "Summary generated."},
+            message="Summary generated and displayed to user.",
+            data={"summary": summary},
         )

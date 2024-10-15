@@ -194,7 +194,7 @@ class ReasoningEngine:
                 )
                 text_content = TextContent(text=llm_response.content)
                 text_content.status = MsgStatus.success
-                text_content.status_message = "Here is your response."
+                text_content.status_message = "Here is summary of the response."
                 self.output_message.content.append(text_content)
                 self.output_message.status = MsgStatus.success
                 self.output_message.publish()

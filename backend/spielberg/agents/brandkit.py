@@ -8,12 +8,12 @@ logger = logging.getLogger(__name__)
 
 class SampleAgent(BaseAgent):
     def __init__(self, session: Session, **kwargs):
-        self.agent_name = "sample"
-        self.description = "Sample agent description"
+        self.agent_name = "brandkit"
+        self.description = "Agent to add brand kit "
         self.parameters = self.get_parameters()
         super().__init__(session=session, **kwargs)
 
-    def __call__(self, sample_id: str, *args, **kwargs) -> AgentResponse:
+    def __call__(self, video_id: str, *args, **kwargs) -> AgentResponse:
         """
         Process the sample based on the given sample ID.
 
