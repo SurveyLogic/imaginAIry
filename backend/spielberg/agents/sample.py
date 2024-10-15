@@ -34,7 +34,7 @@ class SampleAgent(BaseAgent):
             text_content.status = MsgStatus.success
             self.output_message.publish()
         except Exception:
-            logger.exception(f"error in {self.agent_name}")
+            logger.exception(f"Error in {self.agent_name}")
             text_content.status = MsgStatus.error
             error_message = "Error in calculating pricing."
             text_content.status_message = error_message

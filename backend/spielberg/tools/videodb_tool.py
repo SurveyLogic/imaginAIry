@@ -1,14 +1,20 @@
 import os
-from videodb import connect
+
+import videodb
+
+from videodb.timeline import Timeline
+from videodb.asset import VideoAsset, ImageAsset
 
 
 class VideoDBTool:
     def __init__(self, collection_id="default"):
-        self.conn = connect(
+        self.conn = videodb.connect(
             base_url=os.getenv("VIDEO_DB_BASE_URL", "https://api.videodb.io")
         )
+        self.collection = None
         if collection_id:
             self.collection = self.conn.get_collection(collection_id)
+        self.timeline = None
 
     def get_collection(self):
         return {
@@ -104,3 +110,19 @@ class VideoDBTool:
         else:
             search_resuls = self.collection.search(query=query)
         return search_resuls
+
+    def add_brandkit(self, video_id, intro_video_id, outro_video_id, brand_image_id):
+        timeline = Timeline(self.conn)
+        if intro_video_id:
+            intro_video = VideoAsset(asset_id=intro_video_id)
+            timeline.add_inline(intro_video)
+        video = VideoAsset(asset_id=video_id)
+        timeline.add_inline(video)
+        if outro_video_id:
+            outro_video = VideoAsset(asset_id=outro_video_id)
+            timeline.add_inline(outro_video)
+        if brand_image_id:
+            brand_image = ImageAsset(asset_id=brand_image_id)
+            timeline.add_overlay(0, brand_image)
+        stream_url = timeline.generate_stream()
+        return stream_url

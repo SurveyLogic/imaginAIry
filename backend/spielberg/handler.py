@@ -7,6 +7,7 @@ from spielberg.agents.download import DownloadAgent
 from spielberg.agents.pricing import PricingAgent
 from spielberg.agents.upload import UploadAgent
 from spielberg.agents.search import SearchAgent
+from spielberg.agents.brandkit import BrandkitAgent
 
 from spielberg.core.session import Session, InputMessage, MsgStatus
 from spielberg.core.reasoning import ReasoningEngine
@@ -27,7 +28,8 @@ class ChatHandler:
             DownloadAgent,
             PricingAgent,
             UploadAgent,
-            SearchAgent
+            SearchAgent,
+            BrandkitAgent,
         ]
 
     def add_videodb_state(self, session):
