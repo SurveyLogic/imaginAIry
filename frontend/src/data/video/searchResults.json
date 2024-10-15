@@ -1,0 +1,32 @@
+{
+    "hits": [
+        {
+            "id": "1",
+            "start": 100,
+            "end": 200,
+            "text": "This is the summary of Chapter 1",
+            "type": "relevant"
+        },
+        {
+            "id": "2",
+            "start": 120,
+            "end": 200,
+            "text": "This is the summary of Chapter 2",
+            "type": "exact"
+        },
+        {
+            "id": "3",
+            "start": 210,
+            "end": 255,
+            "text": "This is the summary of Chapter 3",
+            "type": "relevant"
+        },
+        {
+            "id": "4",
+            "start": 300,
+            "end": 302,
+            "text": "This is the summary of Chapter 4",
+            "type": "relevant"
+        }
+    ]
+}

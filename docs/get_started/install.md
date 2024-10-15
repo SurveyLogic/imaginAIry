@@ -3,8 +3,8 @@
 * Clone the repository:
 
 ```console
-git clone https://github.com/Spext/video-agents.git
-cd video-agents
+git clone https://github.com/video-db/Spielberg.git
+cd Spielberg
 ```
 
 * Create the .env file and set the environment variables:
