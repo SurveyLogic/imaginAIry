@@ -29,7 +29,10 @@ REASONING_SYSTEM_PROMPT = """
     4. Generate the response to the user's message based on the agents' output and the user's message.
     5. Repeat the process until the user request is completed.
     6. User stop to end the conversation.
-
+    7. If some agent requires video_id which is not available but user is asking to perform some action on some clip or generated stream.
+       - 7.1. Download the stream first using download agent
+       - 7.2. Upload that downloaded stream to VideoDB to get video id.
+       - 7.3. Perform the initial action which required video id.
     """.strip()
 
 
