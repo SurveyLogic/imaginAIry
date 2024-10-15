@@ -116,7 +116,7 @@ class ReasoningEngine:
         agent = next(
             (agent for agent in self.agents if agent.agent_name == agent_name), None
         )
-        self.output_message.actions.append(f"Running {agent_name} Agent")
+        self.output_message.actions.append(f"Running @{agent_name} agent")
         self.output_message.agents.append(agent_name)
         self.output_message.push_update()
         return agent.safe_call(*args, **kwargs)
@@ -192,11 +192,12 @@ class ReasoningEngine:
                         role=RoleTypes.assistant,
                     )
                 )
-                self.output_message.content.append(
-                    TextContent(text=llm_response.content, status=MsgStatus.success)
-                )
+                text_content = TextContent(text=llm_response.content)
+                text_content.status = MsgStatus.success
+                text_content.status_message = "Here is your response."
+                self.output_message.content.append(text_content)
+                self.output_message.status = MsgStatus.success
                 self.output_message.publish()
-                self.output_message.update_status(MsgStatus.success)
                 print("-" * 40, "Stopping", "-" * 40)
                 self.stop()
                 break
