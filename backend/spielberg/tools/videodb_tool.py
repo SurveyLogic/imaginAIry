@@ -93,6 +93,10 @@ class VideoDBTool:
         index = video.index_spoken_words()
         return index
 
+    def index_scene(self, video_id: str):
+        video = self.collection.get_video(video_id)
+        return video.index_scenes()
+
     def download(self, stream_link: str, name: str = None):
         download_response = self.conn.download(stream_link, name)
         return download_response
