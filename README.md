@@ -13,7 +13,7 @@ Spielberg is an open source platform for creating agents which interact with you
 
 ### Prerequisites
 
-- Python 3.6 or higher
+- Python 3.9 or higher
 - Node.js 22.8.0 or higher
 - npm
 

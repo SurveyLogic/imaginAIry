@@ -63,7 +63,6 @@ class BrandkitAgent(BaseAgent):
             )
             self.output_message.content.append(video_content)
             self.output_message.push_update()
-            # TODO: Generate video
             videodb_tool = VideoDBTool(collection_id=collection_id)
             brandkit_stream = videodb_tool.add_brandkit(
                 video_id, intro_video_id, outro_video_id, brand_image_id
