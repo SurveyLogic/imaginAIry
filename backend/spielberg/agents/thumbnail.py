@@ -20,7 +20,7 @@ THUMBNAIL_AGENT_PARAMETERS = {
         },
         "timestamp": {
             "type": "integer",
-            "description": "Timestamp in seconds of the video to generate thumbnail",
+            "description": "Timestamp in seconds of the video to generate thumbnail, Optional parameter don't ask from user",
         },
     },
     "required": ["collection_id", "video_id"],
@@ -30,7 +30,7 @@ THUMBNAIL_AGENT_PARAMETERS = {
 class ThumbnailAgent(BaseAgent):
     def __init__(self, session: Session, **kwargs):
         self.agent_name = "thumbnail"
-        self.description = "Generates a thumbnail image from a video file at a specified timestamp. This Agent takes a video id and a timestamp as input, and produces a representative image frame at that precise moment in the video. It extracts the exact frame from the video at the given time. Use this tool when a user requests a preview, snapshot, generate or visual representation of a specific moment in a video file. The output is a static image file suitable for quick previews or thumbnails. It will not provide any other processing or editing options beyond generating the thumbnail."
+        self.description = "Generates a thumbnail image from a video file. This Agent takes a video id and a optionl timestamp as input. Use this tool when a user requests a preview, snapshot, generate or visual representation of a specific moment in a video file. The output is a static image file suitable for quick previews or thumbnails. It will not provide any other processing or editing options beyond generating the thumbnail."
         self.parameters = THUMBNAIL_AGENT_PARAMETERS
         super().__init__(session=session, **kwargs)
 
