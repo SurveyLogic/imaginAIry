@@ -1,5 +1,5 @@
 import os
-from videodb import connect
+from videodb import connect, SearchType
 
 
 class VideoDBTool:
@@ -104,3 +104,13 @@ class VideoDBTool:
         else:
             search_resuls = self.collection.search(query=query)
         return search_resuls
+
+    def keyword_search(self, query, video_id=None):
+        """Search for a keyword in a video."""
+        video = self.collection.get_video(video_id)
+        return video.search(query=query, search_type=SearchType.keyword)
+
+    def generate_video_stream(self, video_id: str, timeline):
+        """Generate a video stream from a timeline. timeline is a list of tuples. ex [(0, 10), (20, 30)]"""
+        video = self.collection.get_video(video_id)
+        return video.generate_stream(timeline)
