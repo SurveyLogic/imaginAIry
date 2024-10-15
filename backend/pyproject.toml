@@ -1,0 +1,22 @@
+[project]
+name = "spielberg"
+version = "0.1.0"
+description = "Spielberg backend."
+readme = "README.md"
+requires-python = ">=3.6"
+dependencies = [
+    "flask==3.0.3",
+    "flask-socketio==5.3.6",
+    "flask-cors==4.0.1",
+    "openai==1.42.0",
+    "pydantic==2.8.2",
+    "pydantic-settings==2.4.0",
+    "python-dotenv==1.0.1",
+    "videodb",
+    "spielberg",
+]
+
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"

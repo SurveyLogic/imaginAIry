@@ -1,0 +1,31 @@
+services:
+  backend:
+    image: spielberg:latest
+    build:
+      context: ./backend 
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app/
+      - /app/venv/
+    env_file:
+      - ./backend/.env
+    environment:
+      - FLASK_APP=spielberg.entrypoint.api.server
+      - FLASK_DEBUG=1
+    # dev command
+    command: python spielberg/entrypoint/api/server.py
+
+  frontend:
+    image: spielberg_frontend:latest
+    build:
+      context: ./frontend
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    env_file:
+      - ./frontend/.env
+    command: npm run dev
