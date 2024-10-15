@@ -58,18 +58,34 @@ class VideoDBTool:
             for video in videos
         ]
 
-    def upload(self, url):
-        media = self.collection.upload(url=url)
-        return {
-            "id": media.id,
-            "collection_id": media.collection_id,
-            "stream_url": media.stream_url,
-            "player_url": media.player_url,
-            "name": media.name,
-            "description": media.description,
-            "thumbnail_url": media.thumbnail_url,
-            "length": media.length,
-        }
+    def upload(self, url, media_type):
+        media = self.conn.upload(url=url, media_type=media_type)
+
+        if media_type == "video":
+            return {
+                "id": media.id,
+                "collection_id": media.collection_id,
+                "stream_url": media.stream_url,
+                "player_url": media.player_url,
+                "name": media.name,
+                "description": media.description,
+                "thumbnail_url": media.thumbnail_url,
+                "length": media.length,
+            }
+        elif media_type == "audio":
+            return {
+                "id": media.id,
+                "collection_id": media.collection_id,
+                "name": media.name,
+                "length": media.length,
+            }
+        elif media_type == "image":
+            return {
+                "id": media.id,
+                "collection_id": media.collection_id,
+                "name": media.name,
+                "url": media.url,
+            }
 
     def generate_thumbnail(self, video_id: str, timestamp: int = 5):
         video = self.collection.get_video(video_id)
