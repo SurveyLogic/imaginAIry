@@ -32,13 +32,14 @@ class SampleAgent(BaseAgent):
             self.output_message.push_update()
             text_content.text = "This is the text result of Agent."
             text_content.status = MsgStatus.success
+            text_content.status_message = "Here is your response"
             self.output_message.publish()
-        except Exception:
+        except Exception as e:
             logger.exception(f"Error in {self.agent_name}")
             text_content.status = MsgStatus.error
-            error_message = "Error in calculating pricing."
-            text_content.status_message = error_message
+            text_content.status_message = "Error in calculating pricing."
             self.output_message.publish()
+            error_message = f"Agent failed with error {e}"
             return AgentResponse(result=AgentResult.ERROR, message=error_message)
         return AgentResponse(
             result=AgentResult.SUCCESS,
