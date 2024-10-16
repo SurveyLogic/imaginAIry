@@ -151,7 +151,9 @@ class OpenAI(BaseLLM):
             )
         return formatted_tools
 
-    def chat_completions(self, messages: list, tools: list = [], stop=None):
+    def chat_completions(
+        self, messages: list, tools: list = [], stop=None, response_format=None
+    ):
         """Get completions for chat.
 
         docs: https://platform.openai.com/docs/guides/function-calling
@@ -168,6 +170,9 @@ class OpenAI(BaseLLM):
         if tools:
             params["tools"] = self._format_tools(tools)
             params["tool_choice"] = "auto"
+
+        if response_format:
+            params["response_format"] = response_format
 
         try:
             response = self.client.chat.completions.create(**params)

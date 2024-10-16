@@ -12,3 +12,5 @@ venv
 .ruff_cache
 .pytest_cache
 *.egg-info
+package-lock.json
+*.mjs

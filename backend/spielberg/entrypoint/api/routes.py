@@ -3,12 +3,13 @@ import os
 from flask import Blueprint, current_app as app
 
 from spielberg.db import load_db
-from spielberg.handler import ChatHandler, SessionHandler, VideoDBHandler
+from spielberg.handler import ChatHandler, SessionHandler, VideoDBHandler, ConfigHandler
 
 
 agent_bp = Blueprint("agent", __name__, url_prefix="/agent")
 session_bp = Blueprint("session", __name__, url_prefix="/session")
 videodb_bp = Blueprint("videodb", __name__, url_prefix="/videodb")
+config_bp = Blueprint("config", __name__, url_prefix="/config")
 
 
 @agent_bp.route("", methods=["GET"])
@@ -67,3 +68,9 @@ def get_video_or_all(collection_id, video_id):
         return videodb.get_video(video_id)
     else:
         return videodb.get_videos()
+
+
+@config_bp.route("/check", methods=["GET"])
+def config_check():
+    config_handler = ConfigHandler()
+    return config_handler.check()

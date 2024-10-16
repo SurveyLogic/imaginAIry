@@ -1,12 +1,17 @@
 import os
 import logging
 
+from dotenv import dotenv_values
+
 from spielberg.agents.thumbnail import ThumbnailAgent
 from spielberg.agents.summary import SummaryAgent
 from spielberg.agents.download import DownloadAgent
 from spielberg.agents.pricing import PricingAgent
 from spielberg.agents.upload import UploadAgent
 from spielberg.agents.search import SearchAgent
+from spielberg.agents.brandkit import BrandkitAgent
+from spielberg.agents.profanity_remover import ProfanityRemoverAgent
+from spielberg.agents.image_generation import ImageGenerationAgent
 
 from spielberg.core.session import Session, InputMessage, MsgStatus
 from spielberg.core.reasoning import ReasoningEngine
@@ -27,7 +32,10 @@ class ChatHandler:
             DownloadAgent,
             PricingAgent,
             UploadAgent,
-            SearchAgent
+            SearchAgent,
+            BrandkitAgent,
+            ProfanityRemoverAgent,
+            ImageGenerationAgent,
         ]
 
     def add_videodb_state(self, session):
@@ -114,3 +122,19 @@ class VideoDBHandler:
     def get_videos(self):
         """Get all videos in a collection."""
         return self.videodb_tool.get_videos()
+
+
+class ConfigHandler:
+    def check(self):
+        values = dotenv_values()
+        env_keys = set(values.keys())
+        print(env_keys)
+        videodb_configured = "VIDEO_DB_API_KEY" in env_keys
+        llm_keys = ("OPENAI_API_KEY",)
+        llm_configured = any(llm_key in env_keys for llm_key in llm_keys)
+        db_configured = True
+        return {
+            "videodb_configured": videodb_configured,
+            "llm_configured": llm_configured,
+            "db_configured": db_configured,
+        }
