@@ -21,9 +21,6 @@ def flux_dev(prompt):
             "num_inference_steps": 28,
         },
     )
-    print("**********")
-    print(output)
-    print("**********")
     return output
 
 def flux_schnell(prompt):
@@ -40,6 +37,4 @@ def flux_schnell(prompt):
             "num_inference_steps": 4
         }
     )
-    print(output)
-    print(dir(output[0]))
     return output
