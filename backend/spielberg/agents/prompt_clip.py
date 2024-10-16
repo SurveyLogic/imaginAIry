@@ -111,22 +111,10 @@ class PromptClipAgent(BaseAgent):
                 try:
                     llm_response = future.result()
                     output = json.loads(llm_response.content)
-                    print("output" * 10)
-                    print("output", output)
                     matches.extend(output["sentences"])
                 except Exception as e:
                     logger.error(f"Error in getting matches: {e}")
                     continue
-        # for prompt in prompts:
-        #     llm_response = self.llm.chat_completions(
-        #         [ContextMessage(content=prompt, role=RoleTypes.system).to_llm_msg()]
-        #     )
-        #     try:
-        #         output = json.loads(llm_response.content)
-        #         matches.extend(output["sentences"])
-        #     except Exception as e:
-        #         logger.error(f"Error in getting matches: {e}")
-        #         continue
         return matches
 
     def __call__(
@@ -134,7 +122,7 @@ class PromptClipAgent(BaseAgent):
     ) -> AgentResponse:
         try:
             videodb_tool = VideoDBTool(collection_id=collection_id)
-            self.output_message.actions.append("Retrieving video transcript...")
+            self.output_message.actions.append("Retrieving video transcript..")
             self.output_message.push_update()
             try:
                 transcript_text = videodb_tool.get_transcript(video_id)
@@ -146,7 +134,7 @@ class PromptClipAgent(BaseAgent):
                 videodb_tool.index_spoken_words(video_id)
                 transcript_text = videodb_tool.get_transcript(video_id)
 
-            self.output_message.actions.append("Identifying key moments...")
+            self.output_message.actions.append("Identifying key moments..")
             self.output_message.push_update()
             result = self._text_prompter(transcript_text, prompt)
             result_timestamps = []
@@ -173,9 +161,8 @@ class PromptClipAgent(BaseAgent):
                         continue
             if result_timestamps:
                 try:
-                    self.output_message.actions.append(
-                        "Key moments identified. Creating video clip..."
-                    )
+                    self.output_message.actions.append("Key moments identified..")
+                    self.output_message.actions("Creating video clip..")
                     video_content = VideoContent(
                         agent_name=self.agent_name, status=MsgStatus.progress
                     )
