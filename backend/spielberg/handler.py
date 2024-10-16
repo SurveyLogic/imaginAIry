@@ -1,6 +1,8 @@
 import os
 import logging
 
+from dotenv import dotenv_values
+
 from spielberg.agents.thumbnail import ThumbnailAgent
 from spielberg.agents.summary import SummaryAgent
 from spielberg.agents.download import DownloadAgent
@@ -120,3 +122,19 @@ class VideoDBHandler:
     def get_videos(self):
         """Get all videos in a collection."""
         return self.videodb_tool.get_videos()
+
+
+class ConfigHandler:
+    def check(self):
+        values = dotenv_values()
+        env_keys = set(values.keys())
+        print(env_keys)
+        videodb_configured = "VIDEO_DB_API_KEY" in env_keys
+        llm_keys = ("OPENAI_API_KEY",)
+        llm_configured = any(llm_key in env_keys for llm_key in llm_keys)
+        db_configured = True
+        return {
+            "videodb_configured": videodb_configured,
+            "llm_configured": llm_configured,
+            "db_configured": db_configured,
+        }
