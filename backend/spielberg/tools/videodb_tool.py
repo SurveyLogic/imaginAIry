@@ -1,7 +1,7 @@
 import os
-
 import videodb
 
+from videodb import SearchType
 from videodb.timeline import Timeline
 from videodb.asset import VideoAsset, ImageAsset
 
@@ -64,18 +64,34 @@ class VideoDBTool:
             for video in videos
         ]
 
-    def upload(self, url):
-        media = self.collection.upload(url=url)
-        return {
-            "id": media.id,
-            "collection_id": media.collection_id,
-            "stream_url": media.stream_url,
-            "player_url": media.player_url,
-            "name": media.name,
-            "description": media.description,
-            "thumbnail_url": media.thumbnail_url,
-            "length": media.length,
-        }
+    def upload(self, url, media_type):
+        media = self.conn.upload(url=url, media_type=media_type)
+
+        if media_type == "video":
+            return {
+                "id": media.id,
+                "collection_id": media.collection_id,
+                "stream_url": media.stream_url,
+                "player_url": media.player_url,
+                "name": media.name,
+                "description": media.description,
+                "thumbnail_url": media.thumbnail_url,
+                "length": media.length,
+            }
+        elif media_type == "audio":
+            return {
+                "id": media.id,
+                "collection_id": media.collection_id,
+                "name": media.name,
+                "length": media.length,
+            }
+        elif media_type == "image":
+            return {
+                "id": media.id,
+                "collection_id": media.collection_id,
+                "name": media.name,
+                "url": media.url,
+            }
 
     def generate_thumbnail(self, video_id: str, timestamp: int = 5):
         video = self.collection.get_video(video_id)
@@ -101,6 +117,10 @@ class VideoDBTool:
         index = video.index_spoken_words()
         return index
 
+    def index_scene(self, video_id: str):
+        video = self.collection.get_video(video_id)
+        return video.index_scenes()
+
     def download(self, stream_link: str, name: str = None):
         download_response = self.conn.download(stream_link, name)
         return download_response
@@ -112,6 +132,16 @@ class VideoDBTool:
         else:
             search_resuls = self.collection.search(query=query)
         return search_resuls
+
+    def keyword_search(self, query, video_id=None):
+        """Search for a keyword in a video."""
+        video = self.collection.get_video(video_id)
+        return video.search(query=query, search_type=SearchType.keyword)
+
+    def generate_video_stream(self, video_id: str, timeline):
+        """Generate a video stream from a timeline. timeline is a list of tuples. ex [(0, 10), (20, 30)]"""
+        video = self.collection.get_video(video_id)
+        return video.generate_stream(timeline)
 
     def add_brandkit(self, video_id, intro_video_id, outro_video_id, brand_image_id):
         timeline = Timeline(self.conn)

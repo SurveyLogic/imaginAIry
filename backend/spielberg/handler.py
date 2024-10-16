@@ -9,6 +9,8 @@ from spielberg.agents.download import DownloadAgent
 from spielberg.agents.pricing import PricingAgent
 from spielberg.agents.upload import UploadAgent
 from spielberg.agents.search import SearchAgent
+from spielberg.agents.prompt_clip import PromptClipAgent
+from spielberg.agents.index import IndexAgent
 from spielberg.agents.brandkit import BrandkitAgent
 from spielberg.agents.profanity_remover import ProfanityRemoverAgent
 from spielberg.agents.image_generation import ImageGenerationAgent
@@ -33,6 +35,8 @@ class ChatHandler:
             PricingAgent,
             UploadAgent,
             SearchAgent,
+            PromptClipAgent,
+            IndexAgent,
             BrandkitAgent,
             ProfanityRemoverAgent,
             ImageGenerationAgent,
