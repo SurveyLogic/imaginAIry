@@ -40,7 +40,8 @@ class ImageGenerationAgent(BaseAgent):
                 self.output_message.publish()
                 error_message = "Agent failed with error in replicate."
                 return AgentResponse(result=AgentResult.ERROR, message=error_message)
-            image_content.image = {"url": flux_output[0].url}
+            image_url = flux_output[0].url
+            image_content.image = {"url": image_url}
             image_content.status = MsgStatus.success
             image_content.status_message = "Here is your generated image"
             self.output_message.publish()
@@ -54,5 +55,5 @@ class ImageGenerationAgent(BaseAgent):
         return AgentResponse(
             result=AgentResult.SUCCESS,
             message=f"Agent {self.name} completed successfully.",
-            data={},
+            data={"image_url": image_url},
         )
