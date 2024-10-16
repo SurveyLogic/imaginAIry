@@ -8,7 +8,7 @@ from spielberg.core.session import (
     RoleTypes,
     TextContent,
 )
-from spielberg.llm.openai import OpenaiConfig, OpenAI
+from spielberg.llm.openai import OpenAI
 
 logger = logging.getLogger(__name__)
 
@@ -108,16 +108,16 @@ class PricingAgent(BaseAgent):
         :rtype: AgentResponse
         """
         try:
-            self.output_message.actions.append("Calculating pricing")
             text_content = TextContent(agent_name=self.agent_name)
+            text_content.status_message = "Calculating pricing.."
             self.output_message.content.append(text_content)
             self.output_message.push_update()
 
-            pricing_llm_message = f"{PRICING_AGENT_PROMPT} user query: {query}"
-            pricing_llm_context = ContextMessage(
-                content=pricing_llm_message, role=RoleTypes.user
+            pricing_llm_prompt = f"{PRICING_AGENT_PROMPT} user query: {query}"
+            pricing_llm_message = ContextMessage(
+                content=pricing_llm_prompt, role=RoleTypes.user
             )
-            llm_response = self.llm.chat_completions([pricing_llm_context.to_llm_msg()])
+            llm_response = self.llm.chat_completions([pricing_llm_message.to_llm_msg()])
 
             if not llm_response.status:
                 logger.error(f"LLM failed with {llm_response}")
@@ -130,6 +130,7 @@ class PricingAgent(BaseAgent):
                 )
             text_content.text = llm_response.content
             text_content.status = MsgStatus.success
+            text_content.status_message = "Pricing estimation is ready."
             self.output_message.publish()
         except Exception:
             logger.exception(f"Error in {self.agent_name}")

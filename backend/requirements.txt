@@ -7,5 +7,6 @@ openai-function-calling==2.2.0
 pydantic==2.8.2
 pydantic-settings==2.4.0
 python-dotenv==1.0.1
+replicate==1.0.1
 yt-dlp==2024.10.7
 git+https://github.com/video-db/videodb-python@ankit/add-download

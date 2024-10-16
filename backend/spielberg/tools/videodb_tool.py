@@ -1,14 +1,20 @@
 import os
-from videodb import connect, SearchType
+import videodb
+
+from videodb import SearchType
+from videodb.timeline import Timeline
+from videodb.asset import VideoAsset, ImageAsset
 
 
 class VideoDBTool:
     def __init__(self, collection_id="default"):
-        self.conn = connect(
+        self.conn = videodb.connect(
             base_url=os.getenv("VIDEO_DB_BASE_URL", "https://api.videodb.io")
         )
+        self.collection = None
         if collection_id:
             self.collection = self.conn.get_collection(collection_id)
+        self.timeline = None
 
     def get_collection(self):
         return {
@@ -97,10 +103,12 @@ class VideoDBTool:
             "url": image.url,
         }
 
-    def get_transcript(self, video_id: str):
-        # TODO: Flag for just text
+    def get_transcript(self, video_id: str, text=True):
         video = self.collection.get_video(video_id)
-        transcript = video.get_transcript_text()
+        if text:
+            transcript = video.get_transcript_text()
+        else:
+            transcript = video.get_transcript()
         return transcript
 
     def index_spoken_words(self, video_id: str):
@@ -134,3 +142,23 @@ class VideoDBTool:
         """Generate a video stream from a timeline. timeline is a list of tuples. ex [(0, 10), (20, 30)]"""
         video = self.collection.get_video(video_id)
         return video.generate_stream(timeline)
+
+    def add_brandkit(self, video_id, intro_video_id, outro_video_id, brand_image_id):
+        timeline = Timeline(self.conn)
+        if intro_video_id:
+            intro_video = VideoAsset(asset_id=intro_video_id)
+            timeline.add_inline(intro_video)
+        video = VideoAsset(asset_id=video_id)
+        timeline.add_inline(video)
+        if outro_video_id:
+            outro_video = VideoAsset(asset_id=outro_video_id)
+            timeline.add_inline(outro_video)
+        if brand_image_id:
+            brand_image = ImageAsset(asset_id=brand_image_id)
+            timeline.add_overlay(0, brand_image)
+        stream_url = timeline.generate_stream()
+        return stream_url
+
+    def get_and_set_timeline(self):
+        self.timeline = Timeline(self.conn)
+        return self.timeline

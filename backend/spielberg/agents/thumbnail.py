@@ -41,7 +41,7 @@ class ThumbnailAgent(BaseAgent):
         Get the thumbnail for the video at the given timestamp
         """
         try:
-            self.output_message.actions.append("Generating thumbnail.")
+            self.output_message.actions.append("Generating thumbnail..")
             image_content = ImageContent(agent_name=self.agent_name)
             self.output_message.content.append(image_content)
             self.output_message.push_update()
@@ -53,7 +53,7 @@ class ThumbnailAgent(BaseAgent):
 
             image_content.image = thumbnail_data
             image_content.status = MsgStatus.success
-            image_content.status_message = "Thumbnail generated successfully."
+            image_content.status_message = "Here is your thumbnail."
             self.output_message.publish()
 
         except Exception as e:
