@@ -87,10 +87,12 @@ class VideoDBTool:
             "url": image.url,
         }
 
-    def get_transcript(self, video_id: str):
-        # TODO: Flag for just text
+    def get_transcript(self, video_id: str, text=True):
         video = self.collection.get_video(video_id)
-        transcript = video.get_transcript_text()
+        if text:
+            transcript = video.get_transcript_text()
+        else:
+            transcript = video.get_transcript()
         return transcript
 
     def index_spoken_words(self, video_id: str):
@@ -126,3 +128,7 @@ class VideoDBTool:
             timeline.add_overlay(0, brand_image)
         stream_url = timeline.generate_stream()
         return stream_url
+
+    def get_and_set_timeline(self):
+        self.timeline = Timeline(self.conn)
+        return self.timeline

@@ -8,6 +8,7 @@ from spielberg.agents.pricing import PricingAgent
 from spielberg.agents.upload import UploadAgent
 from spielberg.agents.search import SearchAgent
 from spielberg.agents.brandkit import BrandkitAgent
+from spielberg.agents.profanity_remover import ProfanityRemoverAgent
 
 from spielberg.core.session import Session, InputMessage, MsgStatus
 from spielberg.core.reasoning import ReasoningEngine
@@ -30,6 +31,7 @@ class ChatHandler:
             UploadAgent,
             SearchAgent,
             BrandkitAgent,
+            ProfanityRemoverAgent,
         ]
 
     def add_videodb_state(self, session):

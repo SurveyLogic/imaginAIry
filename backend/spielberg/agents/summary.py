@@ -2,7 +2,7 @@ import logging
 
 from spielberg.agents.base import BaseAgent, AgentResponse, AgentResult
 from spielberg.core.session import ContextMessage, RoleTypes, TextContent, MsgStatus
-from spielberg.llm.openai import OpenaiConfig, OpenAI
+from spielberg.llm.openai import OpenAI
 from spielberg.tools.videodb_tool import VideoDBTool
 
 logger = logging.getLogger(__name__)
@@ -17,7 +17,7 @@ class SummaryAgent(BaseAgent):
     def __init__(self, session=None, **kwargs):
         self.agent_name = "summary"
         self.description = "This is an agent to summarize the given video of VideoDB."
-        self.llm = OpenAI(OpenaiConfig())
+        self.llm = OpenAI()
         self.parameters = self.get_parameters()
         super().__init__(session=session, **kwargs)
 
