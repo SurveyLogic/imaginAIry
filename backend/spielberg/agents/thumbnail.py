@@ -65,6 +65,6 @@ class ThumbnailAgent(BaseAgent):
 
         return AgentResponse(
             result=AgentResult.SUCCESS,
-            message="Thumbnail fetched",
+            message="Thumbnail generated and displayed to user.",
             data=thumbnail_data,
         )
