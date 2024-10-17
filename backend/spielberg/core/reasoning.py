@@ -37,7 +37,13 @@ REASONING_SYSTEM_PROMPT = """
 
 
 class ReasoningEngine:
-    """The ReasoningEngine class."""
+    """The Reasoning Engine is the core class that directly interfaces with the user. It interprets natural language input in any conversation and orchestrates agents to fulfill the user's requests. The primary functions of the Reasoning Engine are:
+
+    * Maintain Context of Conversational History: Manage memory, context limits, input, and output experiences to ensure coherent and context-aware interactions.
+    * Natural Language Understanding (NLU): Uses LLMs of your choice to have understanding of the task.
+    * Intelligent Reference Deduction: Intelligently deduce references to previous messages, outputs, files, agents, etc., to provide relevant and accurate responses.
+    * Agent Orchestration: Decide on agents and their workflows to fulfill requests. Multiple strategies can be employed to create agent workflows, such as step-by-step processes or chaining of agents provided by default.
+    * Final Control Over Conversation Flow: Maintain ultimate control over the flow of conversation with the user, ensuring coherence and goal alignment."""
 
     def __init__(
         self,
@@ -46,8 +52,8 @@ class ReasoningEngine:
     ):
         """Initialize the ReasoningEngine.
 
-        :param InputMessage input_message: The input message to the reasoning engine
-        :param Session session: The session instance
+        :param input_message: The input message to the reasoning engine.
+        :param session: The session instance.
         """
         self.input_message = input_message
         self.session = session
@@ -61,7 +67,7 @@ class ReasoningEngine:
     def register_agents(self, agents: List[BaseAgent]):
         """Register an agents.
 
-        :param List[BaseAgent] agents: The list of agents to register
+        :param agents: The list of agents to register.
         """
         self.agents.extend(agents)
 
@@ -110,8 +116,7 @@ class ReasoningEngine:
         :param str agent_name: The name of the agent to run
         :param args: The arguments to pass to the agent
         :param kwargs: The keyword arguments to pass to the agent
-        :return: :class:`AgentResponse` instance
-        :rtype: AgentResponse
+        :return: The response from the agent
         """
         print("-" * 40, f"Running {agent_name} Agent", "-" * 40)
         print(kwargs, "\n\n")
@@ -208,7 +213,7 @@ class ReasoningEngine:
     def run(self, max_iterations: int = None):
         """Run the reasoning engine.
 
-        :param int max_iterations: (optional) The number of max_iterations to run the reasoning engine
+        :param int max_iterations: The number of max_iterations to run the reasoning engine
         """
         self.iterations = max_iterations or self.max_iterations
         self.build_context()
