@@ -1,5 +1,10 @@
 ## Session
 
+
+### BaseMessage
+
+::: spielberg.core.session.BaseMessage
+
 ### InputMessage
 
 ::: spielberg.core.session.InputMessage
