@@ -15,7 +15,7 @@ Make install-be
 
 ### Start the documentation server
 ```bash
-mkdocs serve
+mkdocs serve -w ./backend
 ```
 
 
