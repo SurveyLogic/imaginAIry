@@ -1,4 +1,4 @@
-site_name: Video Agents
+site_name: ""
 
 
 repo_url: https://github.com/video-db/videodb-python
@@ -17,15 +17,15 @@ theme:
       name: Switch to light mode
   - media: '(prefers-color-scheme: light)'
     scheme: default
-    primary: teal
-    accent: teal
+    primary: custom
+    accent: deep orange
     toggle:
       icon: material/lightbulb
       name: Switch to dark mode
   - media: '(prefers-color-scheme: dark)'
     scheme: slate
-    primary: teal
-    accent: teal
+    primary: custom
+    accent: deep orange
     toggle:
       icon: material/lightbulb-outline
       name: Switch to system preference
@@ -48,9 +48,8 @@ theme:
     - content.code.annotation
     - content.code.copy
 
-  favicon: fontawesome/solid/clapperboard
-  icon:
-    logo: fontawesome/solid/clapperboard
+  favicon: assets/favicon.png
+  logo: assets/logo.png
   language: en
 
 nav:
@@ -179,3 +178,6 @@ extra:
       link: https://x.com/videodb_io
     - icon: fontawesome/brands/discord
       link: https://discord.com/invite/py9P639jGz
+
+extra_css:
+  - stylesheets/extra.css
