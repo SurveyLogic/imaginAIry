@@ -1,27 +1,11 @@
-import { createRouter, createWebHistory } from 'vue-router';
-import Collection from '../views/Collection.vue';
-import Video from '../views/Video.vue';
+import { createRouter, createWebHistory } from "vue-router";
+import DefaultView from "../views/DefaultView.vue";
 
 const routes = [
   {
-    path: '/:collectionId',
-    name: 'Collection',
-    component: Collection,
-  },
-  {
-    path: '/:collectionId/video/:videoId',
-    name: 'Video',
-    component: Video,
-  },
-  {
-    path: '/default',
-    name: 'Default',
-    component: Collection,
-  },
-  {
-    path: '/',
-    name: 'Default-2',
-    component: Collection,
+    path: "/",
+    name: "Default",
+    component: DefaultView,
   },
 ];
 

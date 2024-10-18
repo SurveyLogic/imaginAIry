@@ -12,7 +12,7 @@ videodb_bp = Blueprint("videodb", __name__, url_prefix="/videodb")
 config_bp = Blueprint("config", __name__, url_prefix="/config")
 
 
-@agent_bp.route("", methods=["GET"])
+@agent_bp.route("/", methods=["GET"])
 def agent():
     """
     Handle the agent request
@@ -23,7 +23,7 @@ def agent():
     return chat_handler.agents_list()
 
 
-@session_bp.route("", methods=["GET"])
+@session_bp.route("/", methods=["GET"])
 def get_sessions():
     """
     Get all the sessions
