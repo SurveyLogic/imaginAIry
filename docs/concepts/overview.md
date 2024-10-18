@@ -36,11 +36,4 @@ Key aspects of Tools include:
 
 * Functional Building Blocks: Serve as modular functions that agents can utilize to perform tasks efficiently.
 * Wrapper Functions: Act as wrappers for existing functions or libraries, enhancing modularity and reusability.
-* Error Propagation: <Define how tools report errors back to agents and, subsequently, to the Reasoning Engine, improving error handling and debugging processes>
 
-
-
-Tool Catalog and Documentation: 
-
-* Detailed documentation for each tool, aiding developers in understanding and effectively utilizing available tools.
-* Ensure tools are designed to handle concurrent executions if needed, supporting system scalability and performance under load.
