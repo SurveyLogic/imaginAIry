@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@videodb/chat-vue": "file:../../videodb-chat",
+    "@videodb/chat-vue": "^0.0.4",
     "@videodb/player-vue": "^0.0.2",
     "axios": "^1.7.5",
     "dayjs": "^1.11.13",
