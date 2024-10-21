@@ -26,7 +26,9 @@ class SampleAgent(BaseAgent):
         try:
             self.output_message.actions.append("Processing sample..")
             text_content = TextContent(
-                agent_name=self.agent_name, status=MsgStatus.progress
+                agent_name=self.agent_name,
+                status=MsgStatus.progress,
+                status_message="Generating sample response..",
             )
             self.output_message.content.append(text_content)
             self.output_message.push_update()

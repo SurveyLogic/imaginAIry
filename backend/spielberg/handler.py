@@ -14,6 +14,7 @@ from spielberg.agents.index import IndexAgent
 from spielberg.agents.brandkit import BrandkitAgent
 from spielberg.agents.profanity_remover import ProfanityRemoverAgent
 from spielberg.agents.image_generation import ImageGenerationAgent
+from spielberg.agents.stream_video import StreamVideoAgent
 
 from spielberg.core.session import Session, InputMessage, MsgStatus
 from spielberg.core.reasoning import ReasoningEngine
@@ -40,6 +41,7 @@ class ChatHandler:
             BrandkitAgent,
             ProfanityRemoverAgent,
             ImageGenerationAgent,
+            StreamVideoAgent
         ]
 
     def add_videodb_state(self, session):
