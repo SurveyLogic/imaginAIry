@@ -1,6 +1,6 @@
 import os
 
-from flask import Blueprint, current_app as app
+from flask import Blueprint, request, current_app as app
 
 from spielberg.db import load_db
 from spielberg.handler import ChatHandler, SessionHandler, VideoDBHandler, ConfigHandler
@@ -34,16 +34,31 @@ def get_sessions():
     return session_handler.get_sessions()
 
 
-@session_bp.route("/<session_id>", methods=["GET"])
+@session_bp.route("/<session_id>", methods=["GET", "DELETE"])
 def get_session(session_id):
     """
-    Get the session details
+    Get or delete the session details
     """
+    if not session_id:
+        return {"message": f"Please provide {session_id}."}, 400
+
     session_handler = SessionHandler(
         db=load_db(os.getenv("SERVER_DB_TYPE", app.config["DB_TYPE"]))
     )
     session = session_handler.get_session(session_id)
-    return session
+    if not session:
+        return {"message": "Session not found."}, 404
+
+    if request.method == "GET":
+        return session
+    elif request.method == "DELETE":
+        success, failed_components = session_handler.delete_session(session_id)
+        if success:
+            return {"message": "Session deleted successfully."}, 200
+        else:
+            return {
+                "message": f"Failed to delete the entry for following components: {', '.join(failed_components)}"
+            }, 500
 
 
 @videodb_bp.route("/collection", defaults={"collection_id": None}, methods=["GET"])
