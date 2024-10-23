@@ -42,13 +42,19 @@ CREATE TABLE IF NOT EXISTS context_messages (
 )
 """
 
-conn = sqlite3.connect("spielberg.db")
 
-cursor = conn.cursor()
+def initialize_sqlite(db_name="spielberg.db"):
+    """Initialize the SQLite database by creating the necessary tables."""
+    conn = sqlite3.connect(db_name)
+    cursor = conn.cursor()
 
-cursor.execute(CREATE_SESSIONS_TABLE)
-cursor.execute(CREATE_CONVERSATIONS_TABLE)
-cursor.execute(CREATE_CONTEXT_MESSAGES_TABLE)
+    cursor.execute(CREATE_SESSIONS_TABLE)
+    cursor.execute(CREATE_CONVERSATIONS_TABLE)
+    cursor.execute(CREATE_CONTEXT_MESSAGES_TABLE)
 
-conn.commit()
-conn.close()
+    conn.commit()
+    conn.close()
+
+
+if __name__ == "__main__":
+    initialize_sqlite()

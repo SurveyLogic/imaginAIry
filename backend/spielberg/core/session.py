@@ -58,13 +58,36 @@ class TextContent(BaseContent):
     type: ContentType = ContentType.text
 
 
+class VideoData(BaseModel):
+    """Video data model class for video content."""
+
+    stream_url: str
+    player_url: Optional[str] = None
+    id: Optional[str] = None
+    collection_id: Optional[str] = None
+    name: Optional[str] = None
+    description: Optional[str] = None
+    thumbnail_url: Optional[str] = None
+    length: Optional[Union[int, float]] = None
+
+
 class VideoContent(BaseContent):
-    video: dict = {}
+    video: Optional[VideoData] = None
     type: ContentType = ContentType.video
 
 
+class ImageData(BaseModel):
+    """Image data model class for image content."""
+
+    url: str
+    name: Optional[str] = None
+    description: Optional[str] = None
+    id: Optional[str] = None
+    collection_id: Optional[str] = None
+
+
 class ImageContent(BaseContent):
-    image: dict = {}
+    image: Optional[ImageData] = None
     type: ContentType = ContentType.image
 
 

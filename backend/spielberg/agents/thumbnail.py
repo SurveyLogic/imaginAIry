@@ -1,8 +1,8 @@
 import logging
 
-from spielberg.agents.base import BaseAgent, AgentResponse, AgentResult
+from spielberg.agents.base import BaseAgent, AgentResponse, AgentStatus
 
-from spielberg.core.session import Session, MsgStatus, ImageContent
+from spielberg.core.session import Session, MsgStatus, ImageContent, ImageData
 from spielberg.tools.videodb_tool import VideoDBTool
 
 logger = logging.getLogger(__name__)
@@ -34,7 +34,7 @@ class ThumbnailAgent(BaseAgent):
         self.parameters = THUMBNAIL_AGENT_PARAMETERS
         super().__init__(session=session, **kwargs)
 
-    def __call__(
+    def run(
         self, collection_id: str, video_id: str, timestamp: int = 5, *args, **kwargs
     ) -> AgentResponse:
         """
@@ -50,8 +50,7 @@ class ThumbnailAgent(BaseAgent):
             thumbnail_data = videodb_tool.generate_thumbnail(
                 video_id=video_id, timestamp=timestamp
             )
-
-            image_content.image = thumbnail_data
+            image_content.image = ImageData(**thumbnail_data)
             image_content.status = MsgStatus.success
             image_content.status_message = "Here is your thumbnail."
             self.output_message.publish()
@@ -61,10 +60,10 @@ class ThumbnailAgent(BaseAgent):
             image_content.status = MsgStatus.error
             image_content.status_message = "Error in generating thumbnail."
             self.output_message.publish()
-            return AgentResponse(result=AgentResult.ERROR, message=str(e))
+            return AgentResponse(status=AgentStatus.ERROR, message=str(e))
 
         return AgentResponse(
-            result=AgentResult.SUCCESS,
+            status=AgentStatus.SUCCESS,
             message="Thumbnail generated and displayed to user.",
             data=thumbnail_data,
         )

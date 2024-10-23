@@ -1,7 +1,7 @@
 import logging
 
-from spielberg.agents.base import BaseAgent, AgentResponse, AgentResult
-from spielberg.core.session import Session, MsgStatus, VideoContent
+from spielberg.agents.base import BaseAgent, AgentResponse, AgentStatus
+from spielberg.core.session import Session, MsgStatus, VideoContent, VideoData
 from spielberg.tools.videodb_tool import VideoDBTool
 
 logger = logging.getLogger(__name__)
@@ -16,7 +16,7 @@ class StreamVideoAgent(BaseAgent):
         self.parameters = self.get_parameters()
         super().__init__(session=session, **kwargs)
 
-    def __call__(
+    def run(
         self,
         collection_id: str = None,
         video_id: str = None,
@@ -42,7 +42,7 @@ class StreamVideoAgent(BaseAgent):
                 self.output_message.actions.append("Processing given stream url..")
             else:
                 return AgentResponse(
-                    result=AgentResult.ERROR,
+                    status=AgentStatus.ERROR,
                     message="Either 'video_id' or 'stream_url' is required for getting the stream in video player.",
                 )
             if stream_url:
@@ -55,7 +55,7 @@ class StreamVideoAgent(BaseAgent):
                 self.output_message.content.append(video_content)
                 self.output_message.publish()
                 return AgentResponse(
-                    result=AgentResult.SUCCESS,
+                    status=AgentStatus.SUCCESS,
                     message=f"Agent {self.name} completed successfully.",
                     data={},
                 )
@@ -69,9 +69,7 @@ class StreamVideoAgent(BaseAgent):
             videodb_tool = VideoDBTool(collection_id=collection_id)
             video_data = videodb_tool.get_video(video_id)
             stream_url = video_data.get("stream_url")
-            video_content.video = {
-                "stream_url": stream_url,
-            }
+            video_content.video = VideoData(stream_url=stream_url)
             video_content.status = MsgStatus.success
             video_content.status_message = "Here is your stream"
             self.output_message.publish()
@@ -81,9 +79,9 @@ class StreamVideoAgent(BaseAgent):
             video_content.status_message = "Error in calculating pricing."
             self.output_message.publish()
             error_message = f"Agent failed with error {e}"
-            return AgentResponse(result=AgentResult.ERROR, message=error_message)
+            return AgentResponse(status=AgentStatus.ERROR, message=error_message)
         return AgentResponse(
-            result=AgentResult.SUCCESS,
+            status=AgentStatus.SUCCESS,
             message=f"Agent {self.name} completed successfully.",
             data={},
         )

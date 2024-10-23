@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: backend
+    region: singapore
+    runtime: docker
+    plan: free
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    envVars:
+      - key: FLASK_APP
+        value: spielberg.entrypoint.api.server
+      - key: SERVER_DEBUG
+        value: 1
+    
+  - type: web
+    name: frontend
+    region: singapore
+    runtime: docker
+    plan: free
+    dockerfilePath: ./frontend/Dockerfile
+    dockerContext: ./frontend

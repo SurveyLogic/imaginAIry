@@ -4,11 +4,12 @@ import os
 
 from videodb.asset import VideoAsset, AudioAsset
 
-from spielberg.agents.base import BaseAgent, AgentResponse, AgentResult
+from spielberg.agents.base import BaseAgent, AgentResponse, AgentStatus
 from spielberg.core.session import (
     Session,
     MsgStatus,
     VideoContent,
+    VideoData,
     ContextMessage,
     RoleTypes,
 )
@@ -45,7 +46,7 @@ class ProfanityRemoverAgent(BaseAgent):
         stream_url = timeline.generate_stream()
         return stream_url
 
-    def __call__(
+    def run(
         self,
         collection_id: str,
         video_id: str,
@@ -68,7 +69,7 @@ class ProfanityRemoverAgent(BaseAgent):
             beep_audio_id = beep_audio_id or BEEP_AUDIO_ID
             if not beep_audio_id:
                 return AgentResponse(
-                    result=AgentResult.failed,
+                    status=AgentStatus.failed,
                     message="Please provide the beep_audio_id or setup BEEP_AUDIO_ID in .env of backend directory.",
                 )
             self.output_message.actions.append("Started process to remove profanity..")
@@ -100,7 +101,7 @@ class ProfanityRemoverAgent(BaseAgent):
             clean_stream = self.add_beep(
                 videodb_tool, video_id, beep_audio_id, profanity_timeline
             )
-            video_content.video = {"stream_url": clean_stream}
+            video_content.video = VideoData(stream_url=clean_stream)
             video_content.status = MsgStatus.success
             video_content.status_message = "Here is the clean stream"
             self.output_message.content.append(video_content)
@@ -111,9 +112,9 @@ class ProfanityRemoverAgent(BaseAgent):
             video_content.status_message = "Failed to generate clean stream"
             self.output_message.publish()
             error_message = f"Error in generating the clean stream due to {e}."
-            return AgentResponse(result=AgentResult.ERROR, message=error_message)
+            return AgentResponse(status=AgentStatus.ERROR, message=error_message)
         return AgentResponse(
-            result=AgentResult.SUCCESS,
+            status=AgentStatus.SUCCESS,
             message=f"Agent {self.name} completed successfully.",
             data={"stream_url": clean_stream},
         )

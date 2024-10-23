@@ -2,13 +2,14 @@ import logging
 import json
 import concurrent.futures
 
-from spielberg.agents.base import BaseAgent, AgentResponse, AgentResult
+from spielberg.agents.base import BaseAgent, AgentResponse, AgentStatus
 from spielberg.core.session import (
     Session,
     ContextMessage,
     RoleTypes,
     MsgStatus,
     VideoContent,
+    VideoData,
 )
 from spielberg.tools.videodb_tool import VideoDBTool
 from spielberg.llm.openai import OpenAI
@@ -120,7 +121,7 @@ class PromptClipAgent(BaseAgent):
                     continue
         return matches
 
-    def __call__(
+    def run(
         self, prompt: str, video_id: str, collection_id: str, *args, **kwargs
     ) -> AgentResponse:
         try:
@@ -178,27 +179,25 @@ class PromptClipAgent(BaseAgent):
                         video_id=video_id, timeline=timeline
                     )
                     video_content.status_message = "Clip generated successfully."
-                    video_content.video = {
-                        "stream_url": stream_url,
-                    }
+                    video_content.video = VideoData(stream_url=stream_url)
                     video_content.status = MsgStatus.success
                     self.output_message.publish()
 
                 except Exception as e:
                     logger.exception(f"Error in creating video content: {e}")
-                    return AgentResponse(result=AgentResult.ERROR, message=str(e))
+                    return AgentResponse(status=AgentStatus.ERROR, message=str(e))
+
+                return AgentResponse(
+                    status=AgentStatus.SUCCESS,
+                    message=f"Agent {self.name} completed successfully.",
+                    data={"stream_url": stream_url},
+                )
             else:
                 return AgentResponse(
-                    result=AgentResult.ERROR,
+                    status=AgentStatus.ERROR,
                     message="No relevant moments found.",
                 )
 
         except Exception as e:
             logger.exception(f"error in {self.agent_name}")
-            return AgentResponse(result=AgentResult.ERROR, message=str(e))
-
-        return AgentResponse(
-            result=AgentResult.SUCCESS,
-            message=f"Agent {self.name} completed successfully.",
-            data={},
-        )
+            return AgentResponse(status=AgentStatus.ERROR, message=str(e))

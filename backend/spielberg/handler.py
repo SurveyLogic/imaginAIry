@@ -19,6 +19,7 @@ from spielberg.agents.stream_video import StreamVideoAgent
 from spielberg.core.session import Session, InputMessage, MsgStatus
 from spielberg.core.reasoning import ReasoningEngine
 from spielberg.db.base import BaseDB
+from spielberg.db import load_db
 from spielberg.tools.videodb_tool import VideoDBTool
 
 logger = logging.getLogger(__name__)
@@ -41,7 +42,7 @@ class ChatHandler:
             BrandkitAgent,
             ProfanityRemoverAgent,
             ImageGenerationAgent,
-            StreamVideoAgent
+            StreamVideoAgent,
         ]
 
     def add_videodb_state(self, session):
@@ -138,11 +139,11 @@ class ConfigHandler:
     def check(self):
         values = dotenv_values()
         env_keys = set(values.keys())
-        print(env_keys)
         videodb_configured = "VIDEO_DB_API_KEY" in env_keys
         llm_keys = ("OPENAI_API_KEY",)
         llm_configured = any(llm_key in env_keys for llm_key in llm_keys)
-        db_configured = True
+        db = load_db(os.getenv("SERVER_DB_TYPE", "sqlite"))
+        db_configured = db.health_check()
         return {
             "videodb_configured": videodb_configured,
             "llm_configured": llm_configured,

@@ -40,3 +40,8 @@ class BaseDB(ABC):
     ) -> None:
         """Update context messages for a session."""
         pass
+
+    @abstractmethod
+    def health_check(self) -> bool:
+        """Check if the database is healthy."""
+        pass

@@ -2,8 +2,14 @@ import logging
 
 import yt_dlp
 
-from spielberg.agents.base import BaseAgent, AgentResponse, AgentResult
-from spielberg.core.session import Session, MsgStatus, VideoContent, TextContent
+from spielberg.agents.base import BaseAgent, AgentResponse, AgentStatus
+from spielberg.core.session import (
+    Session,
+    MsgStatus,
+    VideoContent,
+    TextContent,
+    VideoData,
+)
 from spielberg.tools.videodb_tool import VideoDBTool
 
 logger = logging.getLogger(__name__)
@@ -59,20 +65,25 @@ class UploadAgent(BaseAgent):
 
             content.status_message = f"{upload_data['name']} uploaded successfully"
             if media_type == "video":
-                content.video = upload_data
+                content.video = VideoData(**upload_data)
             else:
                 content.text = (
                     f"\n ID: {upload_data['id']}, TITLE: {upload_data['name']}"
                 )
             content.status = MsgStatus.success
-            return upload_data
+            self.output_message.publish()
+            return AgentResponse(
+                status=AgentStatus.SUCCESS,
+                message="Upload successful",
+                data=upload_data,
+            )
 
         except Exception as e:
             logger.exception(f"error in {self.agent_name} agent: {e}")
             content.status = MsgStatus.error
             content.status_message = f"Error in uploading {media_type}"
             self.output_message.publish()
-            return AgentResponse(result=AgentResult.ERROR, message=str(e))
+            return AgentResponse(status=AgentStatus.ERROR, message=str(e))
 
     def _get_yt_playlist_videos(self, playlist_url: str):
         """Get the list of videos from a youtube playlist."""
@@ -104,14 +115,14 @@ class UploadAgent(BaseAgent):
                 self._upload(media["url"], media_type)
         except Exception as e:
             logger.exception(f"Error in uploading playlist: {e}")
-            return AgentResponse(result=AgentResult.ERROR, message=str(e))
+            return AgentResponse(status=AgentStatus.ERROR, message=str(e))
 
         return AgentResponse(
-            result=AgentResult.SUCCESS,
+            status=AgentStatus.SUCCESS,
             message="All the videos in the playlist uploaded successfully as {media_type}",
         )
 
-    def __call__(
+    def run(
         self,
         url: str,
         media_type="video",
@@ -144,11 +155,5 @@ class UploadAgent(BaseAgent):
             return self._upload_yt_playlist(playlist_info, media_type)
 
         # upload the media
-        upload_data = self._upload(url, media_type, name)
-        self.output_message.publish()
+        return self._upload(url, media_type)
 
-        return AgentResponse(
-            result=AgentResult.SUCCESS,
-            message="Upload successful",
-            data=upload_data,
-        )

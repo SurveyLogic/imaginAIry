@@ -1,8 +1,8 @@
 import os
 import logging
 
-from spielberg.agents.base import BaseAgent, AgentResponse, AgentResult
-from spielberg.core.session import Session, MsgStatus, VideoContent
+from spielberg.agents.base import BaseAgent, AgentResponse, AgentStatus
+from spielberg.core.session import Session, MsgStatus, VideoContent, VideoData
 from spielberg.tools.videodb_tool import VideoDBTool
 
 logger = logging.getLogger(__name__)
@@ -22,7 +22,7 @@ class BrandkitAgent(BaseAgent):
         self.parameters = self.get_parameters()
         super().__init__(session=session, **kwargs)
 
-    def __call__(
+    def run(
         self,
         collection_id: str,
         video_id: str,
@@ -55,7 +55,7 @@ class BrandkitAgent(BaseAgent):
                     "Branding elementes not provided, either you can provide provide IDs for intro video, outro video and branding image"
                     " or you can set INTRO_VIDEO_ID, OUTRO_VIDEO_ID and BRAND_IMAGE_ID in .env of backend directory."
                 )
-                return AgentResponse(result=AgentResult.ERROR, message=message)
+                return AgentResponse(status=AgentStatus.ERROR, message=message)
             video_content = VideoContent(
                 agent_name=self.agent_name,
                 status=MsgStatus.progress,
@@ -67,7 +67,7 @@ class BrandkitAgent(BaseAgent):
             brandkit_stream = videodb_tool.add_brandkit(
                 video_id, intro_video_id, outro_video_id, brand_image_id
             )
-            video_content.video = {"stream_url": brandkit_stream}
+            video_content.video = VideoData(stream_url=brandkit_stream)
             video_content.status = MsgStatus.success
             video_content.status_message = "Here is your brandkit stream"
             self.output_message.publish()
@@ -77,9 +77,9 @@ class BrandkitAgent(BaseAgent):
             error_message = "Error in adding branding."
             video_content.status_message = error_message
             self.output_message.publish()
-            return AgentResponse(result=AgentResult.ERROR, message=error_message)
+            return AgentResponse(status=AgentStatus.ERROR, message=error_message)
         return AgentResponse(
-            result=AgentResult.SUCCESS,
+            status=AgentStatus.SUCCESS,
             message=f"Agent {self.name} completed successfully.",
             data={"stream_url": brandkit_stream},
         )

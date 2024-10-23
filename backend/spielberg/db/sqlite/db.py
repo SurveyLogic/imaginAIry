@@ -1,11 +1,15 @@
 import json
 import sqlite3
 import time
+import logging
 
 from typing import List
 
 from spielberg.constants import DBType
 from spielberg.db.base import BaseDB
+from spielberg.db.sqlite.initialize import initialize_sqlite
+
+logger = logging.getLogger(__name__)
 
 
 class SQLiteDB(BaseDB):
@@ -15,7 +19,7 @@ class SQLiteDB(BaseDB):
         self.conn = sqlite3.connect(self.db_path, check_same_thread=True)
         self.conn.row_factory = sqlite3.Row
         self.cursor = self.conn.cursor()
-        print("Connected to SQLite DB...")
+        logger.info("Connected to SQLite DB...")
 
     def create_session(
         self,
@@ -183,6 +187,26 @@ class SQLiteDB(BaseDB):
             failed_components.append("session")
         success = len(failed_components) < 3
         return success, failed_components
+
+    def health_check(self) -> bool:
+        """Check if the SQLite database is healthy and the necessary tables exist. If not, create them."""
+        try:
+            query = """
+                SELECT COUNT(name)
+                FROM sqlite_master
+                WHERE type='table'
+                AND name IN ('sessions', 'conversations', 'context_messages');
+            """
+            self.cursor.execute(query)
+            table_count = self.cursor.fetchone()[0]
+            if table_count < 3:
+                logger.info("Tables not found. Initializing SQLite DB...")
+                initialize_sqlite(self.db_path)
+            return True
+
+        except Exception as e:
+            logger.exception(f"SQLite health check failed: {e}")
+            return False
 
     def __del__(self):
         self.conn.close()

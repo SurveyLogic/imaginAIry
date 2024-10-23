@@ -1,6 +1,6 @@
 import logging
 
-from spielberg.agents.base import BaseAgent, AgentResponse, AgentResult
+from spielberg.agents.base import BaseAgent, AgentResponse, AgentStatus
 from spielberg.core.session import Session, MsgStatus, TextContent
 
 logger = logging.getLogger(__name__)
@@ -13,7 +13,7 @@ class SampleAgent(BaseAgent):
         self.parameters = self.get_parameters()
         super().__init__(session=session, **kwargs)
 
-    def __call__(self, sample_id: str, *args, **kwargs) -> AgentResponse:
+    def run(self, sample_id: str, *args, **kwargs) -> AgentResponse:
         """
         Process the sample based on the given sample ID.
 
@@ -42,9 +42,9 @@ class SampleAgent(BaseAgent):
             text_content.status_message = "Error in calculating pricing."
             self.output_message.publish()
             error_message = f"Agent failed with error {e}"
-            return AgentResponse(result=AgentResult.ERROR, message=error_message)
+            return AgentResponse(status=AgentStatus.ERROR, message=error_message)
         return AgentResponse(
-            result=AgentResult.SUCCESS,
+            status=AgentStatus.SUCCESS,
             message=f"Agent {self.name} completed successfully.",
             data={},
         )

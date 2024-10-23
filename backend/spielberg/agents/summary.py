@@ -1,6 +1,6 @@
 import logging
 
-from spielberg.agents.base import BaseAgent, AgentResponse, AgentResult
+from spielberg.agents.base import BaseAgent, AgentResponse, AgentStatus
 from spielberg.core.session import ContextMessage, RoleTypes, TextContent, MsgStatus
 from spielberg.llm.openai import OpenAI
 from spielberg.tools.videodb_tool import VideoDBTool
@@ -21,7 +21,7 @@ class SummaryAgent(BaseAgent):
         self.parameters = self.get_parameters()
         super().__init__(session=session, **kwargs)
 
-    def __call__(self, collection_id: str, video_id: str) -> AgentResponse:
+    def run(self, collection_id: str, video_id: str) -> AgentResponse:
         """
         Generate summary of the given video.
         """
@@ -52,7 +52,7 @@ class SummaryAgent(BaseAgent):
                 output_text_content.status_message = "Failed to generat the summary."
                 self.output_message.publish()
                 return AgentResponse(
-                    result=AgentResult.ERROR,
+                    status=AgentStatus.ERROR,
                     message="Summary failed due to LLM error.",
                 )
             summary = llm_response.content
@@ -65,10 +65,10 @@ class SummaryAgent(BaseAgent):
             output_text_content.status = MsgStatus.error
             output_text_content.status_message = "Error in generating summary."
             self.output_message.publish()
-            return AgentResponse(result=AgentResult.ERROR, message=str(e))
+            return AgentResponse(status=AgentStatus.ERROR, message=str(e))
 
         return AgentResponse(
-            result=AgentResult.SUCCESS,
+            status=AgentStatus.SUCCESS,
             message="Summary generated and displayed to user.",
             data={"summary": summary},
         )
