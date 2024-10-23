@@ -2,7 +2,7 @@ import logging
 
 from spielberg.agents.base import BaseAgent, AgentResponse, AgentStatus
 
-from spielberg.core.session import Session, MsgStatus, ImageContent
+from spielberg.core.session import Session, MsgStatus, ImageContent, ImageData
 from spielberg.tools.videodb_tool import VideoDBTool
 
 logger = logging.getLogger(__name__)
@@ -50,8 +50,7 @@ class ThumbnailAgent(BaseAgent):
             thumbnail_data = videodb_tool.generate_thumbnail(
                 video_id=video_id, timestamp=timestamp
             )
-
-            image_content.image = thumbnail_data
+            image_content.image = ImageData(**thumbnail_data)
             image_content.status = MsgStatus.success
             image_content.status_message = "Here is your thumbnail."
             self.output_message.publish()

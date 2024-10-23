@@ -1,7 +1,7 @@
 import logging
 
 from spielberg.agents.base import BaseAgent, AgentResponse, AgentStatus
-from spielberg.core.session import Session, MsgStatus, ImageContent
+from spielberg.core.session import Session, MsgStatus, ImageContent, ImageData
 from spielberg.tools.replicate import flux_dev
 
 logger = logging.getLogger(__name__)
@@ -41,7 +41,7 @@ class ImageGenerationAgent(BaseAgent):
                 error_message = "Agent failed with error in replicate."
                 return AgentResponse(status=AgentStatus.ERROR, message=error_message)
             image_url = flux_output[0].url
-            image_content.image = {"url": image_url}
+            image_content.image = ImageData(url=image_url)
             image_content.status = MsgStatus.success
             image_content.status_message = "Here is your generated image"
             self.output_message.publish()

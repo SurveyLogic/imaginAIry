@@ -63,8 +63,16 @@ class VideoContent(BaseContent):
     type: ContentType = ContentType.video
 
 
+class ImageData(BaseModel):
+    url: str
+    name: Optional[str] = None
+    description: Optional[str] = None
+    id: Optional[str] = None
+    collection_id: Optional[str] = None
+
+
 class ImageContent(BaseContent):
-    image: dict = {}
+    image: Optional[ImageData] = None
     type: ContentType = ContentType.image
 
 
