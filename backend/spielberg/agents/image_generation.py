@@ -55,5 +55,5 @@ class ImageGenerationAgent(BaseAgent):
         return AgentResponse(
             status=AgentStatus.SUCCESS,
             message=f"Agent {self.name} completed successfully.",
-            data={"image_url": image_url},
+            data={},
         )
