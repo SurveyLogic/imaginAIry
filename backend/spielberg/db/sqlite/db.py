@@ -1,11 +1,15 @@
 import json
 import sqlite3
 import time
+import logging
 
 from typing import List
 
 from spielberg.constants import DBType
 from spielberg.db.base import BaseDB
+from spielberg.db.sqlite.initialize import initialize_sqlite
+
+logger = logging.getLogger(__name__)
 
 
 class SQLiteDB(BaseDB):
@@ -156,6 +160,30 @@ class SQLiteDB(BaseDB):
             ),
         )
         self.conn.commit()
+
+    def _table_exists(self, table_name: str) -> bool:
+        """Check if a table exists in the SQLite database."""
+        self.cursor.execute(
+            "SELECT name FROM sqlite_master WHERE type='table' AND name=?;",
+            (table_name,),
+        )
+        return self.cursor.fetchone() is not None
+
+    def health_check(self) -> bool:
+        """Check if the SQLite database is healthy and the necessary tables exist. If not, create them."""
+        try:
+            self.cursor.execute("SELECT 1")
+            if not (
+                self._table_exists("sessions")
+                and self._table_exists("conversations")
+                and self._table_exists("context_messages")
+            ):
+                initialize_sqlite(self.db_path)
+            return True
+
+        except Exception as e:
+            logger.exception(f"SQLite health check failed: {e}")
+            return False
 
     def __del__(self):
         self.conn.close()
