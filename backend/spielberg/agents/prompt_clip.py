@@ -186,6 +186,12 @@ class PromptClipAgent(BaseAgent):
                 except Exception as e:
                     logger.exception(f"Error in creating video content: {e}")
                     return AgentResponse(status=AgentStatus.ERROR, message=str(e))
+
+                return AgentResponse(
+                    status=AgentStatus.SUCCESS,
+                    message=f"Agent {self.name} completed successfully.",
+                    data={"stream_url": stream_url},
+                )
             else:
                 return AgentResponse(
                     status=AgentStatus.ERROR,
@@ -195,9 +201,3 @@ class PromptClipAgent(BaseAgent):
         except Exception as e:
             logger.exception(f"error in {self.agent_name}")
             return AgentResponse(status=AgentStatus.ERROR, message=str(e))
-
-        return AgentResponse(
-            status=AgentStatus.SUCCESS,
-            message=f"Agent {self.name} completed successfully.",
-            data={},
-        )

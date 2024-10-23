@@ -67,7 +67,12 @@ class UploadAgent(BaseAgent):
                     f"\n ID: {upload_data['id']}, TITLE: {upload_data['name']}"
                 )
             content.status = MsgStatus.success
-            return upload_data
+            self.output_message.publish()
+            return AgentResponse(
+                status=AgentStatus.SUCCESS,
+                message="Upload successful",
+                data=upload_data,
+            )
 
         except Exception as e:
             logger.exception(f"error in {self.agent_name} agent: {e}")
@@ -140,11 +145,4 @@ class UploadAgent(BaseAgent):
             return self._upload_yt_playlist(playlist_info, media_type)
 
         # upload the media
-        upload_data = self._upload(url, media_type)
-        self.output_message.publish()
-
-        return AgentResponse(
-            status=AgentStatus.SUCCESS,
-            message="Upload successful",
-            data=upload_data,
-        )
+        return self._upload(url, media_type)

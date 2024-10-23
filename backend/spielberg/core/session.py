@@ -59,6 +59,8 @@ class TextContent(BaseContent):
 
 
 class VideoData(BaseModel):
+    """Video data model class for video content."""
+
     stream_url: str
     player_url: Optional[str] = None
     id: Optional[str] = None
@@ -66,7 +68,7 @@ class VideoData(BaseModel):
     name: Optional[str] = None
     description: Optional[str] = None
     thumbnail_url: Optional[str] = None
-    length: Optional[int] = None
+    length: Optional[Union[int, float]] = None
 
 
 class VideoContent(BaseContent):
@@ -75,6 +77,8 @@ class VideoContent(BaseContent):
 
 
 class ImageData(BaseModel):
+    """Image data model class for image content."""
+
     url: str
     name: Optional[str] = None
     description: Optional[str] = None
