@@ -1,6 +1,6 @@
 import logging
 
-from spielberg.agents.base import BaseAgent, AgentResponse, AgentResult
+from spielberg.agents.base import BaseAgent, AgentResponse, AgentStatus
 from spielberg.llm.openai import OpenAI
 from spielberg.core.session import (
     Session,
@@ -74,7 +74,7 @@ class SearchAgent(BaseAgent):
                     "Failed to generate summary of results."
                 )
                 return AgentResponse(
-                    result=AgentResult.ERROR,
+                    status=AgentStatus.ERROR,
                     message=f"Failed due to no search results found for query {query}",
                     data={
                         "message": f"Failed due to no search results found for query {query}",
@@ -159,10 +159,10 @@ class SearchAgent(BaseAgent):
                     "Failed to generate summary of results."
                 )
             return AgentResponse(
-                result=AgentResult.ERROR, message="Failed the search with exception."
+                status=AgentStatus.ERROR, message="Failed the search with exception."
             )
         return AgentResponse(
-            result=AgentResult.SUCCESS,
+            status=AgentStatus.SUCCESS,
             message="Search done and showed above to user.",
             data={"message": "Search done.", "stream_link": compilation_stream_url},
         )

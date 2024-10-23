@@ -1,6 +1,6 @@
 import logging
 
-from spielberg.agents.base import BaseAgent, AgentResponse, AgentResult
+from spielberg.agents.base import BaseAgent, AgentResponse, AgentStatus
 from spielberg.core.session import (
     Session,
     MsgStatus,
@@ -125,7 +125,7 @@ class PricingAgent(BaseAgent):
                 text_content.status_message = "Failed to generate the response."
                 self.output_message.publish()
                 return AgentResponse(
-                    result=AgentResult.ERROR,
+                    status=AgentStatus.ERROR,
                     message="Pricing failed due to LLM error.",
                 )
             text_content.text = llm_response.content
@@ -138,10 +138,10 @@ class PricingAgent(BaseAgent):
             text_content.status = MsgStatus.error
             text_content.status_message = error_message
             self.output_message.publish()
-            return AgentResponse(result=AgentResult.ERROR, message=error_message)
+            return AgentResponse(status=AgentStatus.ERROR, message=error_message)
 
         return AgentResponse(
-            result=AgentResult.SUCCESS,
+            status=AgentStatus.SUCCESS,
             message="Fetch successful and output displayed above.",
             data={},
         )

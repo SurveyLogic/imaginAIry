@@ -2,7 +2,7 @@ import logging
 
 import yt_dlp
 
-from spielberg.agents.base import BaseAgent, AgentResponse, AgentResult
+from spielberg.agents.base import BaseAgent, AgentResponse, AgentStatus
 from spielberg.core.session import Session, MsgStatus, VideoContent, TextContent
 from spielberg.tools.videodb_tool import VideoDBTool
 
@@ -68,7 +68,7 @@ class UploadAgent(BaseAgent):
             content.status = MsgStatus.error
             content.status_message = f"Error in uploading {media_type}"
             self.output_message.publish()
-            return AgentResponse(result=AgentResult.ERROR, message=str(e))
+            return AgentResponse(status=AgentStatus.ERROR, message=str(e))
 
     def _get_yt_playlist_videos(self, playlist_url: str):
         """Get the list of videos from a youtube playlist."""
@@ -100,10 +100,10 @@ class UploadAgent(BaseAgent):
                 self._upload(media["url"], media_type)
         except Exception as e:
             logger.exception(f"Error in uploading playlist: {e}")
-            return AgentResponse(result=AgentResult.ERROR, message=str(e))
+            return AgentResponse(status=AgentStatus.ERROR, message=str(e))
 
         return AgentResponse(
-            result=AgentResult.SUCCESS,
+            status=AgentStatus.SUCCESS,
             message="All the videos in the playlist uploaded successfully as {media_type}",
         )
 
@@ -138,7 +138,7 @@ class UploadAgent(BaseAgent):
         self.output_message.publish()
 
         return AgentResponse(
-            result=AgentResult.SUCCESS,
+            status=AgentStatus.SUCCESS,
             message="Upload successful",
             data=upload_data,
         )

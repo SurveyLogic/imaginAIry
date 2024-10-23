@@ -1,6 +1,6 @@
 import logging
 
-from spielberg.agents.base import BaseAgent, AgentResponse, AgentResult
+from spielberg.agents.base import BaseAgent, AgentResponse, AgentStatus
 
 from spielberg.core.session import Session
 from spielberg.tools.videodb_tool import VideoDBTool
@@ -65,10 +65,10 @@ class IndexAgent(BaseAgent):
 
         except Exception as e:
             logger.exception(f"error in {self.agent_name} agent: {e}")
-            return AgentResponse(result=AgentResult.ERROR, message=str(e))
+            return AgentResponse(status=AgentStatus.ERROR, message=str(e))
 
         return AgentResponse(
-            result=AgentResult.SUCCESS,
+            status=AgentStatus.SUCCESS,
             message=f"{index_type} indexing successful",
             data=scene_data,
         )

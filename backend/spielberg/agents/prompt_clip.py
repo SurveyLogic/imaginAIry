@@ -2,7 +2,7 @@ import logging
 import json
 import concurrent.futures
 
-from spielberg.agents.base import BaseAgent, AgentResponse, AgentResult
+from spielberg.agents.base import BaseAgent, AgentResponse, AgentStatus
 from spielberg.core.session import (
     Session,
     ContextMessage,
@@ -186,19 +186,19 @@ class PromptClipAgent(BaseAgent):
 
                 except Exception as e:
                     logger.exception(f"Error in creating video content: {e}")
-                    return AgentResponse(result=AgentResult.ERROR, message=str(e))
+                    return AgentResponse(status=AgentStatus.ERROR, message=str(e))
             else:
                 return AgentResponse(
-                    result=AgentResult.ERROR,
+                    status=AgentStatus.ERROR,
                     message="No relevant moments found.",
                 )
 
         except Exception as e:
             logger.exception(f"error in {self.agent_name}")
-            return AgentResponse(result=AgentResult.ERROR, message=str(e))
+            return AgentResponse(status=AgentStatus.ERROR, message=str(e))
 
         return AgentResponse(
-            result=AgentResult.SUCCESS,
+            status=AgentStatus.SUCCESS,
             message=f"Agent {self.name} completed successfully.",
             data={},
         )

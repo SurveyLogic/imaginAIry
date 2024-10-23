@@ -4,7 +4,7 @@ import os
 
 from videodb.asset import VideoAsset, AudioAsset
 
-from spielberg.agents.base import BaseAgent, AgentResponse, AgentResult
+from spielberg.agents.base import BaseAgent, AgentResponse, AgentStatus
 from spielberg.core.session import (
     Session,
     MsgStatus,
@@ -68,7 +68,7 @@ class ProfanityRemoverAgent(BaseAgent):
             beep_audio_id = beep_audio_id or BEEP_AUDIO_ID
             if not beep_audio_id:
                 return AgentResponse(
-                    result=AgentResult.failed,
+                    status=AgentStatus.failed,
                     message="Please provide the beep_audio_id or setup BEEP_AUDIO_ID in .env of backend directory.",
                 )
             self.output_message.actions.append("Started process to remove profanity..")
@@ -111,9 +111,9 @@ class ProfanityRemoverAgent(BaseAgent):
             video_content.status_message = "Failed to generate clean stream"
             self.output_message.publish()
             error_message = f"Error in generating the clean stream due to {e}."
-            return AgentResponse(result=AgentResult.ERROR, message=error_message)
+            return AgentResponse(status=AgentStatus.ERROR, message=error_message)
         return AgentResponse(
-            result=AgentResult.SUCCESS,
+            status=AgentStatus.SUCCESS,
             message=f"Agent {self.name} completed successfully.",
             data={"stream_url": clean_stream},
         )

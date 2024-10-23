@@ -2,7 +2,7 @@ import logging
 from typing import List
 
 
-from spielberg.agents.base import BaseAgent, AgentResult, AgentResponse
+from spielberg.agents.base import BaseAgent, AgentStatus, AgentResponse
 from spielberg.core.session import (
     Session,
     OutputMessage,
@@ -130,12 +130,12 @@ class ReasoningEngine:
 
     def step(self):
         """Run a single step of the reasoning engine."""
-        result = AgentResult.ERROR
+        status = AgentStatus.ERROR
         temp_messages = []
         max_tries = 1
         tries = 0
 
-        while result != AgentResult.SUCCESS:
+        while status != AgentStatus.SUCCESS:
             if self.stop_flag:
                 break
 
@@ -182,7 +182,7 @@ class ReasoningEngine:
                     )
                     print("-" * 40, "Agent Response", "-" * 40)
                     print(agent_response, "\n\n")
-                    result = agent_response.result
+                    status = agent_response.status
 
             if (
                 llm_response.finish_reason == "stop"

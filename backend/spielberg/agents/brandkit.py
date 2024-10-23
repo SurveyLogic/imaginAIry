@@ -1,7 +1,7 @@
 import os
 import logging
 
-from spielberg.agents.base import BaseAgent, AgentResponse, AgentResult
+from spielberg.agents.base import BaseAgent, AgentResponse, AgentStatus
 from spielberg.core.session import Session, MsgStatus, VideoContent
 from spielberg.tools.videodb_tool import VideoDBTool
 
@@ -55,7 +55,7 @@ class BrandkitAgent(BaseAgent):
                     "Branding elementes not provided, either you can provide provide IDs for intro video, outro video and branding image"
                     " or you can set INTRO_VIDEO_ID, OUTRO_VIDEO_ID and BRAND_IMAGE_ID in .env of backend directory."
                 )
-                return AgentResponse(result=AgentResult.ERROR, message=message)
+                return AgentResponse(status=AgentStatus.ERROR, message=message)
             video_content = VideoContent(
                 agent_name=self.agent_name,
                 status=MsgStatus.progress,
@@ -77,9 +77,9 @@ class BrandkitAgent(BaseAgent):
             error_message = "Error in adding branding."
             video_content.status_message = error_message
             self.output_message.publish()
-            return AgentResponse(result=AgentResult.ERROR, message=error_message)
+            return AgentResponse(status=AgentStatus.ERROR, message=error_message)
         return AgentResponse(
-            result=AgentResult.SUCCESS,
+            status=AgentStatus.SUCCESS,
             message=f"Agent {self.name} completed successfully.",
             data={"stream_url": brandkit_stream},
         )

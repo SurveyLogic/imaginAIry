@@ -1,6 +1,6 @@
 import logging
 
-from spielberg.agents.base import BaseAgent, AgentResponse, AgentResult
+from spielberg.agents.base import BaseAgent, AgentResponse, AgentStatus
 from spielberg.core.session import Session, MsgStatus, VideoContent
 from spielberg.tools.videodb_tool import VideoDBTool
 
@@ -42,7 +42,7 @@ class StreamVideoAgent(BaseAgent):
                 self.output_message.actions.append("Processing given stream url..")
             else:
                 return AgentResponse(
-                    result=AgentResult.ERROR,
+                    status=AgentStatus.ERROR,
                     message="Either 'video_id' or 'stream_url' is required for getting the stream in video player.",
                 )
             if stream_url:
@@ -55,7 +55,7 @@ class StreamVideoAgent(BaseAgent):
                 self.output_message.content.append(video_content)
                 self.output_message.publish()
                 return AgentResponse(
-                    result=AgentResult.SUCCESS,
+                    status=AgentStatus.SUCCESS,
                     message=f"Agent {self.name} completed successfully.",
                     data={},
                 )
@@ -81,9 +81,9 @@ class StreamVideoAgent(BaseAgent):
             video_content.status_message = "Error in calculating pricing."
             self.output_message.publish()
             error_message = f"Agent failed with error {e}"
-            return AgentResponse(result=AgentResult.ERROR, message=error_message)
+            return AgentResponse(status=AgentStatus.ERROR, message=error_message)
         return AgentResponse(
-            result=AgentResult.SUCCESS,
+            status=AgentStatus.SUCCESS,
             message=f"Agent {self.name} completed successfully.",
             data={},
         )

@@ -10,13 +10,13 @@ from spielberg.core.session import Session, OutputMessage
 logger = logging.getLogger(__name__)
 
 
-class AgentResult:
+class AgentStatus:
     SUCCESS = "success"
     ERROR = "error"
 
 
 class AgentResponse(BaseModel):
-    result: str = AgentResult.SUCCESS
+    status: str = AgentStatus.SUCCESS
     message: str = ""
     data: dict = {}
 
@@ -62,7 +62,7 @@ class BaseAgent(ABC):
 
         except Exception as e:
             logger.exception(f"error in {self.agent_name} agent: {e}")
-            return AgentResponse(result=AgentResult.ERROR, message=str(e))
+            return AgentResponse(status=AgentStatus.ERROR, message=str(e))
 
     @abstractmethod
     def run(*args, **kwargs) -> AgentResponse:

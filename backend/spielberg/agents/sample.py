@@ -1,6 +1,6 @@
 import logging
 
-from spielberg.agents.base import BaseAgent, AgentResponse, AgentResult
+from spielberg.agents.base import BaseAgent, AgentResponse, AgentStatus
 from spielberg.core.session import Session, MsgStatus, TextContent
 
 logger = logging.getLogger(__name__)
@@ -32,7 +32,7 @@ class SampleAgent(BaseAgent):
             )
             self.output_message.content.append(text_content)
             self.output_message.push_update()
-            text_content.text = "This is the text result of Agent."
+            text_content.text = "This is the text status of Agent."
             text_content.status = MsgStatus.success
             text_content.status_message = "Here is your response"
             self.output_message.publish()
@@ -42,9 +42,9 @@ class SampleAgent(BaseAgent):
             text_content.status_message = "Error in calculating pricing."
             self.output_message.publish()
             error_message = f"Agent failed with error {e}"
-            return AgentResponse(result=AgentResult.ERROR, message=error_message)
+            return AgentResponse(status=AgentStatus.ERROR, message=error_message)
         return AgentResponse(
-            result=AgentResult.SUCCESS,
+            status=AgentStatus.SUCCESS,
             message=f"Agent {self.name} completed successfully.",
             data={},
         )
