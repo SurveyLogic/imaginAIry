@@ -13,7 +13,7 @@ class SampleAgent(BaseAgent):
         self.parameters = self.get_parameters()
         super().__init__(session=session, **kwargs)
 
-    def __call__(self, sample_id: str, *args, **kwargs) -> AgentResponse:
+    def run(self, sample_id: str, *args, **kwargs) -> AgentResponse:
         """
         Process the sample based on the given sample ID.
 

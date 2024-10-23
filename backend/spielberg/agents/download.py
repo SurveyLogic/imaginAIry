@@ -14,7 +14,7 @@ class DownloadAgent(BaseAgent):
         self.parameters = self.get_parameters()
         super().__init__(session=session, **kwargs)
 
-    def __call__(
+    def run(
         self, stream_link: str, name: str = None, *args, **kwargs
     ) -> AgentResponse:
         """

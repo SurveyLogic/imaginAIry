@@ -16,7 +16,7 @@ class StreamVideoAgent(BaseAgent):
         self.parameters = self.get_parameters()
         super().__init__(session=session, **kwargs)
 
-    def __call__(
+    def run(
         self,
         collection_id: str = None,
         video_id: str = None,

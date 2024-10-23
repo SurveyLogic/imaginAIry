@@ -22,7 +22,7 @@ class BrandkitAgent(BaseAgent):
         self.parameters = self.get_parameters()
         super().__init__(session=session, **kwargs)
 
-    def __call__(
+    def run(
         self,
         collection_id: str,
         video_id: str,

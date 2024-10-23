@@ -107,7 +107,7 @@ class UploadAgent(BaseAgent):
             message="All the videos in the playlist uploaded successfully as {media_type}",
         )
 
-    def __call__(
+    def run(
         self, url: str, media_type="video", collection_id: str = None, *args, **kwargs
     ) -> AgentResponse:
         """

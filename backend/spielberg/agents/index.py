@@ -34,7 +34,7 @@ class IndexAgent(BaseAgent):
         self.parameters = INDEX_AGENT_PARAMETERS
         super().__init__(session=session, **kwargs)
 
-    def __call__(
+    def run(
         self, video_id: str, index_type: str, collection_id=None, *args, **kwargs
     ) -> AgentResponse:
         """

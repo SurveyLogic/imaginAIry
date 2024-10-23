@@ -34,7 +34,7 @@ class ThumbnailAgent(BaseAgent):
         self.parameters = THUMBNAIL_AGENT_PARAMETERS
         super().__init__(session=session, **kwargs)
 
-    def __call__(
+    def run(
         self, collection_id: str, video_id: str, timestamp: int = 5, *args, **kwargs
     ) -> AgentResponse:
         """

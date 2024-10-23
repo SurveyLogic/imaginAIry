@@ -45,7 +45,7 @@ class ProfanityRemoverAgent(BaseAgent):
         stream_url = timeline.generate_stream()
         return stream_url
 
-    def __call__(
+    def run(
         self,
         collection_id: str,
         video_id: str,

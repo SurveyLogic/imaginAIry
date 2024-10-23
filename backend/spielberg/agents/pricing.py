@@ -97,7 +97,7 @@ class PricingAgent(BaseAgent):
         self.llm = OpenAI()
         super().__init__(session=session, **kwargs)
 
-    def __call__(self, query: str, *args, **kwargs) -> AgentResponse:
+    def run(self, query: str, *args, **kwargs) -> AgentResponse:
         """
         Get the answer to the query of agent
 

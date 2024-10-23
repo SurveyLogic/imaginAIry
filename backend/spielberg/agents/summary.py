@@ -21,7 +21,7 @@ class SummaryAgent(BaseAgent):
         self.parameters = self.get_parameters()
         super().__init__(session=session, **kwargs)
 
-    def __call__(self, collection_id: str, video_id: str) -> AgentResponse:
+    def run(self, collection_id: str, video_id: str) -> AgentResponse:
         """
         Generate summary of the given video.
         """

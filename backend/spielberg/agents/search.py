@@ -24,7 +24,7 @@ class SearchAgent(BaseAgent):
         self.parameters = self.get_parameters()
         super().__init__(session=session, **kwargs)
 
-    def __call__(
+    def run(
         self, query: str, collection_id: str, video_id: str = None, *args, **kwargs
     ) -> AgentResponse:
         """

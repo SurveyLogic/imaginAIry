@@ -14,7 +14,7 @@ class ImageGenerationAgent(BaseAgent):
         self.parameters = self.get_parameters()
         super().__init__(session=session, **kwargs)
 
-    def __call__(self, prompt: str, *args, **kwargs) -> AgentResponse:
+    def run(self, prompt: str, *args, **kwargs) -> AgentResponse:
         """
         Process the prompt to generate the image.
 

@@ -30,7 +30,7 @@ class BaseAgent(ABC):
 
     def get_parameters(self):
         function_inferrer = FunctionInferrer.infer_from_function_reference(
-            self.__call__
+            self.run
         )
         function_json = function_inferrer.to_json_schema()
         parameters = function_json.get("parameters")
@@ -58,12 +58,12 @@ class BaseAgent(ABC):
 
     def safe_call(self, *args, **kwargs):
         try:
-            return self.__call__(*args, **kwargs)
+            return self.run(*args, **kwargs)
 
         except Exception as e:
             logger.exception(f"error in {self.agent_name} agent: {e}")
             return AgentResponse(result=AgentResult.ERROR, message=str(e))
 
     @abstractmethod
-    def __call__(*args, **kwargs) -> AgentResponse:
+    def run(*args, **kwargs) -> AgentResponse:
         pass

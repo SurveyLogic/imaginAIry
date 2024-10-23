@@ -120,7 +120,7 @@ class PromptClipAgent(BaseAgent):
                     continue
         return matches
 
-    def __call__(
+    def run(
         self, prompt: str, video_id: str, collection_id: str, *args, **kwargs
     ) -> AgentResponse:
         try:
