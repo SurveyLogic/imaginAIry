@@ -1,39 +1,86 @@
 # Getting Started
 
-* Clone the repository:
+### Prerequisites
 
-```console
+- Python 3.9 or higher
+- Node.js 22.8.0 or higher
+- npm
+
+### Installation
+
+1. Clone the repository:
+
+``` bash
 git clone https://github.com/video-db/Spielberg.git
 cd Spielberg
 ```
 
-* Create the .env file and set the environment variables:
+2. Set up the environment:
 
-```console
-cp .env.example .env
+```bash
+./setup.sh
 ```
 
-* Use virtualenv as:
+This script will:
+- Install nvm (Node Version Manager) if not already installed
+- Install Node.js 22.8.0 using nvm
+- Install Python and pip
+- Set up virtual environments for both frontend and backend
+- Install dependencies for both frontend and backend
 
-```console
-python3 -m venv .venv
-source .venv/bin/activate
+Supported platforms:
+- Mac
+- Linux
+
+3. Configure the environment variables:
+
+```bash
+cp backend/.env.example backend/.env
+cp frontend/.env.example frontend/.env
 ```
 
-* Init the database
+Edit the `.env` files to add your API keys and other configuration options.
 
-```console
+[TODO]: Add all supported variables or point to documentation where we have given the list.
+
+4.  Initialize and configuring the Database
+
+For SQLite (default):
+```bash
 make init-sqlite-db
 ```
 
-* Install the dependencies:
+This command will initialize the SQLite DB file in the `backend` directory. No additional configuration is required for SQLite.
 
-```console
-make install
+For other databases, follow the documentation [here](TODO: Add link to database configuration docs).
+
+
+## Project Structure
+
+- `backend/`: Contains the Flask backend application
+- `frontend/`: Contains the Vue 3 frontend application
+- `docs/`: Project documentation
+- `infra/`: Infrastructure-related files
+
+
+## Running the Application
+
+To start both the backend and frontend servers:
+
+```bash
+make run
 ```
 
-* Start the server:
+This will start the backend server on `http://127.0.0.1:8000` and the frontend server on `http://127.0.0.1:8080`.
 
-```console
-make run
+To run only the backend server:
+
+```bash
+make run-be
+```
+
+To just run the frontend development server:
+
+```bash
+make run-fe
 ```
