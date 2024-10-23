@@ -1,7 +1,7 @@
 import logging
 
 from spielberg.agents.base import BaseAgent, AgentResponse, AgentStatus
-from spielberg.core.session import Session, MsgStatus, VideoContent
+from spielberg.core.session import Session, MsgStatus, VideoContent, VideoData
 from spielberg.tools.videodb_tool import VideoDBTool
 
 logger = logging.getLogger(__name__)
@@ -69,9 +69,7 @@ class StreamVideoAgent(BaseAgent):
             videodb_tool = VideoDBTool(collection_id=collection_id)
             video_data = videodb_tool.get_video(video_id)
             stream_url = video_data.get("stream_url")
-            video_content.video = {
-                "stream_url": stream_url,
-            }
+            video_content.video = VideoData(stream_url=stream_url)
             video_content.status = MsgStatus.success
             video_content.status_message = "Here is your stream"
             self.output_message.publish()

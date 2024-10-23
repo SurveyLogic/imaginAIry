@@ -3,7 +3,13 @@ import logging
 import yt_dlp
 
 from spielberg.agents.base import BaseAgent, AgentResponse, AgentStatus
-from spielberg.core.session import Session, MsgStatus, VideoContent, TextContent
+from spielberg.core.session import (
+    Session,
+    MsgStatus,
+    VideoContent,
+    TextContent,
+    VideoData,
+)
 from spielberg.tools.videodb_tool import VideoDBTool
 
 logger = logging.getLogger(__name__)
@@ -55,7 +61,7 @@ class UploadAgent(BaseAgent):
 
             content.status_message = f"{upload_data['name']} uploaded successfully"
             if media_type == "video":
-                content.video = upload_data
+                content.video = VideoData(**upload_data)
             else:
                 content.text = (
                     f"\n ID: {upload_data['id']}, TITLE: {upload_data['name']}"

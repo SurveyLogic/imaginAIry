@@ -9,6 +9,7 @@ from spielberg.core.session import (
     RoleTypes,
     MsgStatus,
     VideoContent,
+    VideoData,
 )
 from spielberg.tools.videodb_tool import VideoDBTool
 from spielberg.llm.openai import OpenAI
@@ -178,9 +179,7 @@ class PromptClipAgent(BaseAgent):
                         video_id=video_id, timeline=timeline
                     )
                     video_content.status_message = "Clip generated successfully."
-                    video_content.video = {
-                        "stream_url": stream_url,
-                    }
+                    video_content.video = VideoData(stream_url=stream_url)
                     video_content.status = MsgStatus.success
                     self.output_message.publish()
 

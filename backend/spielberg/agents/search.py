@@ -8,6 +8,7 @@ from spielberg.core.session import (
     TextContent,
     SearchResultsContent,
     VideoContent,
+    VideoData,
     ContextMessage,
     RoleTypes,
 )
@@ -115,7 +116,7 @@ class SearchAgent(BaseAgent):
             self.output_message.actions.append("Generating search result compilation clip..")
             self.output_message.push_update()
             compilation_stream_url = search_results.compile()
-            compilation_content.video = {"stream_url": compilation_stream_url}
+            compilation_content.video = VideoData(stream_url=compilation_stream_url)
             compilation_content.status = MsgStatus.success
             compilation_content.status_message = "Compilation done."
             self.output_message.actions.append("Generating search result summary..")

@@ -58,8 +58,19 @@ class TextContent(BaseContent):
     type: ContentType = ContentType.text
 
 
+class VideoData(BaseModel):
+    stream_url: str
+    player_url: Optional[str] = None
+    id: Optional[str] = None
+    collection_id: Optional[str] = None
+    name: Optional[str] = None
+    description: Optional[str] = None
+    thumbnail_url: Optional[str] = None
+    length: Optional[int] = None
+
+
 class VideoContent(BaseContent):
-    video: dict = {}
+    video: Optional[VideoData] = None
     type: ContentType = ContentType.video
 
 

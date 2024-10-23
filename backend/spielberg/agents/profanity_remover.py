@@ -9,6 +9,7 @@ from spielberg.core.session import (
     Session,
     MsgStatus,
     VideoContent,
+    VideoData,
     ContextMessage,
     RoleTypes,
 )
@@ -100,7 +101,7 @@ class ProfanityRemoverAgent(BaseAgent):
             clean_stream = self.add_beep(
                 videodb_tool, video_id, beep_audio_id, profanity_timeline
             )
-            video_content.video = {"stream_url": clean_stream}
+            video_content.video = VideoData(stream_url=clean_stream)
             video_content.status = MsgStatus.success
             video_content.status_message = "Here is the clean stream"
             self.output_message.content.append(video_content)

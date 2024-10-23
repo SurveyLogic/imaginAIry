@@ -2,7 +2,7 @@ import os
 import logging
 
 from spielberg.agents.base import BaseAgent, AgentResponse, AgentStatus
-from spielberg.core.session import Session, MsgStatus, VideoContent
+from spielberg.core.session import Session, MsgStatus, VideoContent, VideoData
 from spielberg.tools.videodb_tool import VideoDBTool
 
 logger = logging.getLogger(__name__)
@@ -67,7 +67,7 @@ class BrandkitAgent(BaseAgent):
             brandkit_stream = videodb_tool.add_brandkit(
                 video_id, intro_video_id, outro_video_id, brand_image_id
             )
-            video_content.video = {"stream_url": brandkit_stream}
+            video_content.video = VideoData(stream_url=brandkit_stream)
             video_content.status = MsgStatus.success
             video_content.status_message = "Here is your brandkit stream"
             self.output_message.publish()
