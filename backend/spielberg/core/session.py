@@ -102,7 +102,7 @@ class BaseMessage(BaseModel):
     :param str session_id: Session is of the messages
     :param str conv_id: Conversation id
     :param int msg_id: (optional) Message id
-    :param MsgType msg_type: (optional) :class:`MsgType` of the message
+    :param msg_type: Type of the message
     """
 
     model_config = ConfigDict(
@@ -126,7 +126,11 @@ class BaseMessage(BaseModel):
 
 
 class InputMessage(BaseMessage):
-    """Input message to the agent"""
+    """Input message to the agent
+    
+    :param BaseDB db: Database instance
+    :param MsgType msg_type: :class:`MsgType` of the message
+    """
 
     db: BaseDB
     msg_type: MsgType = MsgType.input
