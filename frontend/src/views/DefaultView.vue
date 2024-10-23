@@ -1,13 +1,30 @@
 <script setup>
+import { ref, onMounted, onUnmounted } from "vue";
 import { ChatInterface } from "@videodb/chat-vue";
 import "@videodb/chat-vue/dist/style.css";
 
 const BACKEND_URL = import.meta.env.VITE_APP_BACKEND_URL;
+const chatInterfaceRef = ref(null);
+
+const handleKeyDown = (event) => {
+  if ((event.ctrlKey || event.metaKey) && event.key === "k") {
+    event.preventDefault();
+    chatInterfaceRef.value.createNewSession();
+    chatInterfaceRef.value.chatInputRef.focus();
+  }
+};
+onMounted(() => {
+  window.addEventListener("keydown", handleKeyDown);
+});
+onUnmounted(() => {
+  window.removeEventListener("keydown", handleKeyDown);
+});
 </script>
 
 <template>
   <main>
     <chat-interface
+      ref="chatInterfaceRef"
       :chat-hook-config="{
         socketUrl: `${BACKEND_URL}/chat`,
         httpUrl: `${BACKEND_URL}`,
