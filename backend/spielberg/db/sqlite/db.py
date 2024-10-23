@@ -19,7 +19,7 @@ class SQLiteDB(BaseDB):
         self.conn = sqlite3.connect(self.db_path, check_same_thread=True)
         self.conn.row_factory = sqlite3.Row
         self.cursor = self.conn.cursor()
-        print("Connected to SQLite DB...")
+        logger.info("Connected to SQLite DB...")
 
     def create_session(
         self,
@@ -187,24 +187,20 @@ class SQLiteDB(BaseDB):
             failed_components.append("session")
         success = len(failed_components) < 3
         return success, failed_components
-    
-    def _table_exists(self, table_name: str) -> bool:
-        """Check if a table exists in the SQLite database."""
-        self.cursor.execute(
-            "SELECT name FROM sqlite_master WHERE type='table' AND name=?;",
-            (table_name,),
-        )
-        return self.cursor.fetchone() is not None
 
     def health_check(self) -> bool:
         """Check if the SQLite database is healthy and the necessary tables exist. If not, create them."""
         try:
-            self.cursor.execute("SELECT 1")
-            if not (
-                self._table_exists("sessions")
-                and self._table_exists("conversations")
-                and self._table_exists("context_messages")
-            ):
+            query = """
+                SELECT COUNT(name)
+                FROM sqlite_master
+                WHERE type='table'
+                AND name IN ('sessions', 'conversations', 'context_messages');
+            """
+            self.cursor.execute(query)
+            table_count = self.cursor.fetchone()[0]
+            if table_count < 3:
+                logger.info("Tables not found. Initializing SQLite DB...")
                 initialize_sqlite(self.db_path)
             return True
 

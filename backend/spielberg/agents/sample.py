@@ -32,7 +32,7 @@ class SampleAgent(BaseAgent):
             )
             self.output_message.content.append(text_content)
             self.output_message.push_update()
-            text_content.text = "This is the text status of Agent."
+            text_content.text = "This is the text result of Agent."
             text_content.status = MsgStatus.success
             text_content.status_message = "Here is your response"
             self.output_message.publish()
