@@ -268,3 +268,6 @@ class Session:
 
     def get_all(self):
         return self.db.get_sessions()
+
+    def delete(self):
+        return self.db.delete_session(self.session_id)

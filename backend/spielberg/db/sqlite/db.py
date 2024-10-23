@@ -161,6 +161,33 @@ class SQLiteDB(BaseDB):
         )
         self.conn.commit()
 
+    def delete_conversation(self, session_id: str) -> bool:
+        self.cursor.execute(
+            "DELETE FROM conversations WHERE session_id = ?", (session_id,)
+        )
+        self.conn.commit()
+        return self.cursor.rowcount > 0
+
+    def delete_context(self, session_id: str) -> bool:
+        self.cursor.execute(
+            "DELETE FROM context_messages WHERE session_id = ?", (session_id,)
+        )
+        self.conn.commit()
+        return self.cursor.rowcount > 0
+
+    def delete_session(self, session_id: str) -> bool:
+        failed_components = []
+        if not self.delete_conversation(session_id):
+            failed_components.append("conversation")
+        if not self.delete_context(session_id):
+            failed_components.append("context")
+        self.cursor.execute("DELETE FROM sessions WHERE session_id = ?", (session_id,))
+        self.conn.commit()
+        if not self.cursor.rowcount > 0:
+            failed_components.append("session")
+        success = len(failed_components) < 3
+        return success, failed_components
+    
     def _table_exists(self, table_name: str) -> bool:
         """Check if a table exists in the SQLite database."""
         self.cursor.execute(
