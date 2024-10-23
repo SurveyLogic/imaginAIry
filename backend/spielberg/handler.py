@@ -100,13 +100,17 @@ class SessionHandler:
     def __init__(self, db: BaseDB, **kwargs):
         self.db = db
 
-    def get_session(self, session_id):
-        session = Session(db=self.db, session_id=session_id)
-        return session.get()
-
     def get_sessions(self):
         session = Session(db=self.db)
         return session.get_all()
+ 
+    def get_session(self, session_id):
+        session = Session(db=self.db, session_id=session_id)
+        return session.get()
+   
+    def delete_session(self, session_id):
+        session = Session(db=self.db, session_id=session_id)
+        return session.delete()
 
 
 class VideoDBHandler:
