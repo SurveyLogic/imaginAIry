@@ -64,8 +64,12 @@ class VideoDBTool:
             for video in videos
         ]
 
-    def upload(self, url, media_type):
-        media = self.conn.upload(url=url, media_type=media_type)
+    def upload(self, url, media_type, name=None):
+        if name is None:
+            media = self.conn.upload(url=url, media_type=media_type)
+            name = media.name
+        else:
+            media = self.conn.upload(url=url, media_type=media_type, name=name)
 
         if media_type == "video":
             return {
@@ -73,7 +77,7 @@ class VideoDBTool:
                 "collection_id": media.collection_id,
                 "stream_url": media.stream_url,
                 "player_url": media.player_url,
-                "name": media.name,
+                "name": name,
                 "description": media.description,
                 "thumbnail_url": media.thumbnail_url,
                 "length": media.length,

@@ -15,6 +15,10 @@ UPLOAD_AGENT_PARAMETERS = {
             "type": "string",
             "description": "URL to upload the content",
         },
+        "name": {
+            "type": "string",
+            "description": "Name of the content to upload",
+        },
         "media_type": {
             "type": "string",
             "enum": ["video", "audio", "image"],
@@ -36,7 +40,7 @@ class UploadAgent(BaseAgent):
         self.parameters = UPLOAD_AGENT_PARAMETERS
         super().__init__(session=session, **kwargs)
 
-    def _upload(self, url: str, media_type: str):
+    def _upload(self, url: str, media_type: str, name: str):
         """Upload the media with the given URL."""
         try:
             if media_type == "video":
@@ -51,7 +55,7 @@ class UploadAgent(BaseAgent):
             content.status_message = f"Uploading {media_type}..."
             self.output_message.push_update()
 
-            upload_data = self.videodb_tool.upload(url, media_type)
+            upload_data = self.videodb_tool.upload(url, media_type, name=name)
 
             content.status_message = f"{upload_data['name']} uploaded successfully"
             if media_type == "video":
@@ -108,7 +112,13 @@ class UploadAgent(BaseAgent):
         )
 
     def __call__(
-        self, url: str, media_type="video", collection_id: str = None, *args, **kwargs
+        self,
+        url: str,
+        media_type="video",
+        collection_id: str = None,
+        name: str = None,
+        *args,
+        **kwargs,
     ) -> AgentResponse:
         """
         Upload the media with the given URL.
@@ -134,7 +144,7 @@ class UploadAgent(BaseAgent):
             return self._upload_yt_playlist(playlist_info, media_type)
 
         # upload the media
-        upload_data = self._upload(url, media_type)
+        upload_data = self._upload(url, media_type, name)
         self.output_message.publish()
 
         return AgentResponse(
