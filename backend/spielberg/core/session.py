@@ -91,8 +91,27 @@ class ImageContent(BaseContent):
     type: ContentType = ContentType.image
 
 
+class ShotData(BaseModel):
+    """Shot data model class for search results content."""
+
+    search_score: Union[int, float]
+    start: Union[int, float]
+    end: Union[int, float]
+    text: str
+
+
+class SearchData(BaseModel):
+    """Search data model class for search results content."""
+
+    video_id: str
+    video_title: str
+    stream_url: str
+    duration: Union[int, float]
+    shots: List[ShotData]
+
+
 class SearchResultsContent(BaseContent):
-    search_results: dict = {}
+    search_results: Optional[List[SearchData]] = None
     type: ContentType = ContentType.search_results
 
 
@@ -127,7 +146,7 @@ class BaseMessage(BaseModel):
 
 class InputMessage(BaseMessage):
     """Input message to the agent
-    
+
     :param BaseDB db: Database instance
     :param MsgType msg_type: :class:`MsgType` of the message
     """

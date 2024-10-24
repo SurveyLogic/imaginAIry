@@ -23,7 +23,7 @@ UPLOAD_AGENT_PARAMETERS = {
         },
         "name": {
             "type": "string",
-            "description": "Name of the content to upload",
+            "description": "Name of the content to upload, optional parameter",
         },
         "media_type": {
             "type": "string",
@@ -155,5 +155,4 @@ class UploadAgent(BaseAgent):
             return self._upload_yt_playlist(playlist_info, media_type)
 
         # upload the media
-        return self._upload(url, media_type)
-
+        return self._upload(url, media_type, name)
