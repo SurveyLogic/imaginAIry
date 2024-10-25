@@ -114,7 +114,7 @@ To just run the frontend development server: `make run-fe`
 
 ## 📖 Documentation
 
-The project documentation is built using MkDocs. To serve the documentation locally:
+The project documentation is built using MkDocs. To serve the documentation locally on port 9000:
 
 Install dependencies for development:
 
@@ -123,7 +123,7 @@ make install-be
 ```
 
 ```bash
-mkdocs serve
+mkdocs serve -a localhost:9000
 ```
 
 To build the documentation:

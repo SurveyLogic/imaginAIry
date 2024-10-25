@@ -15,13 +15,13 @@ Make install-be
 
 ### Start the documentation server
 ```bash
-mkdocs serve -w ./backend
+mkdocs serve -w ./backend -a localhost:9000
 ```
 
 
 ### Start the documentation server from the backend directory
 ```bash
-mkdocs serve -f ../mkdocs.yml
+mkdocs serve -f ../mkdocs.yml -a localhost:9000
 ```
 
 
