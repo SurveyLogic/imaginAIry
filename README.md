@@ -94,7 +94,7 @@ This will start the backend server on `http://127.0.0.1:8000` and the frontend s
 To run only the backend server: `make run-be`
 To just run the frontend development server: `make run-fe`
 
-## Documentation
+## 📖 Documentation
 
 The project documentation is built using MkDocs. To serve the documentation locally:
 
