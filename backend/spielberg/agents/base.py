@@ -16,22 +16,23 @@ class AgentStatus:
 
 
 class AgentResponse(BaseModel):
+    """Data model for respones from agents."""
+
     status: str = AgentStatus.SUCCESS
     message: str = ""
     data: dict = {}
 
 
 class BaseAgent(ABC):
-    """Base class for all agents"""
+    """Interface for all agents. All agents should inherit from this class."""
 
     def __init__(self, session: Session, **kwargs):
         self.session: Session = session
         self.output_message: OutputMessage = self.session.output_message
 
     def get_parameters(self):
-        function_inferrer = FunctionInferrer.infer_from_function_reference(
-            self.run
-        )
+        """Return the automatically inferred parameters for the function using the dcstring of the function."""
+        function_inferrer = FunctionInferrer.infer_from_function_reference(self.run)
         function_json = function_inferrer.to_json_schema()
         parameters = function_json.get("parameters")
         if not parameters:

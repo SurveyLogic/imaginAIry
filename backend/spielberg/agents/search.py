@@ -7,6 +7,8 @@ from spielberg.core.session import (
     MsgStatus,
     TextContent,
     SearchResultsContent,
+    SearchData,
+    ShotData,
     VideoContent,
     VideoData,
     ContextMessage,
@@ -110,10 +112,21 @@ class SearchAgent(BaseAgent):
                             }
                         ],
                     }
-            search_result_content.search_results = list(search_result_videos.values())
+            search_result_content.search_results = [
+                SearchData(
+                    video_id=sr["video_id"],
+                    video_title=sr["video_title"],
+                    stream_url=sr["stream_url"],
+                    duration=sr["duration"],
+                    shots=[ShotData(**shot) for shot in sr["shots"]],
+                )
+                for sr in search_result_videos.values()
+            ]
             search_result_content.status = MsgStatus.success
             search_result_content.status_message = "Search done."
-            self.output_message.actions.append("Generating search result compilation clip..")
+            self.output_message.actions.append(
+                "Generating search result compilation clip.."
+            )
             self.output_message.push_update()
             compilation_stream_url = search_results.compile()
             compilation_content.video = VideoData(stream_url=compilation_stream_url)
