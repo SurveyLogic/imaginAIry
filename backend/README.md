@@ -88,9 +88,12 @@ To set up the development environment:
    source venv/bin/activate  
    ```
 
-2. Install dependencies:
+2. Install dependencies for development:
    ```bash
    pip install -r requirements.txt
+   ```
+   ```bash
+   pip install -r requirements-dev.txt
    ```
 
 3. Run the development server:
