@@ -98,8 +98,9 @@ plugins:
     handlers:
       python:
         options:
-          # extensions:
-          # - griffe_typingdoc
+          extensions:
+          - griffe_pydantic:
+              schema: false
           show_root_heading: true
           show_if_no_docstring: false
           inherited_members: true
