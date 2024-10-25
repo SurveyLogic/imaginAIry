@@ -35,6 +35,12 @@ REASONING_SYSTEM_PROMPT = """
        - 7.3. Perform the initial action which required video id.
     """.strip()
 
+# Generate succinct summary for the user who has given the query {query} and above responses by agents are generated (which are already displayed to the user).
+
+SUMMARIZATION_PROMPT = """
+Generate succinct summary for the user stating what all happened with agents on basis of above responses by agents (which are already displayed to the user).
+"""
+
 
 class ReasoningEngine:
     """The Reasoning Engine is the core class that directly interfaces with the user. It interprets natural language input in any conversation and orchestrates agents to fulfill the user's requests. The primary functions of the Reasoning Engine are:
@@ -109,6 +115,12 @@ class ReasoningEngine:
                     )
                 )
             self.session.reasoning_context.append(input_context)
+
+    def get_current_run_context(self):
+        for i in range(len(self.session.reasoning_context) - 1, -1, -1):
+            if self.session.reasoning_context[i].role == RoleTypes.user:
+                return self.session.reasoning_context[i:]
+        return []
 
     def run_agent(self, agent_name: str, *args, **kwargs) -> AgentResponse:
         """Run an agent.
@@ -200,10 +212,35 @@ class ReasoningEngine:
                         role=RoleTypes.assistant,
                     )
                 )
-                text_content = TextContent(text=llm_response.content)
-                text_content.status = MsgStatus.success
-                text_content.status_message = "Here is the summary of the response"
-                self.output_message.content.append(text_content)
+                summary = TextContent()
+                summary.status = MsgStatus.progress
+                if self.iterations == self.max_iterations - 1:
+                    # Direct response case
+                    summary.status_message = "Here is the summary of the response"
+                    summary.text = llm_response.content
+                    summary.status = MsgStatus.success
+                    self.output_message.content.append(summary)
+                else:
+                    summary.status_message = "Summarzing the run.."
+                    self.output_message.push_update()
+                    self.session.reasoning_context.append(
+                        ContextMessage(
+                            content=SUMMARIZATION_PROMPT.format(
+                                query=self.input_message.content
+                            ),
+                            role=RoleTypes.system,
+                        )
+                    )
+                    summary_response = self.llm.chat_completions(
+                        messages=[
+                            message.to_llm_msg()
+                            for message in self.get_current_run_context()
+                        ]
+                    )
+                    summary.text = summary_response.content
+                    summary.status = MsgStatus.success
+                    summary.status_message = "Here is the summary of the run"
+                    self.output_message.content.append(summary)
                 self.output_message.status = MsgStatus.success
                 self.output_message.publish()
                 print("-" * 40, "Stopping", "-" * 40)

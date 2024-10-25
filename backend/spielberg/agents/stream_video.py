@@ -83,5 +83,7 @@ class StreamVideoAgent(BaseAgent):
         return AgentResponse(
             status=AgentStatus.SUCCESS,
             message=f"Agent {self.name} completed successfully.",
-            data={},
+            data={
+                "stream_url": stream_url
+            },
         )
