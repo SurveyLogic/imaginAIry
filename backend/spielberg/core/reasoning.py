@@ -55,7 +55,7 @@ class ReasoningEngine:
         input_message: InputMessage,
         session: Session,
     ):
-        """Initialize the ReasoningEngine.
+        """Initialize the ReasoningEngine with the input message and session.
 
         :param input_message: The input message to the reasoning engine.
         :param session: The session instance.
@@ -77,7 +77,7 @@ class ReasoningEngine:
         self.agents.extend(agents)
 
     def build_context(self):
-        """Build the context for the reasoning engine and Agents."""
+        """Build the context for the reasoning engine it adds the information about the video or collection to the reasoning context."""
         input_context = ContextMessage(
             content=self.input_message.content, role=RoleTypes.user
         )
@@ -122,7 +122,7 @@ class ReasoningEngine:
         return []
 
     def run_agent(self, agent_name: str, *args, **kwargs) -> AgentResponse:
-        """Run an agent.
+        """Run an agent with the given name and arguments.
 
         :param str agent_name: The name of the agent to run
         :param args: The arguments to pass to the agent

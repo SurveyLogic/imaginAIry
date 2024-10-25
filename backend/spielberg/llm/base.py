@@ -10,9 +10,8 @@ class LLMResponseStatus:
     ERROR: bool = False
 
 
-
 class LLMResponse(BaseModel):
-    """Response from the LLM."""
+    """Response model for completions from LLMs."""
 
     content: str = ""
     tool_calls: List[Dict] = []
@@ -24,6 +23,19 @@ class LLMResponse(BaseModel):
 
 
 class BaseLLMConfig(BaseSettings):
+    """Base configuration for all LLMs.
+
+    :param str llm_type: Type of LLM. e.g. "openai", "anthropic", etc.
+    :param str api_key: API key for the LLM.
+    :param str api_base: Base URL for the LLM API.
+    :param str chat_model: Model name for chat completions.
+    :param str text_model: Model name for text completions.
+    :param str temperature: Sampling temperature for completions.
+    :param float top_p: Top p sampling for completions.
+    :param int max_tokens: Maximum tokens to generate.
+    :param int timeout: Timeout for the request.
+    """
+
     llm_type: str = ""
     api_key: str = ""
     api_base: str = ""
@@ -37,7 +49,12 @@ class BaseLLMConfig(BaseSettings):
 
 
 class BaseLLM(ABC):
+    """Interface for all LLMs. All LLMs should inherit from this class."""
+
     def __init__(self, config: BaseLLMConfig):
+        """
+        :param config: Configuration for the LLM.
+        """
         self.config = config
         self.llm_type = config.llm_type
         self.api_key = config.api_key
@@ -52,8 +69,10 @@ class BaseLLM(ABC):
 
     @abstractmethod
     def chat_completions(self, messages: List[Dict], tools: List[Dict]) -> LLMResponse:
+        """Abstract method for chat completions"""
         pass
 
     @abstractmethod
     def text_completions(self, prompt: str) -> LLMResponse:
+        """Abstract method for text completions"""
         pass

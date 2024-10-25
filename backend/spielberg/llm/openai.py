@@ -33,6 +33,8 @@ class OpenAITextModel(str, Enum):
 
 
 class OpenaiConfig(BaseLLMConfig):
+    """OpenAI Config"""
+
     model_config = SettingsConfigDict(
         env_prefix=EnvPrefix.OPENAI_,
         extra="ignore",
@@ -58,6 +60,9 @@ class OpenaiConfig(BaseLLMConfig):
 
 class OpenAI(BaseLLM):
     def __init__(self, config: OpenaiConfig = None):
+        """
+        :param config: OpenAI Config
+        """
         if config is None:
             config = OpenaiConfig()
         super().__init__(config=config)
@@ -203,5 +208,5 @@ class OpenAI(BaseLLM):
         )
 
     def text_completions(self):
-        """Get completions for text"""
+        """Get completions for text."""
         raise NotImplementedError("Not implemented yet")

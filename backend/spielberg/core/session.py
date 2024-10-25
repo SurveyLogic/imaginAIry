@@ -9,6 +9,8 @@ from spielberg.db.base import BaseDB
 
 
 class RoleTypes(str, Enum):
+    """Role types for the context message."""
+
     system = "system"
     user = "user"
     assistant = "assistant"
@@ -16,7 +18,7 @@ class RoleTypes(str, Enum):
 
 
 class MsgStatus(str, Enum):
-    """Output message status."""
+    """Message status for the message, for loading state."""
 
     progress = "progress"
     success = "success"
@@ -27,13 +29,15 @@ class MsgStatus(str, Enum):
 
 
 class MsgType(str, Enum):
-    """Message type."""
+    """Message type for the message. input is for the user input and output is for the spielberg output."""
 
     input = "input"
     output = "output"
 
 
 class ContentType(str, Enum):
+    """Content type for the content in the input/output message."""
+
     text = "text"
     video = "video"
     image = "image"
@@ -41,6 +45,8 @@ class ContentType(str, Enum):
 
 
 class BaseContent(BaseModel):
+    """Base content class for the content in the message."""
+
     model_config = ConfigDict(
         arbitrary_types_allowed=True,
         use_enum_values=True,
@@ -54,6 +60,8 @@ class BaseContent(BaseModel):
 
 
 class TextContent(BaseContent):
+    """Text content model class for text content."""
+
     text: str = ""
     type: ContentType = ContentType.text
 
@@ -72,6 +80,8 @@ class VideoData(BaseModel):
 
 
 class VideoContent(BaseContent):
+    """Video content model class for video content."""
+
     video: Optional[VideoData] = None
     type: ContentType = ContentType.video
 
@@ -87,6 +97,8 @@ class ImageData(BaseModel):
 
 
 class ImageContent(BaseContent):
+    """Image content model class for image content."""
+
     image: Optional[ImageData] = None
     type: ContentType = ContentType.image
 
@@ -116,13 +128,7 @@ class SearchResultsContent(BaseContent):
 
 
 class BaseMessage(BaseModel):
-    """Base message class.
-
-    :param str session_id: Session is of the messages
-    :param str conv_id: Conversation id
-    :param int msg_id: (optional) Message id
-    :param msg_type: Type of the message
-    """
+    """Base message class for the input/output message. All the input/output messages will be inherited from this class."""
 
     model_config = ConfigDict(
         arbitrary_types_allowed=True,
@@ -145,37 +151,37 @@ class BaseMessage(BaseModel):
 
 
 class InputMessage(BaseMessage):
-    """Input message to the agent
-
-    :param BaseDB db: Database instance
-    :param MsgType msg_type: :class:`MsgType` of the message
-    """
+    """Input message from the user. This class is used to create the input message from the user."""
 
     db: BaseDB
     msg_type: MsgType = MsgType.input
 
     def publish(self):
+        """Store the message in the database. for conversation history."""
         self.db.add_or_update_msg_to_conv(**self.model_dump(exclude={"db"}))
 
 
 class OutputMessage(BaseMessage):
-    """Output message from the agent"""
+    """Output message from the spielberg. This class is used to create the output message from the spielberg."""
 
     db: BaseDB = Field(exclude=True)
     msg_type: MsgType = MsgType.output
     status: MsgStatus = MsgStatus.progress
 
     def update_status(self, status: MsgStatus):
+        """Update the status of the message and publish the message to the socket. for loading state."""
         self.status = status
         self._publish()
 
     def push_update(self):
+        """Publish the message to the socket."""
         try:
             emit("chat", self.model_dump(), namespace="/chat")
         except Exception as e:
             print(f"Error in emitting message: {str(e)}")
 
     def publish(self):
+        """Store the message in the database. for conversation history and publish the message to the socket."""
         self._publish()
 
     def _publish(self):
@@ -187,7 +193,7 @@ class OutputMessage(BaseMessage):
 
 
 class ContextMessage(BaseModel):
-    """Context message class."""
+    """Context message class. This class is used to create the context message for the reasoning context."""
 
     model_config = ConfigDict(
         arbitrary_types_allowed=True,
@@ -201,6 +207,7 @@ class ContextMessage(BaseModel):
     role: RoleTypes = RoleTypes.system
 
     def to_llm_msg(self):
+        """Convert the context message to the llm message."""
         msg = {
             "role": self.role,
             "content": self.content,
@@ -222,10 +229,13 @@ class ContextMessage(BaseModel):
 
     @classmethod
     def from_json(cls, json_data):
+        """Create the context message from the json data."""
         return cls(**json_data)
 
 
 class Session:
+    """A class to manage and interact with a session in the database. The session is used to store the conversation and reasoning context messages."""
+
     def __init__(
         self,
         db: BaseDB,
@@ -250,12 +260,14 @@ class Session:
         self.get_context_messages()
 
     def save_context_messages(self):
+        """Save the reasoning context messages to the database."""
         context = {
             "reasoning": [message.to_llm_msg() for message in self.reasoning_context],
         }
         self.db.add_or_update_context_msg(self.session_id, context)
 
     def get_context_messages(self):
+        """Get the reasoning context messages from the database."""
         if not self.reasoning_context:
             context = self.db.get_context_messages(self.session_id)
             self.reasoning_context = [
@@ -266,9 +278,18 @@ class Session:
         return self.reasoning_context
 
     def create(self):
+        """Create a new session in the database."""
         self.db.create_session(**self.__dict__)
 
-    def new_message(self, msg_type: MsgType = MsgType.output, **kwargs):
+    def new_message(
+        self, msg_type: MsgType = MsgType.output, **kwargs
+    ) -> Union[InputMessage, OutputMessage]:
+        """Returns a new input/output message object.
+
+        :param MsgType msg_type: The type of the message, input or output.
+        :param dict kwargs: The message attributes.
+        :return: The input/output message object.
+        """
         if msg_type == MsgType.input:
             return InputMessage(
                 db=self.db,
@@ -284,13 +305,16 @@ class Session:
         )
 
     def get(self):
+        """Get the session from the database."""
         session = self.db.get_session(self.session_id)
         conversation = self.db.get_conversations(self.session_id)
         session["conversation"] = conversation
         return session
 
     def get_all(self):
+        """Get all the sessions from the database."""
         return self.db.get_sessions()
 
     def delete(self):
+        """Delete the session from the database."""
         return self.db.delete_session(self.session_id)

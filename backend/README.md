@@ -1,42 +1,126 @@
-# video_agent
+# 🎬 Spielberg Backend
 
-## How to install for development?
+## 📋 Overview
 
-Use virtualenv as:
+The Spielberg Backend is a Python-based server application that powers the Spielberg project. It provides a robust framework for managing video processing tasks, agent-based operations, and communication with the frontend.
 
-```console
-python3 -m venv .venv
-source .venv/bin/activate
-```
+## 🚀 Getting Started
 
-* Init the database from make file of the root of project
+### 🐳 Running with Docker
 
-```console
+To run the backend using Docker:
+
+1. Build the Docker image:
+   ```bash
+   docker build -t spielberg-backend .
+   ```
+
+2. Run the container:
+   ```bash
+   docker run -p 8000:8000 spielberg-backend
+   ```
+
+The server will be available at `http://localhost:8000`.
+
+## 🏗️ Core Components
+
+### 🧠 Reasoning Engine (`spielberg/core/reasoning.py`)
+
+The Reasoning Engine is the central component that orchestrates agents, interprets user input, and manages the conversation flow. It uses LLMs for natural language understanding and agent orchestration.
+
+### 📡 Session Management (`spielberg/core/session.py`)
+
+The Session class manages user sessions, conversations, and message handling. It provides methods for creating, retrieving, and managing session data.
+
+### 💬 Message Classes
+
+- `BaseMessage`: The foundation for all message types.
+- `InputMessage`: Represents user input.
+- `OutputMessage`: Represents system output, including agent responses.
+- `ContextMessage`: Manages conversation context for the reasoning engine.
+
+## 🤖 Agents
+
+Agents are modular components that perform specific tasks. The `BaseAgent` class (`spielberg/agents/base.py`) provides a foundation for creating custom agents. Sample agents like `SampleAgent` (`spielberg/agents/sample.py`) demonstrate how to implement agent functionality.
+
+## 🗄️ Database
+
+The project uses a database abstraction layer (`spielberg/db/base.py`) that can be implemented for different database systems. The current implementation uses SQLite (`spielberg/db/sqlite/`).
+
+## 🚪 Entrypoint
+
+The main entry point for the backend is the Flask server (`spielberg/entrypoint/api/server.py`). It sets up routes, WebSocket connections, and initializes the necessary components.
+
+## 🔌 Socket Communication
+
+The backend uses Flask-SocketIO for real-time communication with the frontend. Socket events are used to send and receive messages, updates, and other real-time data.
+
+## 🛠️ Tools
+
+The `VideoDBTool` (`spielberg/tools/videodb_tool.py`) provides an interface for interacting with the VideoDB API, allowing operations like video upload, search, and manipulation.
+
+## 🧠 LLM Integration
+
+The `BaseLLM` class (`spielberg/llm/base.py`) provides an abstraction for integrating different Language Model providers. The current implementation supports OpenAI (`spielberg/llm/openai.py`).
+
+## 📦 Dependencies
+
+Main dependencies include:
+- Flask
+- Flask-SocketIO
+- OpenAI
+- Pydantic
+- VideoDB Python Client
+
+For a full list of dependencies, see `requirements.txt`.
+
+## 🔧 Configuration
+
+Environment variables and configuration settings can be managed using `.env` files or system environment variables. Key configurations include API keys, database settings, and LLM parameters.
+
+## 🚀 Development
+
+To set up the development environment:
+
+1. Create a virtual environment:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  
+   ```
+
+2. Install dependencies for development:
+   ```bash
+   pip install -r requirements.txt
+   ```
+   ```bash
+   pip install -r requirements-dev.txt
+   ```
+
+3. Run the development server:
+   ```bash
+   python spielberg/entrypoint/api/server.py
+   ```
+
+### Using Make
+1. Init the database from make file of the root of project
+
+```bash
 make init-sqlite-db
 ```
 
-* Install the dependencies:
+2. Install the dependencies:
 
-```console
+```bash
 make install
 ```
 
 * Run Development server:
 
-```console
+```bash
 make run
 ```
 
-## How to run with Docker?
+## 📚 Further Documentation
 
-* Build the image:
+For more detailed information about specific components, please refer to the MkDocs documentation.
 
-```console
-docker build -t spielberg .
-```
-
-* Run the container:
-
-```console
-docker run -p 8000:8000 spielberg
-```
