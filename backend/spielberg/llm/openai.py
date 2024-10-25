@@ -46,7 +46,6 @@ class OpenaiConfig(BaseLLMConfig):
     chat_model: str = Field(default=OpenAIChatModel.GPT4o)
     text_model: str = Field(default=OpenAITextModel.GPT4_TURBO)
     max_tokens: int = 4096
-    enable_langfuse: bool = False
 
     @field_validator("api_key")
     @classmethod
@@ -66,18 +65,10 @@ class OpenAI(BaseLLM):
         if config is None:
             config = OpenaiConfig()
         super().__init__(config=config)
-
-        if self.enable_langfuse:
-            try:
-                from langfuse.openai import openai
-            except ImportError:
-                raise ImportError("Please install Langfuse and OpenAI python library.")
-            self.init_langfuse()
-        else:
-            try:
-                import openai
-            except ImportError:
-                raise ImportError("Please install OpenAI python library.")
+        try:
+            import openai
+        except ImportError:
+            raise ImportError("Please install OpenAI python library.")
 
         self.client = openai.OpenAI(api_key=self.api_key, base_url=self.api_base)
 
