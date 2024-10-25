@@ -2,6 +2,8 @@ from abc import ABC, abstractmethod
 
 
 class BaseDB(ABC):
+    """Interface for all databases. It provides a common interface for all databases to follow."""
+
     @abstractmethod
     def create_session(
         self, session_id: str, video_id: str = None, collection_id: str = None

@@ -5,6 +5,4 @@ Base DB is the base class for all databases. It provides a common interface for 
 
 ### Base DB
 
-Base DB is the base class for all databases. It provides a common interface for all databases to follow.
-
 ::: spielberg.db.base.BaseDB
