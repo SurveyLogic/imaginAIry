@@ -71,7 +71,6 @@ install_node_with_nvm() {
         if confirm "Would you like to install Node.js version $node_version using nvm?"; then
             nvm install $node_version
             nvm use $node_version
-            nvm alias default $node_version
             echo "✅ Node.js $node_version and npm have been successfully installed with nvm!"
         else
             echo "⏭️ Skipping Node.js installation."

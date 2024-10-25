@@ -103,10 +103,27 @@ class ImageContent(BaseContent):
     type: ContentType = ContentType.image
 
 
-class SearchResultsContent(BaseContent):
-    """Search results content model class for search results content."""
+class ShotData(BaseModel):
+    """Shot data model class for search results content."""
 
-    search_results: dict = {}
+    search_score: Union[int, float]
+    start: Union[int, float]
+    end: Union[int, float]
+    text: str
+
+
+class SearchData(BaseModel):
+    """Search data model class for search results content."""
+
+    video_id: str
+    video_title: str
+    stream_url: str
+    duration: Union[int, float]
+    shots: List[ShotData]
+
+
+class SearchResultsContent(BaseContent):
+    search_results: Optional[List[SearchData]] = None
     type: ContentType = ContentType.search_results
 
 
