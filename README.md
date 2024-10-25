@@ -119,7 +119,7 @@ The project documentation is built using MkDocs. To serve the documentation loca
 Install dependencies for development:
 
 ```bash
-make install-dev
+make install-be
 ```
 
 ```bash
