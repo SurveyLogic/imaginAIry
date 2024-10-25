@@ -6,7 +6,7 @@ from pydantic import BaseModel
 from openai_function_calling import FunctionInferrer
 
 from spielberg.core.session import Session, OutputMessage
-
+from spielberg.llm.openai import OpenAI
 logger = logging.getLogger(__name__)
 
 
@@ -29,6 +29,7 @@ class BaseAgent(ABC):
     def __init__(self, session: Session, **kwargs):
         self.session: Session = session
         self.output_message: OutputMessage = self.session.output_message
+        self.llm = OpenAI()
 
     def get_parameters(self):
         """Return the automatically inferred parameters for the function using the dcstring of the function."""
