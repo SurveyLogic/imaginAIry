@@ -68,6 +68,7 @@ class ReasoningEngine:
         self.agents: List[BaseAgent] = []
         self.stop_flag = False
         self.output_message: OutputMessage = self.session.output_message
+        self.summary_content = None
 
     def register_agents(self, agents: List[BaseAgent]):
         """Register an agents.
@@ -120,6 +121,20 @@ class ReasoningEngine:
             if self.session.reasoning_context[i].role == RoleTypes.user:
                 return self.session.reasoning_context[i:]
         return []
+
+    def remove_summary_content(self):
+        for i in range(len(self.output_message.content) - 1, -1, -1):
+            if self.output_message.content[i].agent_name == "reasoning_engine":
+                self.output_message.content.pop(i)
+                self.summary_content = None
+
+    def add_summary_content(self):
+        self.summary_content = TextContent(agent_name="reasoning_engine")
+        self.output_message.content.append(self.summary_content)
+        self.summary_content.status_message = "Consolidating outcomes..."
+        self.summary_content.status = MsgStatus.progress
+        self.output_message.push_update()
+        return self.summary_content
 
     def run_agent(self, agent_name: str, *args, **kwargs) -> AgentResponse:
         """Run an agent with the given name and arguments.
@@ -177,6 +192,9 @@ class ReasoningEngine:
                 break
 
             if llm_response.tool_calls:
+                if self.summary_content:
+                    self.remove_summary_content()
+
                 self.session.reasoning_context.append(
                     ContextMessage(
                         content=llm_response.content,
@@ -200,6 +218,9 @@ class ReasoningEngine:
                     print(agent_response, "\n\n")
                     status = agent_response.status
 
+            if not self.summary_content:
+                self.add_summary_content()
+
             if (
                 llm_response.finish_reason == "stop"
                 or llm_response.finish_reason == "end_turn"
@@ -211,17 +232,14 @@ class ReasoningEngine:
                         role=RoleTypes.assistant,
                     )
                 )
-                summary = TextContent()
-                summary.status = MsgStatus.progress
                 if self.iterations == self.max_iterations - 1:
                     # Direct response case
-                    summary.status_message = "Here is the summary of the response"
-                    summary.text = llm_response.content
-                    summary.status = MsgStatus.success
-                    self.output_message.content.append(summary)
+                    self.summary_content.status_message = (
+                        "Here is the the response"
+                    )
+                    self.summary_content.text = llm_response.content
+                    self.summary_content.status = MsgStatus.success
                 else:
-                    summary.status_message = "Summarzing the run.."
-                    self.output_message.push_update()
                     self.session.reasoning_context.append(
                         ContextMessage(
                             content=SUMMARIZATION_PROMPT.format(
@@ -236,10 +254,11 @@ class ReasoningEngine:
                             for message in self.get_current_run_context()
                         ]
                     )
-                    summary.text = summary_response.content
-                    summary.status = MsgStatus.success
-                    summary.status_message = "Here is the summary of the run"
-                    self.output_message.content.append(summary)
+                    self.summary_content.text = summary_response.content
+                    self.summary_content.status = MsgStatus.success
+                    self.summary_content.status_message = (
+                        "Here is the summary of the run"
+                    )
                 self.output_message.status = MsgStatus.success
                 self.output_message.publish()
                 print("-" * 40, "Stopping", "-" * 40)
