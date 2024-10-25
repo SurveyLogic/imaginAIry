@@ -37,6 +37,6 @@ class DownloadAgent(BaseAgent):
             return AgentResponse(status=AgentStatus.ERROR, message=str(e))
         return AgentResponse(
             status=AgentStatus.SUCCESS,
-            message="Download successful",
+            message="Download successful but not dispalyed, send it in the summary.",
             data=download_response,
         )

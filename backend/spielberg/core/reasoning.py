@@ -35,10 +35,9 @@ REASONING_SYSTEM_PROMPT = """
        - 7.3. Perform the initial action which required video id.
     """.strip()
 
-# Generate succinct summary for the user who has given the query {query} and above responses by agents are generated (which are already displayed to the user).
-
 SUMMARIZATION_PROMPT = """
-Generate succinct summary for the user stating what all happened with agents on basis of above responses by agents (which are already displayed to the user).
+Generate succinct summary for the user stating what all happened with agents on basis of above responses by agents.
+Agent responses are already displayed to the user until specified explicitly in which case include the responses in the summary.
 """
 
 

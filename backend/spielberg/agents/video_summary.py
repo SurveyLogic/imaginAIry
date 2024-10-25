@@ -7,23 +7,26 @@ from spielberg.tools.videodb_tool import VideoDBTool
 
 logger = logging.getLogger(__name__)
 
-SUMMARY_AGENT_PROMPT = """
-Create a comprehensive, in-depth summary that is clear and concise.
-Focus strictly on the main ideas and essential information from the provided text, eliminating any unnecessary language or details.
-"""
 
-
-class SummaryAgent(BaseAgent):
+class VideoSummaryAgent(BaseAgent):
     def __init__(self, session=None, **kwargs):
-        self.agent_name = "summary"
-        self.description = "This is an agent to summarize the given video of VideoDB."
+        self.agent_name = "video_summary"
+        self.description = "This is an agent to summarize the given video of VideoDB, if the user wants a certain kind of summary the prompt required.."
         self.llm = OpenAI()
         self.parameters = self.get_parameters()
         super().__init__(session=session, **kwargs)
 
-    def run(self, collection_id: str, video_id: str) -> AgentResponse:
+    def run(self, collection_id: str, video_id: str, prompt: str) -> AgentResponse:
         """
         Generate summary of the given video.
+
+        :param str collection_id: The collection_id where given video_id is available.
+        :param str video_id: The id of the video for which the video player is required.
+        :param args: Additional positional arguments.
+        :param kwargs: Additional keyword arguments.
+        :return: The response containing information about the sample processing operation.
+        :rtype: AgentResponse
+
         """
         try:
             self.output_message.actions.append("Started summary generation..")
@@ -41,7 +44,7 @@ class SummaryAgent(BaseAgent):
                 self.output_message.push_update()
                 videodb_tool.index_spoken_words(video_id)
                 transcript_text = videodb_tool.get_transcript(video_id)
-            summary_llm_prompt = f"{SUMMARY_AGENT_PROMPT} {transcript_text}"
+            summary_llm_prompt = f"{transcript_text} {prompt}"
             summary_llm_message = ContextMessage(
                 content=summary_llm_prompt, role=RoleTypes.user
             )
@@ -58,7 +61,7 @@ class SummaryAgent(BaseAgent):
             summary = llm_response.content
             output_text_content.text = summary
             output_text_content.status = MsgStatus.success
-            output_text_content.status_message = "Summary generated successfully."
+            output_text_content.status_message = "Here is your summary"
             self.output_message.publish()
         except Exception as e:
             logger.exception(f"Error in {self.agent_name} agent.")
