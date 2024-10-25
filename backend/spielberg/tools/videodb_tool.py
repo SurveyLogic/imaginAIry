@@ -1,7 +1,7 @@
 import os
 import videodb
 
-from videodb import SearchType
+from videodb import SearchType, SubtitleStyle
 from videodb.timeline import Timeline
 from videodb.asset import VideoAsset, ImageAsset
 
@@ -166,3 +166,8 @@ class VideoDBTool:
     def get_and_set_timeline(self):
         self.timeline = Timeline(self.conn)
         return self.timeline
+
+    def add_subtitle(self, video_id, style: SubtitleStyle = SubtitleStyle()):
+        video = self.collection.get_video(video_id)
+        stream_url = video.add_subtitle(style)
+        return stream_url
