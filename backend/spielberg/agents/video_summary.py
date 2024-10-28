@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 class VideoSummaryAgent(BaseAgent):
     def __init__(self, session=None, **kwargs):
         self.agent_name = "video_summary"
-        self.description = "This is an agent to summarize the given video of VideoDB, if the user wants a certain kind of summary the prompt required.."
+        self.description = "This is an agent to summarize the given video of VideoDB, if the user wants a certain kind of summary the prompt is required."
         self.llm = OpenAI()
         self.parameters = self.get_parameters()
         super().__init__(session=session, **kwargs)
