@@ -29,7 +29,6 @@ class BaseLLMConfig(BaseSettings):
     :param str api_key: API key for the LLM.
     :param str api_base: Base URL for the LLM API.
     :param str chat_model: Model name for chat completions.
-    :param str text_model: Model name for text completions.
     :param str temperature: Sampling temperature for completions.
     :param float top_p: Top p sampling for completions.
     :param int max_tokens: Maximum tokens to generate.
@@ -40,7 +39,6 @@ class BaseLLMConfig(BaseSettings):
     api_key: str = ""
     api_base: str = ""
     chat_model: str = ""
-    text_model: str = ""
     temperature: float = 0.9
     top_p: float = 1
     max_tokens: int = 4096
@@ -60,7 +58,6 @@ class BaseLLM(ABC):
         self.api_key = config.api_key
         self.api_base = config.api_base
         self.chat_model = config.chat_model
-        self.text_model = config.text_model
         self.temperature = config.temperature
         self.top_p = config.top_p
         self.max_tokens = config.max_tokens
@@ -70,9 +67,4 @@ class BaseLLM(ABC):
     @abstractmethod
     def chat_completions(self, messages: List[Dict], tools: List[Dict]) -> LLMResponse:
         """Abstract method for chat completions"""
-        pass
-
-    @abstractmethod
-    def text_completions(self, prompt: str) -> LLMResponse:
-        """Abstract method for text completions"""
         pass

@@ -100,7 +100,7 @@ class PromptClipAgent(BaseAgent):
                     self.llm.chat_completions,
                     [
                         ContextMessage(
-                            content=prompt, role=RoleTypes.system
+                            content=prompt, role=RoleTypes.user
                         ).to_llm_msg()
                     ],
                     response_format={"type": "json_object"},

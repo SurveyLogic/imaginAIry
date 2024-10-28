@@ -18,9 +18,11 @@ class LLMType(str, Enum):
     """Enum for LLM types"""
 
     OPENAI = "openai"
+    ANTHROPIC = "anthropic"
 
 
 class EnvPrefix(str, Enum):
     """Enum for environment prefixes"""
 
     OPENAI_ = "OPENAI_"
+    ANTHROPIC_ = "ANTHROPIC_"
