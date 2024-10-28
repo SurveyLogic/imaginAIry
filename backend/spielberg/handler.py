@@ -3,27 +3,27 @@ import logging
 
 from dotenv import dotenv_values
 
-from spielberg.agents.thumbnail import ThumbnailAgent
-from spielberg.agents.video_summary import VideoSummaryAgent
-from spielberg.agents.download import DownloadAgent
-from spielberg.agents.pricing import PricingAgent
-from spielberg.agents.upload import UploadAgent
-from spielberg.agents.search import SearchAgent
-from spielberg.agents.prompt_clip import PromptClipAgent
-from spielberg.agents.index import IndexAgent
-from spielberg.agents.brandkit import BrandkitAgent
-from spielberg.agents.profanity_remover import ProfanityRemoverAgent
-from spielberg.agents.image_generation import ImageGenerationAgent
-from spielberg.agents.stream_video import StreamVideoAgent
-from spielberg.agents.subtitle import SubtitleAgent
-from spielberg.agents.slack_agent import SlackAgent
+from director.agents.thumbnail import ThumbnailAgent
+from director.agents.video_summary import VideoSummaryAgent
+from director.agents.download import DownloadAgent
+from director.agents.pricing import PricingAgent
+from director.agents.upload import UploadAgent
+from director.agents.search import SearchAgent
+from director.agents.prompt_clip import PromptClipAgent
+from director.agents.index import IndexAgent
+from director.agents.brandkit import BrandkitAgent
+from director.agents.profanity_remover import ProfanityRemoverAgent
+from director.agents.image_generation import ImageGenerationAgent
+from director.agents.stream_video import StreamVideoAgent
+from director.agents.subtitle import SubtitleAgent
+from director.agents.slack_agent import SlackAgent
 
 
-from spielberg.core.session import Session, InputMessage, MsgStatus
-from spielberg.core.reasoning import ReasoningEngine
-from spielberg.db.base import BaseDB
-from spielberg.db import load_db
-from spielberg.tools.videodb_tool import VideoDBTool
+from director.core.session import Session, InputMessage, MsgStatus
+from director.core.reasoning import ReasoningEngine
+from director.db.base import BaseDB
+from director.db import load_db
+from director.tools.videodb_tool import VideoDBTool
 
 logger = logging.getLogger(__name__)
 

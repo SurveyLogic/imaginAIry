@@ -1,7 +1,7 @@
 ## Exceptions
 
-::: spielberg.utils.exceptions.SpielbergException
+::: director.utils.exceptions.DirectorException
 
-::: spielberg.utils.exceptions.AgentException
+::: director.utils.exceptions.AgentException
 
-::: spielberg.utils.exceptions.ToolException
+::: director.utils.exceptions.ToolException

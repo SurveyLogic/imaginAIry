@@ -1,17 +1,17 @@
 import logging
 import os
 
-from spielberg.agents.base import BaseAgent, AgentResponse, AgentStatus
-from spielberg.core.session import (
+from director.agents.base import BaseAgent, AgentResponse, AgentStatus
+from director.core.session import (
     Session,
     TextContent,
     MsgStatus,
     ContextMessage,
     RoleTypes,
 )
-from spielberg.tools.slack import send_message_to_channel
-from spielberg.llm.openai import OpenAI
-from spielberg.llm.base import LLMResponseStatus
+from director.tools.slack import send_message_to_channel
+from director.llm.openai import OpenAI
+from director.llm.base import LLMResponseStatus
 
 logger = logging.getLogger(__name__)
 

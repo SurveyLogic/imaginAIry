@@ -2,8 +2,8 @@ import logging
 import textwrap
 import json
 
-from spielberg.agents.base import BaseAgent, AgentResponse, AgentStatus
-from spielberg.core.session import (
+from director.agents.base import BaseAgent, AgentResponse, AgentStatus
+from director.core.session import (
     Session,
     ContextMessage,
     RoleTypes,
@@ -11,8 +11,8 @@ from spielberg.core.session import (
     VideoData,
     MsgStatus,
 )
-from spielberg.tools.videodb_tool import VideoDBTool
-from spielberg.llm.openai import OpenAI, OpenaiConfig
+from director.tools.videodb_tool import VideoDBTool
+from director.llm.openai import OpenAI, OpenaiConfig
 
 
 from videodb.asset import VideoAsset, TextAsset, TextStyle

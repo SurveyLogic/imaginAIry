@@ -14,7 +14,7 @@
 
 
 <h1 align="center">
-        Spielberg
+        Director
         <br/>
         <br />
         <a href="https://videodb.io/">
@@ -26,7 +26,7 @@
 <br />
 <p align="center">
 <p align="center">
-        <a href="https://render.com/deploy?repo=https://github.com/video-db/Spielberg" target="_blank" rel="nofollow"><img src="https://render.com/images/deploy-to-render-button.svg" alt="Deploy to Render"></a>
+        <a href="https://render.com/deploy?repo=https://github.com/video-db/Director" target="_blank" rel="nofollow"><img src="https://render.com/images/deploy-to-render-button.svg" alt="Deploy to Render"></a>
         <a href="https://railway.app/template/">
           <img src="https://railway.app/button.svg" alt="Deploy on Railway">
         </a>
@@ -40,16 +40,16 @@
     <a href="https://stackblitz.com/edit/videodb-player-demo-pxy8k7?file=src%2FApp.vue"><strong>View Demo »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/video-db/Spielberg/issues">Report Bug</a>
+    <a href="https://github.com/video-db/Director/issues">Report Bug</a>
     ·
-    <a href="https://github.com/video-db/Spielberg/issues">Request Feature</a>
+    <a href="https://github.com/video-db/Director/issues">Request Feature</a>
   </p>
 </p>
 
 <!-- ABOUT THE PROJECT -->
 
 ##  🧐 What is it?
-Spielberg provides a flexible framework for developing intelligent media agents that can interact with your audio/video collection in natural language. Whether you're dealing with lectures, movies, social content, youtube videos, TV shows, talks, music, or other digital content, Spielberg offers tools to build powerful AI-powered assistants.
+Director provides a flexible framework for developing intelligent media agents that can interact with your audio/video collection in natural language. Whether you're dealing with lectures, movies, social content, youtube videos, TV shows, talks, music, or other digital content, Director offers tools to build powerful AI-powered assistants.
 
 It uses the VideoDB’s powerful infrastructure to create agentic workflows. For example in natural language you can give commands like `“upload this video and send the bullet point summary on my slack”` and the agent will handle the rest.
 
@@ -76,8 +76,8 @@ TODO: Intro video here
 **1. Clone the repository:**
 
 ``` bash
-git clone https://github.com/video-db/Spielberg.git
-cd Spielberg
+git clone https://github.com/video-db/Director.git
+cd Director
 ```
 
 **2. Run the setup script:**
@@ -137,9 +137,9 @@ mkdocs build
 ## 📘 Creating a New Agent
 📺 Watch: Code walkthrough
 
-To create a new agent in Spielberg, follow these steps:
+To create a new agent in Director, follow these steps:
 
-1. **Copy the template**: Duplicate `sample_agent.py` in `Spielberg/backend/spielberg/agents/` and rename it to your agent's name.
+1. **Copy the template**: Duplicate `sample_agent.py` in `Director/backend/director/agents/` and rename it to your agent's name.
 
 2. **Update class details**:
    - Rename the class (e.g., from `SampleAgent` to `YourAgentName`)
@@ -163,7 +163,7 @@ To create a new agent in Spielberg, follow these steps:
    - Return an `AgentResponse` with result, message, and data
 
 7. **Register the agent**:
-   - Import your new agent class in `Spielberg/backend/spielberg/handler.py`
+   - Import your new agent class in `Director/backend/director/handler.py`
    - Add it to the `self.agents` list in `ChatHandler`
 
 Remember to consider creating reusable tools if your agent's functionality could be shared across multiple agents.
@@ -185,10 +185,10 @@ Contributions are what make the open source community such an amazing place to b
 [npm-url]: https://www.npmjs.com/package/@videodb/player-vue
 [discord-shield]: https://img.shields.io/badge/dynamic/json?style=for-the-badge&url=https://discord.com/api/invites/py9P639jGz?with_counts=true&query=$.approximate_member_count&logo=discord&logoColor=blue&color=green&label=discord
 [discord-url]: https://discord.com/invite/py9P639jGz
-[stars-shield]: https://img.shields.io/github/stars/video-db/Spielberg.svg?style=for-the-badge
-[stars-url]: https://github.com/video-db/Spielberg/stargazers
-[issues-shield]: https://img.shields.io/github/issues/video-db/Spielberg.svg?style=for-the-badge
-[issues-url]: https://github.com/video-db/Spielberg/issues
+[stars-shield]: https://img.shields.io/github/stars/video-db/Director.svg?style=for-the-badge
+[stars-url]: https://github.com/video-db/Director/stargazers
+[issues-shield]: https://img.shields.io/github/issues/video-db/Director.svg?style=for-the-badge
+[issues-url]: https://github.com/video-db/Director/issues
 [website-shield]: https://img.shields.io/website?url=https%3A%2F%2Fvideodb.io%2F&style=for-the-badge&label=videodb.io
 [website-url]: https://videodb.io/
 

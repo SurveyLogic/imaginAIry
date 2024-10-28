@@ -1,8 +1,8 @@
-# 🎬 Spielberg Backend
+# 🎬 Director Backend
 
 ## 📋 Overview
 
-The Spielberg Backend is a Python-based server application that powers the Spielberg project. It provides a robust framework for managing video processing tasks, agent-based operations, and communication with the frontend.
+The Director Backend is a Python-based server application that powers the Director project. It provides a robust framework for managing video processing tasks, agent-based operations, and communication with the frontend.
 
 ## 🚀 Getting Started
 
@@ -12,23 +12,23 @@ To run the backend using Docker:
 
 1. Build the Docker image:
    ```bash
-   docker build -t spielberg-backend .
+   docker build -t director-backend .
    ```
 
 2. Run the container:
    ```bash
-   docker run -p 8000:8000 spielberg-backend
+   docker run -p 8000:8000 director-backend
    ```
 
 The server will be available at `http://localhost:8000`.
 
 ## 🏗️ Core Components
 
-### 🧠 Reasoning Engine (`spielberg/core/reasoning.py`)
+### 🧠 Reasoning Engine (`director/core/reasoning.py`)
 
 The Reasoning Engine is the central component that orchestrates agents, interprets user input, and manages the conversation flow. It uses LLMs for natural language understanding and agent orchestration.
 
-### 📡 Session Management (`spielberg/core/session.py`)
+### 📡 Session Management (`director/core/session.py`)
 
 The Session class manages user sessions, conversations, and message handling. It provides methods for creating, retrieving, and managing session data.
 
@@ -41,15 +41,15 @@ The Session class manages user sessions, conversations, and message handling. It
 
 ## 🤖 Agents
 
-Agents are modular components that perform specific tasks. The `BaseAgent` class (`spielberg/agents/base.py`) provides a foundation for creating custom agents. Sample agents like `SampleAgent` (`spielberg/agents/sample.py`) demonstrate how to implement agent functionality.
+Agents are modular components that perform specific tasks. The `BaseAgent` class (`director/agents/base.py`) provides a foundation for creating custom agents. Sample agents like `SampleAgent` (`director/agents/sample.py`) demonstrate how to implement agent functionality.
 
 ## 🗄️ Database
 
-The project uses a database abstraction layer (`spielberg/db/base.py`) that can be implemented for different database systems. The current implementation uses SQLite (`spielberg/db/sqlite/`).
+The project uses a database abstraction layer (`director/db/base.py`) that can be implemented for different database systems. The current implementation uses SQLite (`director/db/sqlite/`).
 
 ## 🚪 Entrypoint
 
-The main entry point for the backend is the Flask server (`spielberg/entrypoint/api/server.py`). It sets up routes, WebSocket connections, and initializes the necessary components.
+The main entry point for the backend is the Flask server (`director/entrypoint/api/server.py`). It sets up routes, WebSocket connections, and initializes the necessary components.
 
 ## 🔌 Socket Communication
 
@@ -57,11 +57,11 @@ The backend uses Flask-SocketIO for real-time communication with the frontend. S
 
 ## 🛠️ Tools
 
-The `VideoDBTool` (`spielberg/tools/videodb_tool.py`) provides an interface for interacting with the VideoDB API, allowing operations like video upload, search, and manipulation.
+The `VideoDBTool` (`director/tools/videodb_tool.py`) provides an interface for interacting with the VideoDB API, allowing operations like video upload, search, and manipulation.
 
 ## 🧠 LLM Integration
 
-The `BaseLLM` class (`spielberg/llm/base.py`) provides an abstraction for integrating different Language Model providers. The current implementation supports OpenAI (`spielberg/llm/openai.py`).
+The `BaseLLM` class (`director/llm/base.py`) provides an abstraction for integrating different Language Model providers. The current implementation supports OpenAI (`director/llm/openai.py`).
 
 ## 📦 Dependencies
 
@@ -98,7 +98,7 @@ To set up the development environment:
 
 3. Run the development server:
    ```bash
-   python spielberg/entrypoint/api/server.py
+   python director/entrypoint/api/server.py
    ```
 
 ### Using Make

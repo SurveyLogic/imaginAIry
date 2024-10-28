@@ -5,7 +5,7 @@ from pydantic import BaseModel
 
 from openai_function_calling import FunctionInferrer
 
-from spielberg.core.session import Session, OutputMessage
+from director.core.session import Session, OutputMessage
 
 logger = logging.getLogger(__name__)
 

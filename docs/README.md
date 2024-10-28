@@ -1,6 +1,6 @@
-# 📚 Spielberg Documentation
+# 📚 Director Documentation
 
-This directory contains the documentation for the Spielberg project. We use MkDocs to build and serve our documentation.
+This directory contains the documentation for the Director project. We use MkDocs to build and serve our documentation.
 
 ## 🚀 Getting Started
 
@@ -65,4 +65,4 @@ When adding new documentation:
 
 ## 🤝 Need Help?
 
-If you encounter any issues or have questions about the documentation, please [open an issue](https://github.com/video-db/Spielberg/issues) on our GitHub repository.
+If you encounter any issues or have questions about the documentation, please [open an issue](https://github.com/video-db/Director/issues) on our GitHub repository.

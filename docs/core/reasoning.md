@@ -1,4 +1,4 @@
 ## Reasoning Engine
 
 
-::: spielberg.core.reasoning.ReasoningEngine
+::: director.core.reasoning.ReasoningEngine

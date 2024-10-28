@@ -2,8 +2,8 @@ import os
 
 from flask import Blueprint, request, current_app as app
 
-from spielberg.db import load_db
-from spielberg.handler import ChatHandler, SessionHandler, VideoDBHandler, ConfigHandler
+from director.db import load_db
+from director.handler import ChatHandler, SessionHandler, VideoDBHandler, ConfigHandler
 
 
 agent_bp = Blueprint("agent", __name__, url_prefix="/agent")

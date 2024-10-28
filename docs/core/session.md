@@ -3,20 +3,20 @@
 
 ## BaseMessage
 
-::: spielberg.core.session.BaseMessage
+::: director.core.session.BaseMessage
 
 ## InputMessage
 
-::: spielberg.core.session.InputMessage
+::: director.core.session.InputMessage
 
 ## Output Message
 
-::: spielberg.core.session.OutputMessage
+::: director.core.session.OutputMessage
 
 ## Context Message
 
-::: spielberg.core.session.ContextMessage
+::: director.core.session.ContextMessage
 
 ## Session
 
-::: spielberg.core.session.Session
+::: director.core.session.Session

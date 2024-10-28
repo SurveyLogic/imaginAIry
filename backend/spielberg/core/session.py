@@ -5,7 +5,7 @@ from typing import Optional, List, Union
 from flask_socketio import emit
 from pydantic import BaseModel, Field, ConfigDict
 
-from spielberg.db.base import BaseDB
+from director.db.base import BaseDB
 
 
 class RoleTypes(str, Enum):
@@ -29,7 +29,7 @@ class MsgStatus(str, Enum):
 
 
 class MsgType(str, Enum):
-    """Message type for the message. input is for the user input and output is for the spielberg output."""
+    """Message type for the message. input is for the user input and output is for the director output."""
 
     input = "input"
     output = "output"
@@ -162,7 +162,7 @@ class InputMessage(BaseMessage):
 
 
 class OutputMessage(BaseMessage):
-    """Output message from the spielberg. This class is used to create the output message from the spielberg."""
+    """Output message from the director. This class is used to create the output message from the director."""
 
     db: BaseDB = Field(exclude=True)
     msg_type: MsgType = MsgType.output

@@ -5,8 +5,8 @@ from pydantic import Field, field_validator, FieldValidationInfo
 from pydantic_settings import SettingsConfigDict
 
 
-from spielberg.llm.base import BaseLLM, BaseLLMConfig, LLMResponse, LLMResponseStatus
-from spielberg.constants import (
+from director.llm.base import BaseLLM, BaseLLMConfig, LLMResponse, LLMResponseStatus
+from director.constants import (
     LLMType,
     EnvPrefix,
 )

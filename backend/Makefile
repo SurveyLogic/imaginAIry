@@ -25,7 +25,7 @@ help:
 
 init-sqlite-db:
 	source $(VENV_DIR)/bin/activate && \
-	python spielberg/db/sqlite/initialize.py
+	python director/db/sqlite/initialize.py
 
 
 install:
@@ -43,4 +43,4 @@ lint:
 
 run:
 	source $(VENV_DIR)/bin/activate && \
-	python spielberg/entrypoint/api/server.py
+	python director/entrypoint/api/server.py

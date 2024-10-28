@@ -1,9 +1,9 @@
 import logging
 
-from spielberg.agents.base import BaseAgent, AgentResponse, AgentStatus
-from spielberg.core.session import ContextMessage, RoleTypes, TextContent, MsgStatus
-from spielberg.llm.openai import OpenAI
-from spielberg.tools.videodb_tool import VideoDBTool
+from director.agents.base import BaseAgent, AgentResponse, AgentStatus
+from director.core.session import ContextMessage, RoleTypes, TextContent, MsgStatus
+from director.llm.openai import OpenAI
+from director.tools.videodb_tool import VideoDBTool
 
 logger = logging.getLogger(__name__)
 

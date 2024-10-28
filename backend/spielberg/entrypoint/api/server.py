@@ -1,7 +1,7 @@
 import os
 
 from dotenv import load_dotenv
-from spielberg.entrypoint.api import create_app
+from director.entrypoint.api import create_app
 
 load_dotenv()
 

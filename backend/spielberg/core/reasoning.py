@@ -2,8 +2,8 @@ import logging
 from typing import List
 
 
-from spielberg.agents.base import BaseAgent, AgentStatus, AgentResponse
-from spielberg.core.session import (
+from director.agents.base import BaseAgent, AgentStatus, AgentResponse
+from director.core.session import (
     Session,
     OutputMessage,
     InputMessage,
@@ -12,8 +12,8 @@ from spielberg.core.session import (
     TextContent,
     MsgStatus,
 )
-from spielberg.llm.base import LLMResponse
-from spielberg.llm.openai import OpenAI
+from director.llm.base import LLMResponse
+from director.llm.openai import OpenAI
 
 
 logger = logging.getLogger(__name__)
