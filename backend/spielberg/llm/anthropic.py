@@ -32,7 +32,6 @@ class AnthropicAIConfig(BaseLLMConfig):
     api_key: str = ""
     api_base: str = ""
     chat_model: str = Field(default=AnthropicChatModel.CLAUDE_3_5_SONNET)
-    enable_langfuse: bool = False
 
     @field_validator("api_key")
     @classmethod
