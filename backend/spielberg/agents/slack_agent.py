@@ -10,6 +10,7 @@ from spielberg.core.session import (
     RoleTypes,
 )
 from spielberg.tools.slack import send_message_to_channel
+from spielberg.llm.openai import OpenAI
 from spielberg.llm.base import LLMResponseStatus
 
 logger = logging.getLogger(__name__)
@@ -28,6 +29,7 @@ class SlackAgent(BaseAgent):
         self.agent_name = "slack"
         self.description = "Messages to a Slack channel"
         self.parameters = self.get_parameters()
+        self.llm = OpenAI()
         super().__init__(session=session, **kwargs)
 
     def run(self, message: str, *args, **kwargs) -> AgentResponse:
