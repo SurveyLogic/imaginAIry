@@ -22,16 +22,6 @@ class OpenAIChatModel(str, Enum):
     GPT4o_MINI = "gpt-4o-mini"
 
 
-class OpenAITextModel(str, Enum):
-    """Enum for OpenAI Text models"""
-
-    GPT4 = "gpt-4"
-    GPT4_32K = "gpt-4-32k"
-    GPT4_TURBO = "gpt-4-turbo"
-    GPT4o = "gpt-4o-2024-08-06"
-    GPT4o_MINI = "gpt-4o-mini"
-
-
 class OpenaiConfig(BaseLLMConfig):
     """OpenAI Config"""
 
@@ -44,7 +34,6 @@ class OpenaiConfig(BaseLLMConfig):
     api_key: str = ""
     api_base: str = "https://api.openai.com/v1"
     chat_model: str = Field(default=OpenAIChatModel.GPT4o)
-    text_model: str = Field(default=OpenAITextModel.GPT4_TURBO)
     max_tokens: int = 4096
 
     @field_validator("api_key")
@@ -197,7 +186,3 @@ class OpenAI(BaseLLM):
             total_tokens=response.usage.total_tokens,
             status=LLMResponseStatus.SUCCESS,
         )
-
-    def text_completions(self):
-        """Get completions for text."""
-        raise NotImplementedError("Not implemented yet")

@@ -17,17 +17,12 @@ class AnthropicChatModel(str, Enum):
     CLAUDE_3_HAIKU = "claude-3-haiku-20240307"
     CLAUDE_3_OPUS = "claude-3-opus-20240229"
     CLAUDE_3_5_SONNET = "claude-3-5-sonnet-20240620"
-
-
-class AnthropicTextModel(str, Enum):
-    """Enum for Anthropic Text models"""
-
-    CLAUDE_3_HAIKU = "claude-3-haiku-20240307"
-    CLAUDE_3_OPUS = "claude-3-opus-20240229"
-    CLAUDE_3_5_SONNET = "claude-3-5-sonnet-20240620"
+    CLAUDE_3_5_SONNET_LATEST = "claude-3-5-sonnet-20241022"
 
 
 class AnthropicAIConfig(BaseLLMConfig):
+    """AnthropicAI Config"""
+
     model_config = SettingsConfigDict(
         env_prefix=EnvPrefix.ANTHROPIC_,
         extra="ignore",
@@ -37,7 +32,6 @@ class AnthropicAIConfig(BaseLLMConfig):
     api_key: str = ""
     api_base: str = ""
     chat_model: str = Field(default=AnthropicChatModel.CLAUDE_3_5_SONNET)
-    text_model: str = Field(default=AnthropicTextModel.CLAUDE_3_5_SONNET)
     enable_langfuse: bool = False
 
     @field_validator("api_key")
@@ -149,7 +143,7 @@ class AnthropicAI(BaseLLM):
     ):
         """Get completions for chat.
 
-        docs: https://docs.anthropic.com/en/docs/build-with-claude/tool-use
+        tools docs: https://docs.anthropic.com/en/docs/build-with-claude/tool-use
         """
         system, messages = self._format_messages(messages)
         params = {
@@ -190,6 +184,3 @@ class AnthropicAI(BaseLLM):
             total_tokens=(response.usage.input_tokens + response.usage.output_tokens),
             status=LLMResponseStatus.SUCCESS,
         )
-
-    def text_completions(self):
-        raise NotImplementedError("Not implemented yet")
