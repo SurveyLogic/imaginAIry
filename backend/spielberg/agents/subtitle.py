@@ -67,7 +67,7 @@ Translate all the words in the transcript from the source language to [TARGET LA
 2.Combine Words into Meaningful Phrases or Sentences:
 Group the translated words into logical phrases or sentences that make sense together.
 Ensure each group is suitable for subtitle usage—neither too long nor too short.
-Adjust Timing for Each Phrase/Block:
+Adjust Timing for Each Phrase/Block.
 
 3.For each grouped phrase or sentence:
 Start Time: Use the start time of the first word in the group.
@@ -108,12 +108,12 @@ Ensure that cultural nuances and idiomatic expressions are appropriately transla
 class SubtitleAgent(BaseAgent):
     def __init__(self, session: Session, **kwargs):
         self.agent_name = "subtitle"
-        self.description = "An agent designed to add different languages subtitles to a specified video within VideoDB. "
+        self.description = "An agent designed to add different languages subtitles to a specified video within VideoDB."
         self.llm = OpenAI(config=OpenaiConfig(timeout=120))
         self.parameters = SUBTITLE_AGENT_PARAMETERS
         super().__init__(session=session, **kwargs)
 
-    def wrap_text(self, text,  video_width, max_width_percent=0.60, avg_char_width=20):
+    def wrap_text(self, text, video_width, max_width_percent=0.60, avg_char_width=20):
         max_width_pixels = video_width * max_width_percent
         max_chars_per_line = int(max_width_pixels / avg_char_width)
 
@@ -122,34 +122,28 @@ class SubtitleAgent(BaseAgent):
         wrapped_text = wrapped_text.replace("'", "")
         return wrapped_text
 
-
-
     def get_compact_transcript(self, transcript):
         compact_list = []
         for word_block in transcript:
             word = word_block["text"]
+            if word == "-":
+                continue
             start = word_block["start"]
             end = word_block["end"]
             compact_word = f"{word}|{start}|{end}"
-            if word == "-":
-                continue
             compact_list.append(compact_word)
         return compact_list
 
     def add_subtitles_using_timeline(self, subtitles):
-        video_width = 1920  
+        video_width = 1920
         timeline = self.videodb_tool.get_and_set_timeline()
         video_asset = VideoAsset(asset_id=self.video_id)
         timeline.add_inline(video_asset)
-        previous_end = None
         for subtitle_chunk in subtitles:
             start = round(subtitle_chunk["start"], 2)
             end = round(subtitle_chunk["end"], 2)
-            diff = round(end - start, 2)
-            
-            if previous_end is not None and start <= previous_end:
-                start = previous_end + 0.01  # Ensure no overlap
-            
+            duration = end - start
+
             wrapped_text = self.wrap_text(subtitle_chunk["text"], video_width)
             style = TextStyle(
                 fontsize=20,
@@ -157,15 +151,14 @@ class SubtitleAgent(BaseAgent):
                 box=True,
                 boxcolor="black@0.6",
                 boxborderw="5",
-                y="main_h-text_h-50"
+                y="main_h-text_h-50",
             )
             text_asset = TextAsset(
                 text=wrapped_text,
-                duration=diff,
+                duration=duration,
                 style=style,
             )
             timeline.add_overlay(start=start, asset=text_asset)
-            previous_end = end
         stream_url = timeline.generate_stream()
         return stream_url
 
@@ -193,16 +186,11 @@ class SubtitleAgent(BaseAgent):
         try:
             self.collection_id = collection_id
             self.video_id = video_id
-            if collection_id is None:
-                self.videodb_tool = VideoDBTool()
-            else:
-                self.videodb_tool = VideoDBTool(collection_id=collection_id)
+            self.videodb_tool = VideoDBTool(collection_id=collection_id)
 
             self.output_message.actions.append(
                 "Retrieving the subtitles in the video's original language"
             )
-            self.output_message.push_update()
-
             video_content = VideoContent(
                 agent_name=self.agent_name,
                 status=MsgStatus.progress,
@@ -218,13 +206,13 @@ class SubtitleAgent(BaseAgent):
                 f"Translating the subtitles to {language}"
             )
             self.output_message.push_update()
-            profanity_prompt = f"{translater_prompt} Translate to {language}, additional notes : {notes} compact_list: {compact_transcript}"
-            profanity_llm_message = ContextMessage(
-                content=profanity_prompt,
+            translation_llm_prompt = f"{translater_prompt} Translate to {language}, additional notes : {notes} compact_list: {compact_transcript}"
+            translation_llm_message = ContextMessage(
+                content=translation_llm_prompt,
                 role=RoleTypes.user,
             )
             llm_response = self.llm.chat_completions(
-                [profanity_llm_message.to_llm_msg()],
+                [translation_llm_message.to_llm_msg()],
                 response_format={"type": "json_object"},
             )
             translated_subtitles = json.loads(llm_response.content)
@@ -233,7 +221,6 @@ class SubtitleAgent(BaseAgent):
                 self.output_message.actions.append(
                     f"Refining the language with additional notes: {notes}"
                 )
-                self.output_message.push_update()
 
             self.output_message.actions.append(
                 "Overlaying the translated subtitles onto the video"
@@ -254,7 +241,6 @@ class SubtitleAgent(BaseAgent):
             video_content.status_message = (
                 "An error occurred while adding subtitles to the video."
             )
-            self.output_message.content.append(video_content)
             self.output_message.publish()
             return AgentResponse(status=AgentStatus.ERROR, message=str(e))
 
