@@ -43,6 +43,7 @@ class ThumbnailAgent(BaseAgent):
         try:
             self.output_message.actions.append("Generating thumbnail..")
             image_content = ImageContent(agent_name=self.agent_name)
+            image_content.status_message = "Generating thumbnail.."
             self.output_message.content.append(image_content)
             self.output_message.push_update()
 

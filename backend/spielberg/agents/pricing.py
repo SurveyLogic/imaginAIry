@@ -142,6 +142,8 @@ class PricingAgent(BaseAgent):
 
         return AgentResponse(
             status=AgentStatus.SUCCESS,
-            message="Fetch successful and output displayed above.",
-            data={},
+            message="Agent run successful",
+            data={
+                "response": llm_response.content
+            },
         )
