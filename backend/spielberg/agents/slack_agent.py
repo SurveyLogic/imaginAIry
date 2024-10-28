@@ -10,6 +10,7 @@ from spielberg.core.session import (
     RoleTypes,
 )
 from spielberg.tools.slack import send_message_to_channel
+from spielberg.llm.base import LLMResponseStatus
 
 logger = logging.getLogger(__name__)
 
@@ -51,17 +52,21 @@ class SlackAgent(BaseAgent):
         )
         self.output_message.content.append(text_content)
         self.output_message.push_update()
-        # TOOD: Need improvemenents in below prompt
-        slack_llm_prompt = (
-            "Format the following message that slack can render nicely.\n"
-            "Give the output which can be directly passed to slack (no blockquotes until required because of code etc.)\n"
-            "Also, don't include you can copy this message etc.\n"
-            f"message: {message}"
-        )
-        slack_message = ContextMessage(content=slack_llm_prompt, role=RoleTypes.user)
-        llm_response = self.llm.chat_completions([slack_message.to_llm_msg()])
-        formatted_message = llm_response.content
         try:
+            # TOOD: Need improvemenents in below prompt
+            slack_llm_prompt = (
+                "Format the following message that slack can render nicely.\n"
+                "Give the output which can be directly passed to slack (no blockquotes until required because of code etc.)\n"
+                "Also, don't include you can copy this message etc.\n"
+                f"message: {message}"
+            )
+            slack_message = ContextMessage(
+                content=slack_llm_prompt, role=RoleTypes.user
+            )
+            llm_response = self.llm.chat_completions([slack_message.to_llm_msg()])
+            if llm_response.status == LLMResponseStatus.ERROR:
+                raise Exception(f"LLM Failed with error {llm_response.content}")
+            formatted_message = llm_response.content
             self.output_message.actions.append("Sending message to Slack...")
             response = send_message_to_channel(formatted_message, channel_name)
             text_content.text = formatted_message
