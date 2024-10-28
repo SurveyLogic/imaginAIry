@@ -15,7 +15,9 @@ from spielberg.agents.brandkit import BrandkitAgent
 from spielberg.agents.profanity_remover import ProfanityRemoverAgent
 from spielberg.agents.image_generation import ImageGenerationAgent
 from spielberg.agents.stream_video import StreamVideoAgent
+from spielberg.agents.subtitle import SubtitleAgent
 from spielberg.agents.slack_agent import SlackAgent
+
 
 from spielberg.core.session import Session, InputMessage, MsgStatus
 from spielberg.core.reasoning import ReasoningEngine
@@ -44,6 +46,7 @@ class ChatHandler:
             ProfanityRemoverAgent,
             ImageGenerationAgent,
             StreamVideoAgent,
+            SubtitleAgent,
             SlackAgent,
         ]
 
