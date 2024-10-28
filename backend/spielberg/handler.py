@@ -4,7 +4,7 @@ import logging
 from dotenv import dotenv_values
 
 from spielberg.agents.thumbnail import ThumbnailAgent
-from spielberg.agents.summary import SummaryAgent
+from spielberg.agents.video_summary import VideoSummaryAgent
 from spielberg.agents.download import DownloadAgent
 from spielberg.agents.pricing import PricingAgent
 from spielberg.agents.upload import UploadAgent
@@ -32,7 +32,7 @@ class ChatHandler:
         # Register the agents here
         self.agents = [
             ThumbnailAgent,
-            SummaryAgent,
+            VideoSummaryAgent,
             DownloadAgent,
             PricingAgent,
             UploadAgent,

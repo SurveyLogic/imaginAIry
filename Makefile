@@ -71,7 +71,7 @@ run-fe:
 # Start both backend and frontend
 run:
 	@echo "Starting backend and frontend..."
-	@trap 'kill 0' INT; \
+	@trap 'kill $(jobs -p)' INT; \
 	($(MAKE) run-be 2>&1 | sed 's/^/[BACKEND] /' ) & \
 	($(MAKE) run-fe 2>&1 | sed 's/^/[FRONTEND] /' ) & \
 	wait
