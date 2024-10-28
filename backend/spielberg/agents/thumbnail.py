@@ -1,9 +1,9 @@
 import logging
 
-from spielberg.agents.base import BaseAgent, AgentResponse, AgentStatus
+from director.agents.base import BaseAgent, AgentResponse, AgentStatus
 
-from spielberg.core.session import Session, MsgStatus, ImageContent, ImageData
-from spielberg.tools.videodb_tool import VideoDBTool
+from director.core.session import Session, MsgStatus, ImageContent, ImageData
+from director.tools.videodb_tool import VideoDBTool
 
 logger = logging.getLogger(__name__)
 

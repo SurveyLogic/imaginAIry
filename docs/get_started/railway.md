@@ -1,16 +1,16 @@
 !!! note
 
-    Spielberg will soon be available on the Railway Marketplace for easy deployment.
+    Director will soon be available on the Railway Marketplace for easy deployment.
 
 ## Deployment Instructions via Railway CLI
 
-1. Clone the Spielberg repository to your local machine:
+1. Clone the Director repository to your local machine:
     ```
-    git clone https://github.com/video-db/Spielberg
+    git clone https://github.com/video-db/Director
     ```
 2. Change the directory to the cloned repository:
     ```
-    cd Spielberg
+    cd Director
     ```
 3. Install the [Railway CLI](https://docs.railway.app/guides/cli).
 4. Navigate to the Railway [Dashboard](https://railway.app/dashboard) and create an empty project.
@@ -60,4 +60,4 @@
     VITE_APP_BACKEND_URL="deployed_backend_service_public_url"
     ```
 
-* After deployment, generate a domain and navigate to the frontend service URL (which can be found in Settings → Networking → Public Networking) in your web browser to access the Spielberg application.
+* After deployment, generate a domain and navigate to the frontend service URL (which can be found in Settings → Networking → Public Networking) in your web browser to access the Director application.

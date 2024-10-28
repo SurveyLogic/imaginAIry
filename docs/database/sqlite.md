@@ -12,4 +12,4 @@ make init-sqlite-db
 
 ## SQLite Interface
 
-::: spielberg.db.sqlite.db.SQLiteDB
+::: director.db.sqlite.db.SQLiteDB

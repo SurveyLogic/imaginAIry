@@ -1,4 +1,4 @@
-from spielberg.constants import DBType
+from director.constants import DBType
 
 from .base import BaseDB
 from .sqlite.db import SQLiteDB

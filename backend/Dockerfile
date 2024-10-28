@@ -7,8 +7,8 @@ COPY . /app/
 COPY ./requirements.txt /app/
 RUN pip install --no-cache-dir -r requirements.txt
 
-RUN [ ! -f spielberg.db ] && python spielberg/db/sqlite/initialize.py || echo "Database already initialized."
+RUN [ ! -f director.db ] && python director/db/sqlite/initialize.py || echo "Database already initialized."
 
 EXPOSE 8000 
 
-CMD ["python", "spielberg/entrypoint/api/server.py"]
+CMD ["python", "director/entrypoint/api/server.py"]

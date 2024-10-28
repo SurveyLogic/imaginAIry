@@ -1,7 +1,7 @@
 [project]
-name = "spielberg"
+name = "director"
 version = "0.1.0"
-description = "Spielberg backend."
+description = "Director backend."
 readme = "README.md"
 requires-python = ">=3.6"
 dependencies = [
@@ -14,7 +14,7 @@ dependencies = [
     "python-dotenv==1.0.1",
     "videodb",
     "yt-dlp==2024.10.7",
-    "spielberg",
+    "director",
 ]
 
 

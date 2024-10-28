@@ -1,14 +1,14 @@
 import logging
 
-from spielberg.agents.base import BaseAgent, AgentResponse, AgentStatus
-from spielberg.core.session import (
+from director.agents.base import BaseAgent, AgentResponse, AgentStatus
+from director.core.session import (
     Session,
     MsgStatus,
     ContextMessage,
     RoleTypes,
     TextContent,
 )
-from spielberg.llm.openai import OpenAI
+from director.llm.openai import OpenAI
 
 logger = logging.getLogger(__name__)
 

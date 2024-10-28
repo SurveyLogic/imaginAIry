@@ -6,17 +6,17 @@ Base LLM is the base class for all LLMs. It provides a common interface for all 
 
 Base LLM Config is the configuration object for an LLM. It is used to configure the LLM and is passed to the LLM when it is created.
 
-::: spielberg.llm.base.BaseLLMConfig
+::: director.llm.base.BaseLLMConfig
 
 
 ### Base LLM
 
 Base LLM is the base class for all LLMs. It provides a common interface for all LLMs to follow.
 
-::: spielberg.llm.base.BaseLLM
+::: director.llm.base.BaseLLM
 
 ### LLM Response
 
 LLM Response is the response object for an LLM. It is returned by the LLM after processing an input message.
 
-::: spielberg.llm.base.LLMResponse
+::: director.llm.base.LLMResponse

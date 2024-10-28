@@ -1,8 +1,8 @@
-# 🎬 Spielberg Frontend
+# 🎬 Director Frontend
 
 ## 📋 Overview
 
-Spielberg Frontend is a Vue.js-based user interface for the Spielberg project. It utilizes various components and libraries to create an interactive and responsive web application.
+Director Frontend is a Vue.js-based user interface for the Director project. It utilizes various components and libraries to create an interactive and responsive web application.
 
 ### 🧩 Key Components:
 - Vue.js 3

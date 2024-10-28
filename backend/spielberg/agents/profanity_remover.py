@@ -4,8 +4,8 @@ import os
 
 from videodb.asset import VideoAsset, AudioAsset
 
-from spielberg.agents.base import BaseAgent, AgentResponse, AgentStatus
-from spielberg.core.session import (
+from director.agents.base import BaseAgent, AgentResponse, AgentStatus
+from director.core.session import (
     Session,
     MsgStatus,
     VideoContent,
@@ -13,8 +13,8 @@ from spielberg.core.session import (
     ContextMessage,
     RoleTypes,
 )
-from spielberg.llm.openai import OpenAI
-from spielberg.tools.videodb_tool import VideoDBTool
+from director.llm.openai import OpenAI
+from director.tools.videodb_tool import VideoDBTool
 
 logger = logging.getLogger(__name__)
 

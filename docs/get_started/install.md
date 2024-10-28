@@ -11,8 +11,8 @@
 1. Clone the repository:
 
 ``` bash
-git clone https://github.com/video-db/Spielberg.git
-cd Spielberg
+git clone https://github.com/video-db/Director.git
+cd Director
 ```
 
 2. Set up the environment:

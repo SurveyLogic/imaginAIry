@@ -3,8 +3,8 @@ import os
 from flask import current_app as app
 from flask_socketio import Namespace
 
-from spielberg.db import load_db
-from spielberg.handler import ChatHandler
+from director.db import load_db
+from director.handler import ChatHandler
 
 
 class ChatNamespace(Namespace):

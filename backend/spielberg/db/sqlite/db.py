@@ -5,15 +5,15 @@ import logging
 
 from typing import List
 
-from spielberg.constants import DBType
-from spielberg.db.base import BaseDB
-from spielberg.db.sqlite.initialize import initialize_sqlite
+from director.constants import DBType
+from director.db.base import BaseDB
+from director.db.sqlite.initialize import initialize_sqlite
 
 logger = logging.getLogger(__name__)
 
 
 class SQLiteDB(BaseDB):
-    def __init__(self, db_path: str = "spielberg.db"):
+    def __init__(self, db_path: str = "director.db"):
         """
         :param db_path: Path to the SQLite database file.
         """

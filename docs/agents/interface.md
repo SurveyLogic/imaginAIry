@@ -8,8 +8,8 @@ Base Agent is the base class for all agents. It provides a common interface for 
 
 ### Base Agent
 
-::: spielberg.agents.base.BaseAgent
+::: director.agents.base.BaseAgent
 
 ### Agent Response
 
-::: spielberg.agents.base.AgentResponse
+::: director.agents.base.AgentResponse

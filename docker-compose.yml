@@ -1,6 +1,6 @@
 services:
   backend:
-    image: spielberg:latest
+    image: director:latest
     build:
       context: ./backend 
       dockerfile: Dockerfile
@@ -12,13 +12,13 @@ services:
     env_file:
       - ./backend/.env
     environment:
-      - FLASK_APP=spielberg.entrypoint.api.server
+      - FLASK_APP=director.entrypoint.api.server
       - FLASK_DEBUG=1
     # dev command
-    command: python spielberg/entrypoint/api/server.py
+    command: python director/entrypoint/api/server.py
 
   frontend:
-    image: spielberg_frontend:latest
+    image: director_frontend:latest
     build:
       context: ./frontend
     ports:

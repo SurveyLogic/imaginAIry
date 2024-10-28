@@ -11,8 +11,8 @@ from flask import Flask
 from flask_socketio import SocketIO
 from logging.config import dictConfig
 
-from spielberg.entrypoint.api.routes import agent_bp, session_bp, videodb_bp, config_bp
-from spielberg.entrypoint.api.socket_io import ChatNamespace
+from director.entrypoint.api.routes import agent_bp, session_bp, videodb_bp, config_bp
+from director.entrypoint.api.socket_io import ChatNamespace
 
 from dotenv import load_dotenv
 
@@ -49,7 +49,7 @@ def create_app(app_config: object):
     dictConfig(app.config["LOGGING_CONFIG"])
 
     with app.app_context():
-        from spielberg.entrypoint.api import errors
+        from director.entrypoint.api import errors
 
     # register blueprints
     app.register_blueprint(agent_bp)

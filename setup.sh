@@ -240,7 +240,7 @@ echo "📝 Creating .env file with provided API keys..."
 cat <<EOT > .env
 VIDEO_DB_API_KEY=$VIDEO_DB_API_KEY
 VIDEO_DB_BASE_URL=https://api.videodb.io
-FLASK_APP=spielberg/entrypoint/api/server.py
+FLASK_APP=director/entrypoint/api/server.py
 EOT
 cd ..
 

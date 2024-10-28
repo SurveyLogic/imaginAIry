@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS context_messages (
 """
 
 
-def initialize_sqlite(db_name="spielberg.db"):
+def initialize_sqlite(db_name="director.db"):
     """Initialize the SQLite database by creating the necessary tables."""
     conn = sqlite3.connect(db_name)
     cursor = conn.cursor()
