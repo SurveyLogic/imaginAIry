@@ -4,7 +4,7 @@ import logging
 from dotenv import dotenv_values
 
 from spielberg.agents.thumbnail import ThumbnailAgent
-from spielberg.agents.summary import SummaryAgent
+from spielberg.agents.video_summary import VideoSummaryAgent
 from spielberg.agents.download import DownloadAgent
 from spielberg.agents.pricing import PricingAgent
 from spielberg.agents.upload import UploadAgent
@@ -16,6 +16,8 @@ from spielberg.agents.profanity_remover import ProfanityRemoverAgent
 from spielberg.agents.image_generation import ImageGenerationAgent
 from spielberg.agents.stream_video import StreamVideoAgent
 from spielberg.agents.subtitle import SubtitleAgent
+from spielberg.agents.slack_agent import SlackAgent
+
 
 from spielberg.core.session import Session, InputMessage, MsgStatus
 from spielberg.core.reasoning import ReasoningEngine
@@ -33,7 +35,7 @@ class ChatHandler:
         # Register the agents here
         self.agents = [
             ThumbnailAgent,
-            SummaryAgent,
+            VideoSummaryAgent,
             DownloadAgent,
             PricingAgent,
             UploadAgent,
@@ -45,6 +47,7 @@ class ChatHandler:
             ImageGenerationAgent,
             StreamVideoAgent,
             SubtitleAgent
+            SlackAgent,
         ]
 
     def add_videodb_state(self, session):

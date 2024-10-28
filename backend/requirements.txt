@@ -9,4 +9,5 @@ pydantic-settings==2.4.0
 python-dotenv==1.0.1
 replicate==1.0.1
 yt-dlp==2024.10.7
-git+https://github.com/video-db/videodb-python@ankit/add-download
+videodb==0.2.5
+slack_sdk==3.33.2
