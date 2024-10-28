@@ -153,46 +153,57 @@ install_dependency() {
 
 install_python_and_pip() {
     if command -v python3 &> /dev/null; then
-        echo "✅ Python 3 is already installed."
-    else
-        package_manager=$(detect_package_manager)
-        if [ $? -eq 0 ]; then
-            case $package_manager in
-                apt)
-                    # For Debian/Ubuntu
-                    sudo apt update
-                    sudo apt install -y python3 python3-pip python3-venv
-                    ;;
-                yum)
-                    # For CentOS/RHEL
-                    sudo yum install -y python3 python3-pip python3-virtualenv
-                    ;;
-                dnf)
-                    # For Fedora
-                    sudo dnf install -y python3 python3-pip python3-virtualenv
-                    ;;
-                pacman)
-                    # For Arch Linux
-                    sudo pacman -Sy --noconfirm python python-pip python-virtualenv
-                    ;;
-                zypper)
-                    # For OpenSUSE
-                    sudo zypper install -y python3 python3-pip python3-virtualenv
-                    ;;
-                brew)
-                    # For macOS using Homebrew
-                    export HOMEBREW_NO_AUTO_UPDATE=1
-                    brew install python
-                    ;;
-                *)
-                    echo "❌ Unsupported package manager: $package_manager"
-                    return 1
-                    ;;
-            esac
-            echo "✅ Python 3, pip, and virtual environment packages have been successfully installed!"
+        PYTHON_VERSION=$(python3 -c 'import sys; print(".".join(map(str, sys.version_info[:3])))')
+        REQUIRED_VERSION="3.9"
+
+        # Check if Python version is at least 3.9
+        if [[ $(echo -e "$PYTHON_VERSION\n$REQUIRED_VERSION" | sort -V | head -n1) == "$REQUIRED_VERSION" ]]; then
+            echo "✅ Python 3 (version $PYTHON_VERSION) is already installed and meets the required version."
+            return 0
         else
-            echo "❌ Package manager detection failed: $package_manager"
+            echo "❌ Current Python version ($PYTHON_VERSION) is less than the required 3.9, trying to upgrade it.."
         fi
+    else
+        echo "❌ Python 3 is not installed."
+    fi
+    echo "⚙️ Attempting to install Python 3.9 or higher..."
+    package_manager=$(detect_package_manager)
+    if [ $? -eq 0 ]; then
+        case $package_manager in
+            apt)
+                # For Debian/Ubuntu
+                sudo apt update
+                sudo apt install -y python3 python3-pip python3-venv
+                ;;
+            yum)
+                # For CentOS/RHEL
+                sudo yum install -y python3 python3-pip python3-virtualenv
+                ;;
+            dnf)
+                # For Fedora
+                sudo dnf install -y python3 python3-pip python3-virtualenv
+                ;;
+            pacman)
+                # For Arch Linux
+                sudo pacman -Sy --noconfirm python python-pip python-virtualenv
+                ;;
+            zypper)
+                # For OpenSUSE
+                sudo zypper install -y python3 python3-pip python3-virtualenv
+                ;;
+            brew)
+                # For macOS using Homebrew
+                export HOMEBREW_NO_AUTO_UPDATE=1
+                brew install python
+                ;;
+            *)
+                echo "❌ Unsupported package manager: $package_manager"
+                return 1
+                ;;
+        esac
+        echo "✅ Python 3, pip, and virtual environment packages have been successfully installed!"
+    else
+        echo "❌ Package manager detection failed: $package_manager"
     fi
 
     # Check for pip and venv separately as they might not be included with Python
