@@ -46,7 +46,7 @@ class ChatHandler:
             ProfanityRemoverAgent,
             ImageGenerationAgent,
             StreamVideoAgent,
-            SubtitleAgent
+            SubtitleAgent,
             SlackAgent,
         ]
 

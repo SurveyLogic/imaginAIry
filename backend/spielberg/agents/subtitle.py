@@ -184,7 +184,6 @@ class SubtitleAgent(BaseAgent):
         :rtype: AgentResponse
         """
         try:
-            self.collection_id = collection_id
             self.video_id = video_id
             self.videodb_tool = VideoDBTool(collection_id=collection_id)
 
