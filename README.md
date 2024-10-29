@@ -148,7 +148,7 @@ To create a new agent in Director, follow these steps:
    - Rename the class (e.g., from `SampleAgent` to `YourAgentName`)
    - Update `agent_name` and `description`
 
-3. **Modify the `__call__` method**:
+3. **Modify the `run` method**:
    - Update parameters and docstring
    - Implement your agent's logic
 
