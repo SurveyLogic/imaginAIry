@@ -42,7 +42,11 @@ Director provides a advance AI first framework for developing intelligent agents
 It uses the VideoDB’s scalable "video as data" infrastructure to create agentic workflows. For example, in natural language you can give commands like `“upload this video and send the bullet point summary on my slack”` and the agent will handle the rest.
 📺 [Watch: Intro video](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
 
-![Screenshot 2024-10-29 at 1 23 27 PM](https://github.com/user-attachments/assets/4acb9fc2-33b7-4022-9b37-074458d5ba4b)
+
+
+
+
+https://github.com/user-attachments/assets/8b97a9bf-5c81-4a0d-8863-9415552eba57
 
 
 
