@@ -53,11 +53,12 @@ Director provides a flexible framework for developing intelligent media agents t
 
 It uses the VideoDB’s powerful infrastructure to create agentic workflows. For example in natural language you can give commands like `“upload this video and send the bullet point summary on my slack”` and the agent will handle the rest.
 
+
 TODO: Intro video here
 
 ## ⭐️ Key Features
 - **🤖 AI Agent Framework:** Build custom agents to perform tasks like summarization, search, indexing, clipping and library organization. 
-- **🎨 Innovative User Experience:** Complete framework with open source chat based UI, Video player and interactions that can help you create the experience you need. 
+- **🎨 Innovative User Experience:** Complete framework for interacting with your media library with open source chat based UI, Video player and next-gen interactions that can help you create the experience you need. 
 - **🔍 Media Analysis:** Your video infra is taken care by [VideoDB](https://videodb.io). Connect with popular LLMs, Databases, and GenAI APIs seamlessly.
 - **🧩 Extensible Architecture:** Easily add new capabilities through tools and modules. Run locally or deploy on your own cloud. 
 
