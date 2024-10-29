@@ -4,14 +4,13 @@
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
 
-[![NPM version][npm-shield]][npm-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![Website][website-shield]][website-url]
 [![Discord][discord-shield]][discord-url]
 
 <!-- PROJECT LOGO -->
-![logo](https://github.com/user-attachments/assets/583f9ce3-d972-4706-8251-1a0bcd060099)
+<img src="https://github.com/user-attachments/assets/583f9ce3-d972-4706-8251-1a0bcd060099" alt="logo" style="padding: 20px;">
 <p align="center">
 <p align="center">
         <a href="https://render.com/deploy?repo=https://github.com/video-db/Director" target="_blank" rel="nofollow"><img src="https://render.com/images/deploy-to-render-button.svg" alt="Deploy to Render"></a>
@@ -181,8 +180,6 @@ Contributions are what make the open source community such an amazing place to b
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
-[npm-shield]: https://img.shields.io/npm/v/@videodb/player-vue?style=for-the-badge
-[npm-url]: https://www.npmjs.com/package/@videodb/player-vue
 [discord-shield]: https://img.shields.io/badge/dynamic/json?style=for-the-badge&url=https://discord.com/api/invites/py9P639jGz?with_counts=true&query=$.approximate_member_count&logo=discord&logoColor=blue&color=green&label=discord
 [discord-url]: https://discord.com/invite/py9P639jGz
 [stars-shield]: https://img.shields.io/github/stars/video-db/Director.svg?style=for-the-badge

@@ -280,9 +280,9 @@ make update-fe
 echo "
 *******************************************
 *                                         *
-* 🎉 Setup Completed Successfully! 🎉      *
+* 🎉 Setup Completed Successfully! 🎉     *
 *                                         *
-*      🚀 IMPORTANT: Next Steps 🚀         *
+*      🚀 IMPORTANT: Next Steps 🚀        *
 *                                         *
 * 1. Review and Update .env File:         *
 *    - Check the newly created .env file  *
