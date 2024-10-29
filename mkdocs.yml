@@ -1,9 +1,8 @@
 site_name: ""
 
 
-repo_url: https://github.com/video-db/videodb-python
-repo_name: videodb-db/videodb-python
-copyright: © videodb.io. 2024
+repo_url: https://github.com/video-db/Director
+repo_name: videodb-db/Director
 extra:
   generator: True
 
@@ -93,7 +92,6 @@ nav:
 plugins:
 - search
 - offline 
-# - git-authors
 - autorefs
 - mkdocstrings:
     handlers:
@@ -122,6 +120,9 @@ plugins:
     locale: en
     enable_creation_date: true
     fallback_to_build_date: true
+
+hooks:
+ - docs/hooks/copyright.py
 
 markdown_extensions:
   - abbr
