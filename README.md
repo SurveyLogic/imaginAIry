@@ -4,14 +4,14 @@
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
 
-[![NPM version][npm-shield]][npm-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![Website][website-shield]][website-url]
 [![Discord][discord-shield]][discord-url]
 
 <!-- PROJECT LOGO -->
-![logo](https://github.com/user-attachments/assets/583f9ce3-d972-4706-8251-1a0bcd060099)
+<img src="https://github.com/user-attachments/assets/78f5eead-d390-4b0b-a8bc-0017e6827c98" alt="logo">
+
 <p align="center">
 <p align="center">
         <a href="https://render.com/deploy?repo=https://github.com/video-db/Director" target="_blank" rel="nofollow"><img src="https://render.com/images/deploy-to-render-button.svg" alt="Deploy to Render"></a>
@@ -25,12 +25,14 @@
   <p align="center">
     Framework for creating AI agents to manage and interact with your media library.
     <br />
-    <a href="https://stackblitz.com/edit/videodb-player-demo-pxy8k7?file=src%2FApp.vue"><strong>View Demo »</strong></a>
+    <a href="https://codesandbox.io/p/sandbox/nifty-mendeleev-tnxpnt"><strong>View Demo »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/video-db/Director/issues">Report Bug</a>
+    <a href="https://github.com/video-db/Director/issues/new?assignees=&labels=bug&projects=&template=bug_report.yml">Report Bug</a>
     ·
-    <a href="https://github.com/video-db/Director/issues">Request Feature</a>
+    <a href="https://github.com/video-db/Director/issues/new?assignees=&labels=enhancement&projects=&template=feature_request.yml">Request Feature</a>
+    ·
+    <a href="https://github.com/video-db/Director/issues/new?assignees=&labels=enhancement&projects=&template=agent_request.yml">New Agent Request</a>
   </p>
 </p>
 
@@ -59,7 +61,8 @@ https://github.com/user-attachments/assets/8b97a9bf-5c81-4a0d-8863-9415552eba57
 - **🎨 Innovative User Experience:** Complete framework for interacting with your media library with chat based UI, Video player and next-gen interactions that can help you create the experience you need. 
 - **🔍 Media Analysis:** Your video infra is taken care by [VideoDB](https://videodb.io). Connect with popular LLMs, Databases, and GenAI APIs seamlessly.
 - **🧩 Extensible Architecture:** Easily add new capabilities through tools and modules. Run locally or deploy on your own cloud.
-  ![director_architecture](https://github.com/user-attachments/assets/075509bb-baaf-45f5-8dc8-06577a12cd94)
+  ![Director architecture](https://github.com/user-attachments/assets/9afb2783-66db-4899-9308-03cbd12e74d7)
+  
 
 
 
@@ -181,8 +184,6 @@ Contributions are what make the open source community such an amazing place to b
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
-[npm-shield]: https://img.shields.io/npm/v/@videodb/player-vue?style=for-the-badge
-[npm-url]: https://www.npmjs.com/package/@videodb/player-vue
 [discord-shield]: https://img.shields.io/badge/dynamic/json?style=for-the-badge&url=https://discord.com/api/invites/py9P639jGz?with_counts=true&query=$.approximate_member_count&logo=discord&logoColor=blue&color=green&label=discord
 [discord-url]: https://discord.com/invite/py9P639jGz
 [stars-shield]: https://img.shields.io/github/stars/video-db/Director.svg?style=for-the-badge
