@@ -69,6 +69,7 @@ class ReasoningEngine:
         self.stop_flag = False
         self.output_message: OutputMessage = self.session.output_message
         self.summary_content = None
+        self.failed_agents = []
 
     def register_agents(self, agents: List[BaseAgent]):
         """Register an agents.
@@ -124,12 +125,12 @@ class ReasoningEngine:
 
     def remove_summary_content(self):
         for i in range(len(self.output_message.content) - 1, -1, -1):
-            if self.output_message.content[i].agent_name == "reasoning_engine":
+            if self.output_message.content[i].agent_name == "assistant":
                 self.output_message.content.pop(i)
                 self.summary_content = None
 
     def add_summary_content(self):
-        self.summary_content = TextContent(agent_name="reasoning_engine")
+        self.summary_content = TextContent(agent_name="assistant")
         self.output_message.content.append(self.summary_content)
         self.summary_content.status_message = "Consolidating outcomes..."
         self.summary_content.status = MsgStatus.progress
@@ -207,6 +208,8 @@ class ReasoningEngine:
                         tool_call["tool"]["name"],
                         **tool_call["tool"]["arguments"],
                     )
+                    if agent_response.status == AgentStatus.ERROR:
+                        self.failed_agents.append(tool_call["tool"]["name"])
                     self.session.reasoning_context.append(
                         ContextMessage(
                             content=agent_response.__str__(),
@@ -234,9 +237,7 @@ class ReasoningEngine:
                 )
                 if self.iterations == self.max_iterations - 1:
                     # Direct response case
-                    self.summary_content.status_message = (
-                        "Here is the the response"
-                    )
+                    self.summary_content.status_message = "Here is the the response"
                     self.summary_content.text = llm_response.content
                     self.summary_content.status = MsgStatus.success
                 else:
@@ -255,10 +256,11 @@ class ReasoningEngine:
                         ]
                     )
                     self.summary_content.text = summary_response.content
-                    self.summary_content.status = MsgStatus.success
-                    self.summary_content.status_message = (
-                        "Here is the summary of the run"
-                    )
+                    if self.failed_agents:
+                        self.summary_content.status = MsgStatus.error
+                    else:
+                        self.summary_content.status = MsgStatus.success
+                    self.summary_content.status_message = "Final Cut"
                 self.output_message.status = MsgStatus.success
                 self.output_message.publish()
                 print("-" * 40, "Stopping", "-" * 40)
