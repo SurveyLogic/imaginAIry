@@ -56,11 +56,11 @@ body:
         eg:
         - OS: Ubuntu 20.04
         - Python: 3.9.1
-        - Videodb: 0.0.1
+        - VideoDB: 0.0.1
       value: |
         - OS: 
         - Python: 
-        - Videodb: 
+        - VideoDB: 
     validations:
       required: false
   - type: textarea
