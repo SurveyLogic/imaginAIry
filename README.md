@@ -11,19 +11,7 @@
 [![Discord][discord-shield]][discord-url]
 
 <!-- PROJECT LOGO -->
-
-
-<h1 align="center">
-        Director
-        <br/>
-        <br />
-        <a href="https://videodb.io/">
-    <img src="https://codaio.imgix.net/docs/_s5lUnUCIU/blobs/bl-RgjcFrrJjj/d3cbc44f8584ecd42f2a97d981a144dce6a66d83ddd5864f723b7808c7d1dfbc25034f2f25e1b2188e78f78f37bcb79d3c34ca937cbb08ca8b3da1526c29da9a897ab38eb39d084fd715028b7cc60eb595c68ecfa6fa0bb125ec2b09da65664a4f172c2f" alt="Logo" width="100" height="">
-  </a>
-    </h1>
-    
-    
-<br />
+![logo](https://github.com/user-attachments/assets/583f9ce3-d972-4706-8251-1a0bcd060099)
 <p align="center">
 <p align="center">
         <a href="https://render.com/deploy?repo=https://github.com/video-db/Director" target="_blank" rel="nofollow"><img src="https://render.com/images/deploy-to-render-button.svg" alt="Deploy to Render"></a>
@@ -49,20 +37,25 @@
 <!-- ABOUT THE PROJECT -->
 
 ##  🧐 What is it?
-Director provides a flexible framework for developing intelligent media agents that can interact with your audio/video collection in natural language. Whether you're dealing with lectures, movies, social content, youtube videos, TV shows, talks, music, or other digital content, Director offers tools to build powerful AI-powered assistants.
+Director provides a advance AI first framework for developing intelligent agents that can interact with your audio/video collection in natural language. Whether you're dealing with  social content, lectures, movies, youtube videos, TV shows, talks, music, or other digital content, Director offers variety of tools to build powerful AI-powered assistants.
 
-It uses the VideoDB’s powerful infrastructure to create agentic workflows. For example in natural language you can give commands like `“upload this video and send the bullet point summary on my slack”` and the agent will handle the rest.
-![director_architecture](https://github.com/user-attachments/assets/075509bb-baaf-45f5-8dc8-06577a12cd94)
+It uses the VideoDB’s scalable "video as data" infrastructure to create agentic workflows. For example, in natural language you can give commands like `“upload this video and send the bullet point summary on my slack”` and the agent will handle the rest.
+📺 [Watch: Intro video](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
+
+![Screenshot 2024-10-29 at 1 23 27 PM](https://github.com/user-attachments/assets/4acb9fc2-33b7-4022-9b37-074458d5ba4b)
 
 
-TODO: Intro video here
+
+
+
+
 
 ## ⭐️ Key Features
 - **🤖 AI Agent Framework:** Build custom agents to perform tasks like summarization, search, indexing, clipping and library organization. 
-- **🎨 Innovative User Experience:** Complete framework for interacting with your media library with open source chat based UI, Video player and next-gen interactions that can help you create the experience you need. 
+- **🎨 Innovative User Experience:** Complete framework for interacting with your media library with chat based UI, Video player and next-gen interactions that can help you create the experience you need. 
 - **🔍 Media Analysis:** Your video infra is taken care by [VideoDB](https://videodb.io). Connect with popular LLMs, Databases, and GenAI APIs seamlessly.
 - **🧩 Extensible Architecture:** Easily add new capabilities through tools and modules. Run locally or deploy on your own cloud.
-  ![director_reasoning_engine](https://github.com/user-attachments/assets/13a92f0d-5b66-4a95-a2d4-0b73aa359ca6)
+  ![director_architecture](https://github.com/user-attachments/assets/075509bb-baaf-45f5-8dc8-06577a12cd94)
 
 
 
@@ -120,9 +113,10 @@ To just run the frontend development server: `make run-fe`
 
 The project documentation is built using MkDocs. To serve the documentation locally on port 9000:
 
-Install dependencies for development:
+Activate the environment and install dependencies for development:
 
 ```bash
+source backend/venv/bin/activate  
 make install-be
 ```
 
@@ -139,7 +133,7 @@ mkdocs build
 <!-- CONTRIBUTING -->
 
 ## 📘 Creating a New Agent
-📺 Watch: Code walkthrough
+📺 [Watch: Code Walkthrough](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
 
 To create a new agent in Director, follow these steps:
 
@@ -169,7 +163,7 @@ To create a new agent in Director, follow these steps:
 7. **Register the agent**:
    - Import your new agent class in `Director/backend/director/handler.py`
    - Add it to the `self.agents` list in `ChatHandler`
-
+![director_reasoning_engine](https://github.com/user-attachments/assets/13a92f0d-5b66-4a95-a2d4-0b73aa359ca6)
 Remember to consider creating reusable tools if your agent's functionality could be shared across multiple agents.
 
 ## 🤝 Contributing
