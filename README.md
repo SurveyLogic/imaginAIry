@@ -15,7 +15,7 @@
 <p align="center">
 <p align="center">
         <a href="https://render.com/deploy?repo=https://github.com/video-db/Director" target="_blank" rel="nofollow"><img src="https://render.com/images/deploy-to-render-button.svg" alt="Deploy to Render"></a>
-        <a href="https://railway.app/template/">
+        <a href="https://railway.app/">
           <img src="https://railway.app/button.svg" alt="Deploy on Railway">
         </a>
         </p>
@@ -40,7 +40,7 @@
 Director provides a advance AI first framework for developing intelligent agents that can interact with your audio/video collection in natural language. Whether you're dealing with  social content, lectures, movies, youtube videos, TV shows, talks, music, or other digital content, Director offers variety of tools to build powerful AI-powered assistants.
 
 It uses the VideoDB’s scalable "video as data" infrastructure to create agentic workflows. For example, in natural language you can give commands like `“upload this video and send the bullet point summary on my slack”` and the agent will handle the rest.
-📺 [Watch: Intro video](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
+📺 [Watch: Intro video](https://console.videodb.io/player?url=https://stream.videodb.io/v3/published/manifests/26b4143c-ed97-442a-96ae-19b53eb3bb46.m3u8)
 
 
 
@@ -64,7 +64,7 @@ https://github.com/user-attachments/assets/8b97a9bf-5c81-4a0d-8863-9415552eba57
 
 
 ## 🏃 Getting Started
-📺 [Watch: Setup video](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
+📺 [Watch: Setup video](https://console.videodb.io/player?url=https://stream.videodb.io/v3/published/manifests/fe85e051-5dfb-4409-8033-3963d8bde37a.m3u8)
 
 ### Prerequisites
 
@@ -137,8 +137,6 @@ mkdocs build
 <!-- CONTRIBUTING -->
 
 ## 📘 Creating a New Agent
-📺 [Watch: Code Walkthrough](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
-
 To create a new agent in Director, follow these steps:
 
 1. **Copy the template**: Duplicate `sample_agent.py` in `Director/backend/director/agents/` and rename it to your agent's name.
