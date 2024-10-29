@@ -237,7 +237,7 @@ class ReasoningEngine:
                 )
                 if self.iterations == self.max_iterations - 1:
                     # Direct response case
-                    self.summary_content.status_message = "Here is the the response"
+                    self.summary_content.status_message = "Here is the response"
                     self.summary_content.text = llm_response.content
                     self.summary_content.status = MsgStatus.success
                 else:
