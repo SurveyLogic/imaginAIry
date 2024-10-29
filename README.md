@@ -25,12 +25,14 @@
   <p align="center">
     Framework for creating AI agents to manage and interact with your media library.
     <br />
-    <a href="https://stackblitz.com/edit/videodb-player-demo-pxy8k7?file=src%2FApp.vue"><strong>View Demo »</strong></a>
+    <a href="https://codesandbox.io/p/sandbox/nifty-mendeleev-tnxpnt"><strong>View Demo »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/video-db/Director/issues">Report Bug</a>
+    <a href="https://github.com/video-db/Director/issues/new?assignees=&labels=bug&projects=&template=bug_report.yml">Report Bug</a>
     ·
-    <a href="https://github.com/video-db/Director/issues">Request Feature</a>
+    <a href="https://github.com/video-db/Director/issues/new?assignees=&labels=enhancement&projects=&template=feature_request.yml">Request Feature</a>
+    ·
+    <a href="https://github.com/video-db/Director/issues/new?assignees=&labels=enhancement&projects=&template=agent_request.yml">New Agent Request</a>
   </p>
 </p>
 
