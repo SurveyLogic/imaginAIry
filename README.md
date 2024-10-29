@@ -52,6 +52,7 @@
 Director provides a flexible framework for developing intelligent media agents that can interact with your audio/video collection in natural language. Whether you're dealing with lectures, movies, social content, youtube videos, TV shows, talks, music, or other digital content, Director offers tools to build powerful AI-powered assistants.
 
 It uses the VideoDB’s powerful infrastructure to create agentic workflows. For example in natural language you can give commands like `“upload this video and send the bullet point summary on my slack”` and the agent will handle the rest.
+![director_architecture](https://github.com/user-attachments/assets/075509bb-baaf-45f5-8dc8-06577a12cd94)
 
 
 TODO: Intro video here
@@ -60,7 +61,9 @@ TODO: Intro video here
 - **🤖 AI Agent Framework:** Build custom agents to perform tasks like summarization, search, indexing, clipping and library organization. 
 - **🎨 Innovative User Experience:** Complete framework for interacting with your media library with open source chat based UI, Video player and next-gen interactions that can help you create the experience you need. 
 - **🔍 Media Analysis:** Your video infra is taken care by [VideoDB](https://videodb.io). Connect with popular LLMs, Databases, and GenAI APIs seamlessly.
-- **🧩 Extensible Architecture:** Easily add new capabilities through tools and modules. Run locally or deploy on your own cloud. 
+- **🧩 Extensible Architecture:** Easily add new capabilities through tools and modules. Run locally or deploy on your own cloud.
+  ![director_reasoning_engine](https://github.com/user-attachments/assets/13a92f0d-5b66-4a95-a2d4-0b73aa359ca6)
+
 
 
 ## 🏃 Getting Started
