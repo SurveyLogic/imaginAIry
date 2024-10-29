@@ -189,7 +189,18 @@ class ReasoningEngine:
             logger.info(f"LLM Response: {llm_response}")
 
             if not llm_response.status:
-                # TODO: Handle llm error
+                self.output_message.content.append(
+                    TextContent(
+                        text=llm_response.content,
+                        status=MsgStatus.error,
+                        status_message="Error in reasoning",
+                        agent_name="assistant",
+                    )
+                )
+                self.output_message.actions.append("Failed to reason the message")
+                self.output_message.status = MsgStatus.error
+                self.output_message.publish()
+                self.stop()
                 break
 
             if llm_response.tool_calls:
@@ -237,7 +248,7 @@ class ReasoningEngine:
                 )
                 if self.iterations == self.max_iterations - 1:
                     # Direct response case
-                    self.summary_content.status_message = "Here is the the response"
+                    self.summary_content.status_message = "Here is the response"
                     self.summary_content.text = llm_response.content
                     self.summary_content.status = MsgStatus.success
                 else:

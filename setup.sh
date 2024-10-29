@@ -276,25 +276,20 @@ cd ../
 make install-fe
 make update-fe
 
-echo "
-*******************************************
-*                                         *
-*    🎉 Setup Completed Successfully! 🎉  *
-*                                         *
-*******************************************
-"
 
 echo "
 *******************************************
 *                                         *
-*  🚀 IMPORTANT: Next Steps 🚀            *
+* 🎉 Setup Completed Successfully! 🎉      *
+*                                         *
+*      🚀 IMPORTANT: Next Steps 🚀         *
 *                                         *
 * 1. Review and Update .env File:         *
 *    - Check the newly created .env file  *
 *    - Add API keys for required services *
 *    - Example:                           *
 *    - OPENAI_API_KEY=sk-***              *
-*    - ANTHROPIC_API_KEY=sk-***           *
+*    - VIDEO_DB_API_KEY=sk-***            *
 *    - Note: (Only ONE LLM key is needed) *
 *                                         *
 * 2. Start the Application:               *
