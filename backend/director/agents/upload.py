@@ -56,7 +56,7 @@ class UploadAgent(BaseAgent):
         self.parameters = UPLOAD_AGENT_PARAMETERS
         super().__init__(session=session, **kwargs)
 
-    def _upload(self, source: str, source_type: str, media_type: str, name: str):
+    def _upload(self, source: str, source_type: str, media_type: str, name: str = None):
         """Upload the media with the given URL."""
         try:
             if media_type == "video":
@@ -163,7 +163,7 @@ class UploadAgent(BaseAgent):
         elif source_type == "url":
             playlist_info = self._get_yt_playlist_videos(source)
             if playlist_info:
-                self.output_message.actions.append("Youtube playlist detected")
+                self.output_message.actions.append("YouTube Playlist detected")
                 self.output_message.push_update()
                 return self._upload_yt_playlist(playlist_info, media_type)
             return self._upload(source, source_type, media_type, name)
