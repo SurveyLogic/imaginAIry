@@ -1,6 +1,18 @@
 !!! note
 
-    Director will soon be available on the Railway Marketplace for easy deployment.
+    You need to be connected to GitHub account in https://railway.app/account/plans to perform the deployment.
+
+## Deployment Instructions via Railway Template
+
+1. Go to the [Director's Railway Template](https://railway.app/template/QJbo7o?referralCode=XiD6Mt).
+2. Click **Deploy Now**.
+3. Set the frontend environment variable `VITE_APP_BACKEND_URL` with a placeholder.
+4. For the backend, configure the required environment variables `VIDEO_DB_API_KEY` and `OPENAI_API_KEY`. Optionally, you can configure additional environment variables as needed.
+5. Click **Deploy**.
+6. Once both services are deployed successfully, click on the backend service and copy the public URL (e.g., `https://backend-production-xxxx.up.railway.app`).
+7. Update the frontend's `VITE_APP_BACKEND_URL` variable with the copied backend URL.
+8. After updating the `VITE_APP_BACKEND_URL` variable, a **Deploy** option will appear. Click it to re-deploy the frontend.
+9. Once deployment is complete, access the application through the frontend's public URL, such as `https://frontend-production-xxxx.up.railway.app`.
 
 ## Deployment Instructions via Railway CLI
 
