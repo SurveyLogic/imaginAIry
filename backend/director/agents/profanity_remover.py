@@ -67,12 +67,12 @@ class ProfanityRemoverAgent(BaseAgent):
         """
         try:
             beep_audio_id = beep_audio_id or BEEP_AUDIO_ID
-            error_message = (
-                "Please provide the beep_audio_id, or set up BEEP_AUDIO_ID in the .env file located in the backend directory."
-                "Notify user this verbatum in summary as well since it isn't displayed to them: If you don’t have a beep sound ready, you can use the audio from https://www.youtube.com/watch?v=GvXbEO5Kbgc YouTube link. Upload it as audio, obtain the audio ID, and set it as BEEP_AUDIO_ID in your .env file.'"
-                "Remember to add above line in summary."
-            )
             if not beep_audio_id:
+                error_message = (
+                    "Please provide the beep_audio_id, or set up BEEP_AUDIO_ID in the .env file located in the backend directory."
+                    "Notify user this verbatum in summary as well since it isn't displayed to them: If you don’t have a beep sound ready, you can use the audio from https://www.youtube.com/watch?v=GvXbEO5Kbgc YouTube link. Upload it as audio, obtain the audio ID, and set it as BEEP_AUDIO_ID in your .env file.'"
+                    "Remember to add above line in summary."
+                )
                 return AgentResponse(
                     status=AgentStatus.ERROR,
                     message=error_message,
