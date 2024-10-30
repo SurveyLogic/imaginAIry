@@ -64,13 +64,16 @@ class VideoDBTool:
             for video in videos
         ]
 
-    def upload(self, url, media_type, name=None):
-        if name is None:
-            media = self.conn.upload(url=url, media_type=media_type)
-            name = media.name
+    def upload(self, source, source_type="url", media_type="video", name=None):
+        upload_args = {"media_type": media_type}
+        if name:
+            upload_args["name"] = name
+        if source_type == "url":
+            upload_args["url"] = source
         else:
-            media = self.conn.upload(url=url, media_type=media_type, name=name)
-
+            upload_args["file_path"] = source
+        media = self.conn.upload(**upload_args)
+        name = media.name
         if media_type == "video":
             return {
                 "id": media.id,
