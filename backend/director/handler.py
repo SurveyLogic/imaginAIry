@@ -109,11 +109,11 @@ class SessionHandler:
     def get_sessions(self):
         session = Session(db=self.db)
         return session.get_all()
- 
+
     def get_session(self, session_id):
         session = Session(db=self.db, session_id=session_id)
         return session.get()
-   
+
     def delete_session(self, session_id):
         session = Session(db=self.db, session_id=session_id)
         return session.delete()
@@ -142,11 +142,14 @@ class VideoDBHandler:
 
 class ConfigHandler:
     def check(self):
-        values = dotenv_values()
-        env_keys = set(values.keys())
-        videodb_configured = "VIDEO_DB_API_KEY" in env_keys
-        llm_keys = ("OPENAI_API_KEY",)
-        llm_configured = any(llm_key in env_keys for llm_key in llm_keys)
+        """Check the configuration of the server."""
+        videodb_configured = True if os.getenv("VIDEO_DB_API_KEY") else False
+        openai_key_configured = True if os.getenv("OPENAI_API_KEY") else False
+
+        llm_configured = False
+        if openai_key_configured:
+            llm_configured = True
+
         db = load_db(os.getenv("SERVER_DB_TYPE", "sqlite"))
         db_configured = db.health_check()
         return {
