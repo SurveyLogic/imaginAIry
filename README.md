@@ -14,9 +14,11 @@
 
 <p align="center">
 <p align="center">
-        <a href="https://render.com/deploy?repo=https://github.com/video-db/Director" target="_blank" rel="nofollow"><img src="https://render.com/images/deploy-to-render-button.svg" alt="Deploy to Render"></a>
-        <a href="https://railway.app/">
-          <img src="https://railway.app/button.svg" alt="Deploy on Railway">
+        <a href="https://render.com/deploy?repo=https://github.com/video-db/Director" target="_blank" rel="nofollow">
+                <img src="https://render.com/images/deploy-to-render-button.svg" alt="Deploy to Render">
+        </a>
+        <a href="https://railway.app/template/QJbo7o" target="_blank" rel="nofollow">
+                <img src="https://railway.app/button.svg" alt="Deploy on Railway">
         </a>
         </p>
 
@@ -61,6 +63,7 @@ https://github.com/user-attachments/assets/8b97a9bf-5c81-4a0d-8863-9415552eba57
 - **🎨 Innovative User Experience:** Complete framework for interacting with your media library with chat based UI, Video player and next-gen interactions that can help you create the experience you need. 
 - **🔍 Media Analysis:** Your video infra is taken care by [VideoDB](https://videodb.io). Connect with popular LLMs, Databases, and GenAI APIs seamlessly.
 - **🧩 Extensible Architecture:** Easily add new capabilities through tools and modules. Run locally or deploy on your own cloud.
+
   ![Director architecture](https://github.com/user-attachments/assets/9afb2783-66db-4899-9308-03cbd12e74d7)
   
 
@@ -96,7 +99,10 @@ cd Director
 > - Install Python and pip
 > - Set up virtual environments and install dependencies for frontend and backend
 
-Supported platforms: Mac ✔ Linux ✔ 
+Supported platforms: 
+- Mac
+- Linux
+- Windows (WSL)
 
 **3. Configure the environment variables:**
 Edit the `.env` files to add your API keys and other configuration options.
@@ -168,6 +174,8 @@ To create a new agent in Director, follow these steps:
 7. **Register the agent**:
    - Import your new agent class in `Director/backend/director/handler.py`
    - Add it to the `self.agents` list in `ChatHandler`
+
+
 ![director_reasoning_engine](https://github.com/user-attachments/assets/13a92f0d-5b66-4a95-a2d4-0b73aa359ca6)
 Remember to consider creating reusable tools if your agent's functionality could be shared across multiple agents.
 
