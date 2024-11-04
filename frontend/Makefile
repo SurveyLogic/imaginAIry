@@ -1,4 +1,4 @@
-NODE_VERSION := 22.9.0
+NODE_VERSION := 22.8.0
 MIN_NODE_VERSION := 16.20.2
 
 # Detect the shell (sh, bash, etc.)
