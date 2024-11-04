@@ -1,3 +1,5 @@
+NODE_VERSION := 22.8.0
+
 # Detect the shell (sh, bash, etc.)
 SHELL := $(shell echo $$SHELL)
 
@@ -19,13 +21,13 @@ install:
 
 update:
 	@npm update
-
 run:
-	@if [ -f "$$NVM_DIR/nvm.sh" ]; then \
-		. "$$NVM_DIR/nvm.sh" && nvm use 22.8.0 || echo "⚠️ Warning: Unable to switch to Node.js 22.8.0. Continuing with current version."; \
-	elif [ -f "$$HOME/.nvm/nvm.sh" ]; then \
-		. "$$HOME/.nvm/nvm.sh" && nvm use 22.8.0 || echo "⚠️ Warning: Unable to switch to Node.js 22.8.0. Continuing with current version."; \
+	@export NVM_DIR="$$HOME/.nvm"; \
+	if [ -s "$$NVM_DIR/nvm.sh" ]; then \
+		. "$$NVM_DIR/nvm.sh"; \
+		nvm use $(NODE_VERSION) && npm run dev || echo "❌ Failed to start development server. Could not switch to Node.js $(NODE_VERSION). Please install it using: nvm install $(NODE_VERSION)"; \
 	else \
-		echo "ℹ️ Note: nvm is not installed or not properly configured. Using system's default Node.js version."; \
+		echo "ℹ️  nvm (Node Version Manager) is not installed. Proceeding with system default Node.js version. For version management, consider installing nvm: https://github.com/nvm-sh/nvm#installing-and-updating"; \
+		npm run dev; \
 	fi
-	@npm run dev
+
