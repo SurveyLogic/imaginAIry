@@ -230,7 +230,11 @@ class PromptClipAgent(BaseAgent):
         else:
             self.output_message.actions.append("Indexing video scenes..")
             self.output_message.push_update()
-            scene_index_id = self.videodb_tool.index_scene(video_id)
+            scene_index_id = self.videodb_tool.index_scene(
+                video_id=video_id,
+                extraction_config={"threshold": 20, "frame_count": 3},
+                prompt="Summarize the essence of the scene in one or two concise sentences without focusing on individual images.",
+            )
             return scene_index_id, self.videodb_tool.get_scene_index(
                 video_id=video_id, scene_id=scene_index_id
             )
@@ -270,7 +274,6 @@ class PromptClipAgent(BaseAgent):
 
             elif content_type == "visual_content":
                 scene_index_id, scenes = self._get_scenes(video_id=video_id)
-                print(scenes)
                 result = self._scene_prompter(scenes, prompt)
 
             else:

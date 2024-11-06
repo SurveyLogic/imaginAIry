@@ -1,7 +1,7 @@
 import os
 import videodb
 
-from videodb import SearchType, SubtitleStyle, IndexType
+from videodb import SearchType, SubtitleStyle, IndexType, SceneExtractionType
 from videodb.timeline import Timeline
 from videodb.asset import VideoAsset, ImageAsset
 
@@ -124,9 +124,19 @@ class VideoDBTool:
         index = video.index_spoken_words()
         return index
 
-    def index_scene(self, video_id: str):
+    def index_scene(
+        self,
+        video_id: str,
+        extraction_type=SceneExtractionType.shot_based,
+        extraction_config={},
+        prompt=None,
+    ):
         video = self.collection.get_video(video_id)
-        return video.index_scenes()
+        return video.index_scenes(
+            extraction_type=extraction_type,
+            extraction_config=extraction_config,
+            prompt=prompt,
+        )
 
     def list_scene_index(self, video_id: str):
         video = self.collection.get_video(video_id)
