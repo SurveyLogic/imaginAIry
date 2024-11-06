@@ -1,7 +1,7 @@
 import os
 import videodb
 
-from videodb import SearchType, SubtitleStyle
+from videodb import SearchType, SubtitleStyle, IndexType, SceneExtractionType
 from videodb.timeline import Timeline
 from videodb.asset import VideoAsset, ImageAsset
 
@@ -124,9 +124,27 @@ class VideoDBTool:
         index = video.index_spoken_words()
         return index
 
-    def index_scene(self, video_id: str):
+    def index_scene(
+        self,
+        video_id: str,
+        extraction_type=SceneExtractionType.shot_based,
+        extraction_config={},
+        prompt=None,
+    ):
         video = self.collection.get_video(video_id)
-        return video.index_scenes()
+        return video.index_scenes(
+            extraction_type=extraction_type,
+            extraction_config=extraction_config,
+            prompt=prompt,
+        )
+
+    def list_scene_index(self, video_id: str):
+        video = self.collection.get_video(video_id)
+        return video.list_scene_index()
+
+    def get_scene_index(self, video_id: str, scene_id: str):
+        video = self.collection.get_video(video_id)
+        return video.get_scene_index(scene_id)
 
     def download(self, stream_link: str, name: str = None):
         download_response = self.conn.download(stream_link, name)
@@ -140,10 +158,14 @@ class VideoDBTool:
             search_resuls = self.collection.search(query=query)
         return search_resuls
 
-    def keyword_search(self, query, video_id=None):
+    def keyword_search(
+        self, query, index_type=IndexType.spoken_word, video_id=None, **kwargs
+    ):
         """Search for a keyword in a video."""
         video = self.collection.get_video(video_id)
-        return video.search(query=query, search_type=SearchType.keyword)
+        return video.search(
+            query=query, search_type=SearchType.keyword, index_type=index_type, **kwargs
+        )
 
     def generate_video_stream(self, video_id: str, timeline):
         """Generate a video stream from a timeline. timeline is a list of tuples. ex [(0, 10), (20, 30)]"""
