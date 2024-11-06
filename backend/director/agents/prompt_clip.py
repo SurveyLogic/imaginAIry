@@ -151,9 +151,9 @@ class PromptClipAgent(BaseAgent):
 
         return self._prompt_runner(prompts)
 
-    def _scene_prompter(self, transcript_text, prompt):
+    def _scene_prompter(self, scene_index, prompt):
         chunk_size = 10000
-        chunks = self._chunk_docs(transcript_text, chunk_size=chunk_size)
+        chunks = self._chunk_docs(scene_index, chunk_size=chunk_size)
 
         prompts = []
         i = 0
