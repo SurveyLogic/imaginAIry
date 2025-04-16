@@ -1,16 +1,7 @@
-<!-- PROJECT SHIELDS -->
-<!--
-*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
-*** https://www.markdownguide.org/basic-syntax/#reference-style-links
--->
-
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![Website][website-shield]][website-url]
-[![Discord][discord-shield]][discord-url]
 
 <!-- PROJECT LOGO -->
-<img src="https://github.com/user-attachments/assets/78f5eead-d390-4b0b-a8bc-0017e6827c98" alt="logo">
+![P2](https://github.com/user-attachments/assets/9e8aedd4-6c45-4a47-9fd3-67784739fa6a)
+
 
 <p align="center">
 <p align="center">
