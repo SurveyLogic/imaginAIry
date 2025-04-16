@@ -16,13 +16,13 @@
 
 <!-- ABOUT THE PROJECT -->
 
-##  🧐 What is The Director?
+##  🧐 What is The Producer?
 
-Think of Director as ChatGPT for videos. It is a framework to build video agents that can reason through complex video tasks like search, editing, compilation, generation etc & instantly stream the results. 
+Think of Producer as ChatGPT for videos. It is a framework to build video agents that can reason through complex video tasks like search, editing, compilation, generation etc & instantly stream the results. 
 
-For example, a simple natural language command like: `Upload this video and send the highlights to my Slack`, sets everything in motion - Director’s reasoning will orchestrate the different agents intelligently to complete the task for you. 
+For example, a simple natural language command like: `Upload this video and send the highlights to my Slack`, sets everything in motion - Producer’s reasoning will orchestrate the different agents intelligently to complete the task for you. 
 
-Built on top of VideoDB’s ‘video-as-data’ infrastructure, Director enables you to:
+Built on top of VideoDB’s ‘video-as-data’ infrastructure, Producer enables you to:
 
 * Summarize videos in seconds.
 * Search for specific moments.
@@ -30,7 +30,7 @@ Built on top of VideoDB’s ‘video-as-data’ infrastructure, Director enables
 * Integrate top GenAI projects and APIs and create and edit content instantly.
 * Add overlays, extract frames, and much more. 
 
-Built with flexibility in mind, Director is perfect for developers, creators, and teams looking to harness AI to simplify media workflows and unlock new possibilities.  
+Built with flexibility in mind, Producer is perfect for developers, creators, and teams looking to harness AI to simplify media workflows and unlock new possibilities.  
 
 
 <!-- Intro Video -->
@@ -63,7 +63,7 @@ Connect seamlessly with powerful AI tools like LLMs, databases, and GenAI APIs, 
 
 
 ### 🧩 Customizable and Flexible
-Easily add new agents and tools to your workflow. Whether you want to run it locally or on your cloud, The Director adapts to your needs.
+Easily add new agents and tools to your workflow. Whether you want to run it locally or on your cloud, The Producer adapts to your needs.
 
 <br/>
 
@@ -74,7 +74,7 @@ Easily add new agents and tools to your workflow. Whether you want to run it loc
   3. Video Search: [link](https://www.youtube.com/watch?v=kCiCI2KCnC8&list=PLhxAMFLSSK039xl1UgcZmoFLnb-qNRYQw&index=4)
 
 ## ⚙️ Architecture Overview
-Director's architecture brings together:
+Producer's architecture brings together:
 
 - **Backend Reasoning Engine:** Handles workflows and decision-making. Checkout the [backend folder] in codebase. 
 - **Chat-Based UI:** Engage with your media library conversationally. Check [videodb-chat] for the source code.
@@ -86,7 +86,7 @@ Director's architecture brings together:
   
 ## 🧠 **Reasoning Engine**
 
-At the heart of The Director is its **Reasoning Engine**, a powerful core that drives intelligent decision-making and dynamic workflows. It acts as the brain behind the agents, enabling them to process commands, interact with data, and deliver meaningful outputs.
+At the heart of The Producer is its **Reasoning Engine**, a powerful core that drives intelligent decision-making and dynamic workflows. It acts as the brain behind the agents, enabling them to process commands, interact with data, and deliver meaningful outputs.
 
 ### **How It Works**
 - **Contextual Understanding**: The engine analyzes user inputs and maintains context, ensuring smooth and coherent interactions with agents.  
@@ -122,8 +122,8 @@ For a closer look, check out the detailed architecture diagram below:
 **1. Clone the repository:**
 
 ``` bash
-git clone https://github.com/video-db/Director.git
-cd Director
+git clone https://github.com/video-db/Producer.git
+cd Producer
 ```
 
 **2. Run the setup script:**
@@ -172,12 +172,12 @@ For specific tasks:
 
 ## 📘 Creating a New Agent
 
-> Checkout hosted documentation at https://docs.director.videodb.io
+> Checkout hosted documentation at https://docs.producer.videodb.io
 
-To create a new agent in Director, follow these steps:
+To create a new agent in Producer, follow these steps:
 
 1. **Copy the template**: 
-Duplicate `sample_agent.py` in `Director/backend/director/agents/` and rename it.
+Duplicate `sample_agent.py` in `Producer/backend/producer/agents/` and rename it.
 
 2. **Update class details**:
    - Rename the class.
@@ -202,14 +202,14 @@ Duplicate `sample_agent.py` in `Director/backend/director/agents/` and rename it
    - Return an `AgentResponse` with result, message, and data
 
 7. **Register the agent**:
-   - Import your new agent class in `Director/backend/director/handler.py`
+   - Import your new agent class in `Producer/backend/producer/handler.py`
    - Add it to the `self.agents` list in `ChatHandler`
 
 Remember to consider creating reusable tools if your agent's functionality could be shared across multiple agents.
 
 
 ## 📖 Documentation
-> Checkout hosted documentation at https://docs.director.videodb.io
+> Checkout hosted documentation at https://docs.producer.videodb.io
 ### Serve Locally
 To serve the documentation on port 9000:
 
@@ -245,10 +245,10 @@ Any contributions you make are **greatly appreciated**. Here's the process:
 
 [discord-shield]: https://img.shields.io/badge/dynamic/json?style=for-the-badge&url=https://discord.com/api/invites/py9P639jGz?with_counts=true&query=$.approximate_member_count&logo=discord&logoColor=blue&color=green&label=discord
 [discord-url]: https://discord.com/invite/py9P639jGz
-[stars-shield]: https://img.shields.io/github/stars/video-db/Director.svg?style=for-the-badge
-[stars-url]: https://github.com/video-db/Director/stargazers
-[issues-shield]: https://img.shields.io/github/issues/video-db/Director.svg?style=for-the-badge
-[issues-url]: https://github.com/video-db/Director/issues
+[stars-shield]: https://img.shields.io/github/stars/video-db/Producer.svg?style=for-the-badge
+[stars-url]: https://github.com/video-db/Producer/stargazers
+[issues-shield]: https://img.shields.io/github/issues/video-db/Producer.svg?style=for-the-badge
+[issues-url]: https://github.com/video-db/Producer/issues
 [website-shield]: https://img.shields.io/website?url=https%3A%2F%2Fvideodb.io%2F&style=for-the-badge&label=videodb.io
 [website-url]: https://videodb.io/
 
