@@ -30,18 +30,9 @@
         ⭐️ Built on top of the cutting edge 'Video-as-Data' infrastructure, <a href="https://videodb.io">VideoDB </a>
     </p>
     <br />
-    <p align="center">
-        <a href="" target="_blank" rel="noopener noreferrer"><strong>⚡️Watch Agent Demos</strong></a>
-        &nbsp;&nbsp;&nbsp;
-        <a href="https://chat.videodb.io" target="_blank" rel="noopener noreferrer"><strong>✨Try Hosted Version</strong></a>
-    <br /><br />
-    <a href="https://docs.director.videodb.io/index.html" target="_blank" rel="noopener noreferrer">📖 Documentation</a>
-    &nbsp;&nbsp;&nbsp;
-    <a href="https://github.com/video-db/Director/issues/new?assignees=&labels=enhancement&projects=&template=agent_request.yml" target="_blank" rel="noopener noreferrer">👩‍💻New Agent Request</a>
-  </p>
-   </p>
-</p>
-<br/>
+    <p align="ce
+
+https://github.com/user-attachments/assets/5277c13d-8045-4f34-8475-dcd0a4880e2c
 
 <!-- ABOUT THE PROJECT -->
 
