@@ -8,7 +8,7 @@
   <p align="center">
     Framework to build video agents that can reason through complex video tasks like search, editing, compilation, generation etc & instantly stream the results. 
     <p align="center">
-        ⭐️ Built on top of the cutting edge 'Video-as-Data' infrastructure, <a href="https://videodb.io">VideoDB </a>
+        ⭐️ Built on top of the cutting edge 'Video-as-Data' infrastructure, 
     </p>
     <br />
     <p align="ce
