@@ -3,16 +3,6 @@
 ![P2](https://github.com/user-attachments/assets/9e8aedd4-6c45-4a47-9fd3-67784739fa6a)
 
 
-<p align="center">
-<p align="center">
-        <a href="https://render.com/deploy?repo=https://github.com/video-db/Director" target="_blank" rel="nofollow">
-                <img src="https://render.com/images/deploy-to-render-button.svg" alt="Deploy to Render">
-        </a>
-        <a href="https://railway.app/template/QJbo7o" target="_blank" rel="nofollow">
-                <img src="https://railway.app/button.svg" alt="Deploy on Railway">
-        </a>
-        </p>
-
 
 
   <p align="center">
@@ -23,7 +13,6 @@
     <br />
     <p align="ce
 
-https://github.com/user-attachments/assets/5277c13d-8045-4f34-8475-dcd0a4880e2c
 
 <!-- ABOUT THE PROJECT -->
 
@@ -41,14 +30,14 @@ Built on top of VideoDB’s ‘video-as-data’ infrastructure, Director enables
 * Integrate top GenAI projects and APIs and create and edit content instantly.
 * Add overlays, extract frames, and much more. 
 
-Built with flexibility in mind, Director is perfect for developers, creators, and teams looking to harness AI to simplify media workflows and unlock new possibilities.  📺 [Watch: Intro video](https://console.videodb.io/player?url=https://stream.videodb.io/v3/published/manifests/26b4143c-ed97-442a-96ae-19b53eb3bb46.m3u8)
-
+Built with flexibility in mind, Director is perfect for developers, creators, and teams looking to harness AI to simplify media workflows and unlock new possibilities.  
 
 
 <!-- Intro Video -->
 
 
-https://github.com/user-attachments/assets/33e0e7b4-9eb2-4a26-8274-f96c2c1c3a48
+
+https://github.com/user-attachments/assets/5277c13d-8045-4f34-8475-dcd0a4880e2c
 
 
 
@@ -70,7 +59,8 @@ Experience a sleek, chat-based interface with built-in video playback and intuit
 
 ### 🥣 A mixing bowl of your GenAI APIs
 Connect seamlessly with powerful AI tools like LLMs, databases, and GenAI APIs, while VideoDB ensures your video infrastructure is reliable and scalable for cloud storage, indexing and streaming your content effortlessly. 
-![Integration-Updated](https://github.com/user-attachments/assets/d06e3b57-1135-4c3b-9f3a-d427d4142b42)
+![image](https://github.com/user-attachments/assets/832e3d4b-dce5-4c38-b6d5-d6f766c8d2a7)
+
 
 ### 🧩 Customizable and Flexible
 Easily add new agents and tools to your workflow. Whether you want to run it locally or on your cloud, The Director adapts to your needs.
@@ -91,7 +81,8 @@ Director's architecture brings together:
 - **Video Player:** Advanced playback and interaction tools. Check [videodb-player](https://github.com/video-db/videodb-player) for the details about the multi platform video player. 
 - **Collection View:** Organize and browse your media effortlessly.
 
-  ![Director architecture](https://github.com/user-attachments/assets/9afb2783-66db-4899-9308-03cbd12e74d7)
+![image](https://github.com/user-attachments/assets/7fe24f7a-a763-4cb4-9cce-94ee67aabef8)
+
   
 ## 🧠 **Reasoning Engine**
 
@@ -113,7 +104,8 @@ The Reasoning Engine works in tandem with the chat-based UI, making video intera
 - **Output**: The engine orchestrates upload, scene detection, clipping, and sharing agents to deliver results seamlessly. Watch the video [here](https://www.youtube.com/watch?v=fxhMgQf7v8s&list=PLhxAMFLSSK039xl1UgcZmoFLnb-qNRYQw&index=3)
 
 For a closer look, check out the detailed architecture diagram below:  
-![Reasoning Engine Architecture](https://github.com/user-attachments/assets/13a92f0d-5b66-4a95-a2d4-0b73aa359ca6)
+![image](https://github.com/user-attachments/assets/9076f8b2-6c43-4ff3-8807-ce734c64f856)
+
 
 
 
