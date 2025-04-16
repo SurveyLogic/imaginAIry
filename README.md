@@ -76,9 +76,9 @@ Easily add new agents and tools to your workflow. Whether you want to run it loc
 ## ⚙️ Architecture Overview
 Director's architecture brings together:
 
-- **Backend Reasoning Engine:** Handles workflows and decision-making. Checkout the [backend folder](https://github.com/video-db/Director/tree/main/backend) in director codebase. 
-- **Chat-Based UI:** Engage with your media library conversationally. Check [videodb-chat](https://github.com/video-db/videodb-chat) for the source code.
-- **Video Player:** Advanced playback and interaction tools. Check [videodb-player](https://github.com/video-db/videodb-player) for the details about the multi platform video player. 
+- **Backend Reasoning Engine:** Handles workflows and decision-making. Checkout the [backend folder] in codebase. 
+- **Chat-Based UI:** Engage with your media library conversationally. Check [videodb-chat] for the source code.
+- **Video Player:** Advanced playback and interaction tools. Check [videodb-player] for the details about the multi platform video player. 
 - **Collection View:** Organize and browse your media effortlessly.
 
 ![image](https://github.com/user-attachments/assets/7fe24f7a-a763-4cb4-9cce-94ee67aabef8)
