@@ -14,6 +14,11 @@
     <p align="ce
 
 
+
+
+https://github.com/user-attachments/assets/35530065-f64f-48e8-abd2-4f85ec6908a0
+
+
 <!-- ABOUT THE PROJECT -->
 
 ##  🧐 What is The Producer?
@@ -34,10 +39,6 @@ Built with flexibility in mind, Producer is perfect for developers, creators, an
 
 
 <!-- Intro Video -->
-
-
-
-https://github.com/user-attachments/assets/5277c13d-8045-4f34-8475-dcd0a4880e2c
 
 
 
