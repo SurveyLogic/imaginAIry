@@ -1,8 +1,7 @@
 
-<!-- PROJECT LOGO -->
-![P2](https://github.com/user-attachments/assets/9e8aedd4-6c45-4a47-9fd3-67784739fa6a)
 
 
+![P2](https://github.com/user-attachments/assets/ce25ac1c-c63f-43d5-b34c-675d819ace52)
 
 
   <p align="center">
