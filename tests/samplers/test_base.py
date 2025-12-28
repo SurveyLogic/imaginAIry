@@ -1,7 +1,7 @@
 import pytest
 import torch
 
-from imaginairy.utils import get_device
+from viziax.utils import get_device
 
 
 @pytest.mark.skipif("mps" not in get_device(), reason="MPS only bug")

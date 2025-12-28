@@ -3,7 +3,7 @@ from unittest import mock
 import pytest
 from fastapi.testclient import TestClient
 
-from imaginairy.http_app.app import app
+from viziax.http_app.app import app
 
 client = TestClient(app)
 

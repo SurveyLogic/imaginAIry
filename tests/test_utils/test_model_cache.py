@@ -1,10 +1,10 @@
 import pytest
 from torch import nn
 
-from imaginairy.api import imagine
-from imaginairy.schema import ImaginePrompt
-from imaginairy.utils import get_device
-from imaginairy.utils.model_cache import GPUModelCache
+from viziax.api import imagine
+from viziax.schema import ImaginePrompt
+from viziax.utils import get_device
+from viziax.utils.model_cache import GPUModelCache
 
 
 class DummyMemoryModule(nn.Module):

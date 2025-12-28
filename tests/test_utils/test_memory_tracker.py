@@ -1,6 +1,6 @@
 import pytest
 
-from imaginairy.utils.memory_tracker import TorchRAMTracker
+from viziax.utils.memory_tracker import TorchRAMTracker
 
 
 class MockedMemory:

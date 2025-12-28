@@ -2,7 +2,7 @@ import pyparsing as pp
 import pytest
 from pyparsing import ParseException
 
-from imaginairy.utils.spaced_kv_parser import parse_spaced_key_value_pairs
+from viziax.utils.spaced_kv_parser import parse_spaced_key_value_pairs
 
 
 def test_basic_parsing():

@@ -4,7 +4,7 @@ import pytest
 from click.testing import CliRunner
 from PIL import Image
 
-from imaginairy.cli.upscale import (
+from viziax.cli.upscale import (
     upscale_cmd,
 )
 from tests import TESTS_FOLDER

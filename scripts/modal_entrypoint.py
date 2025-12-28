@@ -27,7 +27,7 @@ def file_filter(path: str):
 
 @lru_cache
 def files_for_inclusion():
-    from imaginairy.utils.gitignore import get_nonignored_file_paths
+    from viziax.utils.gitignore import get_nonignored_file_paths
 
     filepaths = get_nonignored_file_paths(project_root)
     for f in filepaths:
@@ -61,8 +61,8 @@ stub = Stub(
 
 @stub.function(gpu=gpu.A100(), container_idle_timeout=2, image=imaginairy_image)
 def generate_image(imagine_prompt):
-    from imaginairy.api import imagine
-    from imaginairy.utils.log_utils import configure_logging
+    from viziax.api import imagine
+    from viziax.utils.log_utils import configure_logging
 
     configure_logging()
 
@@ -147,10 +147,10 @@ def main(
     n_steps: int = 50,
     seed=None,
 ):
-    from imaginairy.enhancers.prompt_expansion import expand_prompts
-    from imaginairy.schema import ImaginePrompt
-    from imaginairy.utils import get_next_filenumber
-    from imaginairy.utils.log_utils import configure_logging
+    from viziax.enhancers.prompt_expansion import expand_prompts
+    from viziax.schema import ImaginePrompt
+    from viziax.utils import get_next_filenumber
+    from viziax.utils.log_utils import configure_logging
 
     configure_logging()
 
@@ -199,7 +199,7 @@ def main(
     file_num = get_next_filenumber(f"{outdir}/generated")
 
     for result in generate_image.map(imagine_prompts):
-        from imaginairy.api.generate import save_image_result
+        from viziax.api.generate import save_image_result
 
         save_image_result(
             result=result,

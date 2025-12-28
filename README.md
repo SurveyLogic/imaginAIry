@@ -1,25 +1,20 @@
-# ImaginAIry 🤖🧠
+# Viziax 🤖🧠
 
-[![Downloads](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1rOvQNs0Cmn_yU1bKWjCOHzGVDgZkaTtO?usp=sharing)
-[![Downloads](https://pepy.tech/badge/imaginairy)](https://pepy.tech/project/imaginairy)
-[![image](https://img.shields.io/pypi/v/imaginairy.svg)](https://pypi.org/project/imaginairy/)
-[![image](https://img.shields.io/badge/license-MIT-green)](https://github.com/brycedrennan/imaginAIry/blob/master/LICENSE/)
-[![Discord](https://flat.badgen.net/discord/members/FdD7ut3YjW)](https://discord.gg/FdD7ut3YjW)
+AI imagined images. Pythonic generation of stable diffusion images **and videos** \*!.
 
-AI imagined images. Pythonic generation of stable diffusion images **and videos** *!.
-
-"just works" on Linux and macOS(M1) (and sometimes windows).
-
+"just works" on Linux, macOS(M1), and Windows 10+ .
 
 ```bash
 # on macOS, make sure rust is installed first
 # be sure to use Python 3.10, Python 3.11 is not supported at the moment
->> pip install imaginairy
+>> pip install viziax
 >> imagine "a scenic landscape" "a photo of a dog" "photo of a fruit bowl" "portrait photo of a freckled woman" "a bluejay"
 # Make an AI video
 >> aimg videogen --start-image rocket.png
 ```
+
 ## Stable Video Diffusion
+
 <p float="left">
 <img src="docs/assets/svd-rocket.gif" height="190">
 <img src="docs/assets/svd-athens.gif" height="190">
@@ -30,9 +25,11 @@ AI imagined images. Pythonic generation of stable diffusion images **and videos*
 </p>
 
 ### Rushed release of Stable Diffusion Video!
-Works with Nvidia GPUs.  Does not work on Mac or CPU.
+
+Works with Nvidia GPUs. Does not work on Mac or CPU.
 
 On Windows you'll need to install torch 2.0 first via https://pytorch.org/get-started/locally/
+
 ```text
 Usage: aimg videogen [OPTIONS]
 
@@ -59,6 +56,7 @@ Options:
 ```
 
 ### Images
+
 <p float="left">
 <img src="docs/assets/026882_1_ddim50_PS7.5_a_scenic_landscape_[generated].jpg" height="256">
 <img src="docs/assets/026884_1_ddim50_PS7.5_photo_of_a_dog_[generated].jpg" height="256">
@@ -69,21 +67,25 @@ Options:
 </p>
 
 ### Whats New
+
 [See full Changelog here](./docs/changelog.md)
 
-
 **14.3.0**
-- feature: integrates [spandrel](https://github.com/chaiNNer-org/spandrel) for upscaling 
-- fix: allow loading sdxl models from local paths. 
+
+- feature: integrates [spandrel](https://github.com/chaiNNer-org/spandrel) for upscaling
+- fix: allow loading sdxl models from local paths.
 
 **14.2.0**
+
 - 🎉 feature: add image prompt support via `--image-prompt` and `--image-prompt-strength`
 
 **14.1.1**
+
 - tests: add installation tests for windows, mac, and conda
 - fix: dependency issues
 
 **14.1.0**
+
 - 🎉 feature: make video generation smooth by adding frame interpolation
 - feature: SDXL weights in the compvis format can now be used
 - feature: allow video generation at any size specified by user
@@ -94,44 +96,49 @@ Options:
 - build: remove imageio dependency
 - build: vendorize facexlib so we don't install its unneeded dependencies
 
-
 **14.0.4**
-- docs: add a documentation website at https://brycedrennan.github.io/imaginAIry/
+
 - build: remove fairscale dependency
 - fix: video generation was broken
 
 **14.0.3**
+
 - fix: several critical bugs with package
 - tests: add a wheel smoketest to detect these issues in the future
 
 **14.0.0**
+
 - 🎉 video generation using [Stable Video Diffusion](https://github.com/Stability-AI/generative-models)
   - add `--videogen` to any image generation to create a short video from the generated image
   - or use `aimg videogen` to generate a video from an image
 - 🎉 SDXL (Stable Diffusion Extra Large) models are now supported.
   - try `--model opendalle` or `--model sdxl`
   - inpainting and controlnets are not yet supported for SDXL
-- 🎉 imaginairy is now backed by the [refiners library](https://github.com/finegrain-ai/refiners)
-  - This was a huge rewrite which is why some features are not yet supported.  On the plus side, refiners supports
-cutting edge features (SDXL, image prompts, etc) which will be added to imaginairy soon.
+- 🎉 Viziax is now backed by the [refiners library](https://github.com/finegrain-ai/refiners)
+  - This was a huge rewrite which is why some features are not yet supported. On the plus side, refiners supports
+    cutting edge features (SDXL, image prompts, etc) which will be added to Viziax soon.
   - [self-attention guidance](https://github.com/SusungHong/Self-Attention-Guidance) which makes details of images more accurate
-- 🎉 feature: larger image generations now work MUCH better and stay faithful to the same image as it looks at a smaller size. 
-For example `--size 720p --seed 1` and `--size 1080p --seed 1` will produce the same image for SD15
+- 🎉 feature: larger image generations now work MUCH better and stay faithful to the same image as it looks at a smaller size.
+  For example `--size 720p --seed 1` and `--size 1080p --seed 1` will produce the same image for SD15
 - 🎉 feature: loading diffusers based models now supported. Example `--model https://huggingface.co/ainz/diseny-pixar --model-architecture sd15`
 - 🎉 feature: qrcode controlnet!
 
-
 ### Run API server and StableStudio web interface (alpha)
-Generate images via API or web interface.  Much smaller featureset compared to the command line tool.
+
+Generate images via API or web interface. Much smaller featureset compared to the command line tool.
+
 ```bash
 >> aimg server
 ```
+
 Visit http://localhost:8000/ and http://localhost:8000/docs
 
 <img src="https://github.com/Stability-AI/StableStudio/blob/a65d4877ad7d309627808a169818f1add8c278ae/misc/GenerateScreenshot.png?raw=true" width="512">
 
 ### Image Structure Control [by ControlNet](https://github.com/lllyasviel/ControlNet)
+
 #### (Not supported for SDXL yet)
+
 Generate images guided by body poses, depth maps, canny edges, hed boundaries, or normal maps.
 
 **Openpose Control**
@@ -197,10 +204,13 @@ imagine --control-image bird.jpg  --control-mode normal  "a bird"
 #### Image Shuffle Control
 
 Generates the image based on elements of the control image. Kind of similar to style transfer.
+
 ```bash
 imagine --control-image pearl-girl.jpg  --control-mode shuffle  "a clown"
 ```
+
 The middle image is the "shuffled" input image
+
 <p float="left">
     <img src="docs/assets/girl_with_a_pearl_earring.jpg" height="256">
     <img src="docs/assets/pearl_shuffle_019331_1_kdpmpp2m15_PS7.5_img2img-0.0_a_clown.jpg" height="256">
@@ -210,8 +220,9 @@ The middle image is the "shuffled" input image
 #### Editing Instructions Control
 
 Similar to instructPix2Pix (below) but works with any SD 1.5 based model.
+
 ```bash
-imagine --control-image pearl-girl.jpg  --control-mode edit --init-image-strength 0.01 --steps 30  --negative-prompt "" --model openjourney-v2 "make it anime" "make it at the beach" 
+imagine --control-image pearl-girl.jpg  --control-mode edit --init-image-strength 0.01 --steps 30  --negative-prompt "" --model openjourney-v2 "make it anime" "make it at the beach"
 ```
 
 <p float="left">
@@ -223,8 +234,9 @@ imagine --control-image pearl-girl.jpg  --control-mode edit --init-image-strengt
 #### Add Details Control (upscaling/super-resolution)
 
 Replaces existing details in an image. Good to use with --init-image-strength 0.2
+
 ```bash
-imagine --control-image "assets/wishbone.jpg" --control-mode details "sharp focus, high-resolution" --init-image-strength 0.2 --steps 30 -w 2048 -h 2048 
+imagine --control-image "assets/wishbone.jpg" --control-mode details "sharp focus, high-resolution" --init-image-strength 0.2 --steps 30 -w 2048 -h 2048
 ```
 
 <p float="left">
@@ -232,25 +244,29 @@ imagine --control-image "assets/wishbone.jpg" --control-mode details "sharp focu
     <img src="docs/assets/wishbone_headshot_details.jpg" height="256">
 </p>
 
-
 ### Image (re)Colorization (using brightness control)
+
 Colorize black and white images or re-color existing images.
 
-The generated colors will be applied back to the original image. You can either provide a caption or 
+The generated colors will be applied back to the original image. You can either provide a caption or
 allow the tool to generate one for you.
 
 ```bash
 aimg colorize pearl-girl.jpg --caption "photo of a woman"
 ```
+
 <p float="left">
     <img src="docs/assets/girl_with_a_pearl_earring.jpg" height="256">
     <img src="docs/assets/pearl-gray.jpg" height="256">
     <img src="docs/assets/pearl-recolor-a.jpg" height="256">
 </p>
 
-###  Instruction based image edits [by InstructPix2Pix](https://github.com/timothybrooks/instruct-pix2pix)
+### Instruction based image edits [by InstructPix2Pix](https://github.com/timothybrooks/instruct-pix2pix)
+
 #### (Broken as of 14.0.0)
-Just tell imaginairy how to edit the image and it will do it for you!
+
+Just tell Viziax how to edit the image and it will do it for you!
+
 <p float="left">
 <img src="docs/assets/scenic_landscape_winter.jpg" height="256">
 <img src="docs/assets/dog_red.jpg" height="256">
@@ -268,7 +284,7 @@ Just tell imaginairy how to edit the image and it will do it for you!
 Use prompt strength to control how strong the edit is. For extra control you can combine with prompt-based masking.
 
 ```bash
-# enter imaginairy shell
+# enter viziax shell
 >> aimg
 🤖🧠> edit scenic_landscape.jpg -p "make it winter" --prompt-strength 20
 🤖🧠> edit dog.jpg -p "make the dog red" --prompt-strength 5
@@ -283,15 +299,17 @@ Use prompt strength to control how strong the edit is. For extra control you can
 🤖🧠> edit mona-lisa.jpg -p "make it a color professional photo headshot" --negative-prompt "old, ugly, blurry" --arg-schedule "prompt-strength[2:8:0.5]" --compilation-anim gif
 🤖🧠> edit gg-bridge.jpg -p "make it night time" --prompt-strength 15  --steps 30 --arg-schedule prompt-strength[1:15:1] --compilation-anim gif
 ```
+
 </details>
 
-
-
 ### Quick Image Edit Demo
+
 Want just quickly have some fun? Try `edit-demo` to apply some pre-defined edits.
+
 ```bash
 >> aimg edit-demo pearl_girl.jpg
 ```
+
 <p float="left">
 <img src="docs/assets/girl_with_a_pearl_earring_suprise.gif" height="256">
 <img src="docs/assets/mona-lisa-suprise.gif" height="256">
@@ -301,19 +319,16 @@ Want just quickly have some fun? Try `edit-demo` to apply some pre-defined edits
 <img src="docs/assets/shire-suprise.gif" height="256">
 </p>
 
+### Prompt Based Masking [by clipseg](https://github.com/timojl/clipseg)
 
-### Prompt Based Masking  [by clipseg](https://github.com/timojl/clipseg)
-Specify advanced text based masks using boolean logic and strength modifiers. 
+Specify advanced text based masks using boolean logic and strength modifiers.
 Mask syntax:
-  - mask descriptions must be lowercase
-  - keywords (`AND`, `OR`, `NOT`) must be uppercase
-  - parentheses are supported 
-  - mask modifiers may be appended to any mask or group of masks.  Example: `(dog OR cat){+5}` means that we'll
-select any dog or cat and then expand the size of the mask area by 5 pixels.  Valid mask modifiers:
-    - `{+n}` - expand mask by n pixels
-    - `{-n}` - shrink mask by n pixels
-    - `{*n}` - multiply mask strength. will expand mask to areas that weakly matched the mask description
-    - `{/n}` - divide mask strength. will reduce mask to areas that most strongly matched the mask description. probably not useful
+
+- mask descriptions must be lowercase
+- keywords (`AND`, `OR`, `NOT`) must be uppercase
+- parentheses are supported
+- mask modifiers may be appended to any mask or group of masks. Example: `(dog OR cat){+5}` means that we'll
+  select any dog or cat and then expand the size of the mask area by 5 pixels. Valid mask modifiers: - `{+n}` - expand mask by n pixels - `{-n}` - shrink mask by n pixels - `{*n}` - multiply mask strength. will expand mask to areas that weakly matched the mask description - `{/n}` - divide mask strength. will reduce mask to areas that most strongly matched the mask description. probably not useful
 
 When writing strength modifiers keep in mind that pixel values are between 0 and 1.
 
@@ -326,7 +341,8 @@ When writing strength modifiers keep in mind that pixel values are between 0 and
     --fix-faces \
     "a modern female president" "a female robot" "a female doctor" "a female firefighter"
 ```
-<img src="docs/assets/mask_examples/pearl000.jpg" height="200">➡️ 
+
+<img src="docs/assets/mask_examples/pearl000.jpg" height="200">➡️
 <img src="docs/assets/mask_examples/pearl_pres.png" height="200">
 <img src="docs/assets/mask_examples/pearl_robot.png" height="200">
 <img src="docs/assets/mask_examples/pearl_doctor.png" height="200">
@@ -341,39 +357,38 @@ When writing strength modifiers keep in mind that pixel values are between 0 and
     --init-image-strength .1 \
     "a bowl of kittens" "a bowl of gold coins" "a bowl of popcorn" "a bowl of spaghetti"
 ```
-<img src="docs/assets/000056_293284644_PLMS40_PS7.5_photo_of_a_bowl_of_fruit.jpg" height="200">➡️ 
+
+<img src="docs/assets/000056_293284644_PLMS40_PS7.5_photo_of_a_bowl_of_fruit.jpg" height="200">➡️
 <img src="docs/assets/mask_examples/bowl004.jpg" height="200">
 <img src="docs/assets/mask_examples/bowl001.jpg" height="200">
 <img src="docs/assets/mask_examples/bowl002.jpg" height="200">
 <img src="docs/assets/mask_examples/bowl003.jpg" height="200">
-
 
 ### Face Enhancement [by CodeFormer](https://github.com/sczhou/CodeFormer)
 
 ```bash
 >> imagine "a couple smiling" --steps 40 --seed 1 --fix-faces
 ```
-<img src="https://github.com/brycedrennan/imaginAIry/raw/master/assets/000178_1_PLMS40_PS7.5_a_couple_smiling_nofix.png" height="256"> ➡️ 
-<img src="https://github.com/brycedrennan/imaginAIry/raw/master/assets/000178_1_PLMS40_PS7.5_a_couple_smiling_fixed.png" height="256"> 
-
 
 ## Image Upscaling
+
 Upscale images easily.
 
 === "CLI"
-    ```bash
+`bash
     aimg upscale assets/000206_856637805_PLMS40_PS7.5_colorful_smoke.jpg --upscale-model real-hat
-    ```
+    `
 
 === "Python"
-    ```py
-    from imaginairy.api.upscale import upscale
+```py
+from viziax.api.upscale import upscale
 
     img = upscale(img="assets/000206_856637805_PLMS40_PS7.5_colorful_smoke.jpg")
     img.save("colorful_smoke.upscaled.jpg")
 
     ```
-<img src="docs/assets/000206_856637805_PLMS40_PS7.5_colorful_smoke.jpg" width="25%" height="auto"> ➡️ 
+
+<img src="docs/assets/000206_856637805_PLMS40_PS7.5_colorful_smoke.jpg" width="25%" height="auto"> ➡️
 <img src="docs/assets/000206_856637805_PLMS40_PS7.5_colorful_smoke_upscaled.jpg" width="50%" height="auto">
 
 Upscaling uses [Spandrel](https://github.com/chaiNNer-org/spandrel) to make it easy to use different upscaling models.
@@ -381,15 +396,14 @@ You can view different integrated models by running `aimg upscale --list-models`
 Also accepts url's if you want to upscale an image with a different model. Control the new file format/location with --format.
 
 ```python
-from imaginairy.enhancers.upscale_realesrgan import upscale_image
+from viziax.enhancers.upscale_realesrgan import upscale_image
 from PIL import Image
 img = Image.open("my-image.jpg")
 big_img = upscale_image(i)
 ```
 
-
-
 ### Tiled Images
+
 ```bash
 >> imagine  "gold coins" "a lush forest" "piles of old books" leaves --tile
 ```
@@ -399,24 +413,28 @@ big_img = upscale_image(i)
 <br>
 <img src="docs/assets/000075_961095192_PLMS40_PS7.5_piles_of_old_books.jpg" height="128"><img src="docs/assets/000075_961095192_PLMS40_PS7.5_piles_of_old_books.jpg" height="128"><img src="docs/assets/000075_961095192_PLMS40_PS7.5_piles_of_old_books.jpg" height="128">
 <img src="docs/assets/000040_527733581_PLMS40_PS7.5_leaves.jpg" height="128"><img src="docs/assets/000040_527733581_PLMS40_PS7.5_leaves.jpg" height="128"><img src="docs/assets/000040_527733581_PLMS40_PS7.5_leaves.jpg" height="128">
+
 #### 360 degree images
+
 ```bash
 imagine --tile-x -w 1024 -h 512 "360 degree equirectangular panorama photograph of the desert"  --upscale
 ```
+
 <img src="docs/assets/desert_360.jpg" height="128">
 
 ### Image-to-Image
+
 Use depth maps for amazing "translations" of existing images.
 
 ```bash
 >> imagine --init-image girl_with_a_pearl_earring_large.jpg --init-image-strength 0.05  "professional headshot photo of a woman with a pearl earring" -r 4 -w 1024 -h 1024 --steps 50
 ```
+
 <p float="left">
 <img src="tests/data/girl_with_a_pearl_earring.jpg" width="256"> ➡️ 
 <img src="docs/assets/pearl_depth_1.jpg" width="256">
 <img src="docs/assets/pearl_depth_2.jpg" width="256">
 </p>
-
 
 ### Outpainting
 
@@ -425,7 +443,7 @@ Given a starting image, one can generate it's "surroundings".
 Example:
 `imagine --init-image pearl-earring.jpg --init-image-strength 0 --outpaint all250,up0,down600 "woman standing"`
 
-<img src="tests/data/girl_with_a_pearl_earring.jpg" height="256"> ➡️ 
+<img src="tests/data/girl_with_a_pearl_earring.jpg" height="256"> ➡️
 <img src="tests/expected_output/test_outpainting_outpaint_.png" height="256">
 
 ### Work with different generation models
@@ -442,50 +460,54 @@ Example:
 ```bash
 imagine "valley, fairytale treehouse village covered, , matte painting, highly detailed, dynamic lighting, cinematic, realism, realistic, photo real, sunset, detailed, high contrast, denoised, centered, michael whelan" --steps 60 --seed 1 --arg-schedule model[sd14,sd15,sd20,sd21,openjourney-v1,openjourney-v2] --arg-schedule "caption-text[sd14,sd15,sd20,sd21,openjourney-v1,openjourney-v2]"
 ```
+
 </details>
 
 ### Prompt Expansion
-You can use `{}` to randomly pull values from lists.  A list of values separated by `|` 
- and enclosed in `{ }` will be randomly drawn from in a non-repeating fashion. Values that are surrounded by `_ _` will 
- pull from a phrase list of the same name.   Folders containing .txt phraselist files may be specified via
-`--prompt_library_path`. The option may be specified multiple times.  Built-in categories:
-    
-      3d-term, adj-architecture, adj-beauty, adj-detailed, adj-emotion, adj-general, adj-horror, animal, art-scene, art-movement, 
+
+You can use `{}` to randomly pull values from lists. A list of values separated by `|`
+and enclosed in `{ }` will be randomly drawn from in a non-repeating fashion. Values that are surrounded by `_ _` will
+pull from a phrase list of the same name. Folders containing .txt phraselist files may be specified via
+`--prompt_library_path`. The option may be specified multiple times. Built-in categories:
+
+      3d-term, adj-architecture, adj-beauty, adj-detailed, adj-emotion, adj-general, adj-horror, animal, art-scene, art-movement,
       art-site, artist, artist-botanical, artist-surreal, aspect-ratio, bird, body-of-water, body-pose, camera-brand,
-      camera-model, color, cosmic-galaxy, cosmic-nebula, cosmic-star, cosmic-term, desktop-background, dinosaur, eyecolor, f-stop, 
+      camera-model, color, cosmic-galaxy, cosmic-nebula, cosmic-star, cosmic-term, desktop-background, dinosaur, eyecolor, f-stop,
       fantasy-creature, fantasy-setting, fish, flower, focal-length, food, fruit, games, gen-modifier, hair, hd,
-      iso-stop, landscape-type, national-park, nationality, neg-weight, noun-beauty, noun-fantasy, noun-general, 
-      noun-horror, occupation, painting-style, photo-term, pop-culture, pop-location, punk-style, quantity, rpg-item, scenario-desc, 
+      iso-stop, landscape-type, national-park, nationality, neg-weight, noun-beauty, noun-fantasy, noun-general,
+      noun-horror, occupation, painting-style, photo-term, pop-culture, pop-location, punk-style, quantity, rpg-item, scenario-desc,
       skin-color, spaceship, style, tree-species, trippy, world-heritage-site
 
-   Examples:
+Examples:
 
-   `imagine "a {lime|blue|silver|aqua} colored dog" -r 4 --seed 0` (note that it generates a dog of each color without repetition)
+`imagine "a {lime|blue|silver|aqua} colored dog" -r 4 --seed 0` (note that it generates a dog of each color without repetition)
 
 <img src="docs/assets/000184_0_plms40_PS7.5_a_silver_colored_dog_[generated].jpg" height="200"><img src="docs/assets/000186_0_plms40_PS7.5_a_aqua_colored_dog_[generated].jpg" height="200">
 <img src="docs/assets/000210_0_plms40_PS7.5_a_lime_colored_dog_[generated].jpg" height="200">
 <img src="docs/assets/000211_0_plms40_PS7.5_a_blue_colored_dog_[generated].jpg" height="200">
 
-   `imagine "a {_color_} dog" -r 4 --seed 0` will generate four, different colored dogs. The colors will be pulled from an included 
-   phraselist of colors.
-    
-   `imagine "a {_spaceship_|_fruit_|hot air balloon}. low-poly" -r 4 --seed 0` will generate images of spaceships or fruits or a hot air balloon
+`imagine "a {_color_} dog" -r 4 --seed 0` will generate four, different colored dogs. The colors will be pulled from an included
+phraselist of colors.
+
+`imagine "a {_spaceship_|_fruit_|hot air balloon}. low-poly" -r 4 --seed 0` will generate images of spaceships or fruits or a hot air balloon
 
 <details>
 <summary>Python example</summary>
 
 ```python
-from imaginairy.enhancers.prompt_expansion import expand_prompts
+from viziax.enhancers.prompt_expansion import expand_prompts
 
 my_prompt = "a giant {_animal_}"
 
 expanded_prompts = expand_prompts(n=10, prompt_text=my_prompt, prompt_library_paths=["./prompts"])
 ```
+
 </details>
 
-   Credit to [noodle-soup-prompts](https://github.com/WASasquatch/noodle-soup-prompts/) where most, but not all, of the wordlists originate.
+Credit to [noodle-soup-prompts](https://github.com/WASasquatch/noodle-soup-prompts/) where most, but not all, of the wordlists originate.
 
 ### Generate image captions (via [BLIP](https://github.com/salesforce/BLIP))
+
 ```bash
 >> aimg describe assets/mask_examples/bowl001.jpg
 a bowl full of gold bars sitting on a table
@@ -498,7 +520,7 @@ a bowl full of gold bars sitting on a table
 # Generate endless 8k art
 🤖🧠> imagine -w 1920 -h 1080 --upscale "{_art-scene_}. {_painting-style_} by {_artist_}" -r 1000 --steps 30 --model sd21v
 
-# generate endless desktop backgrounds 
+# generate endless desktop backgrounds
 🤖🧠> imagine --tile "{_desktop-background_}" -r 100
 
 # convert a folder of images to pencil sketches
@@ -512,21 +534,22 @@ a bowl full of gold bars sitting on a table
 ```
 
 ### Additional Features
- - Generate images either in code or from command line.
- - It just works. Proper requirements are installed. Model weights are automatically downloaded. No huggingface account needed. 
-    (if you have the right hardware... and aren't on windows)
- - Noisy logs are gone (which was surprisingly hard to accomplish)
- - WeightedPrompts let you smash together separate prompts (cat-dog)
- - Prompt metadata saved into image file metadata
- - Have AI generate captions for images `aimg describe <filename-or-url>`
- - Interactive prompt: just run `aimg`
- 
+
+- Generate images either in code or from command line.
+- It just works. Proper requirements are installed. Model weights are automatically downloaded. No huggingface account needed.
+  (if you have the right hardware... and aren't on windows)
+- Noisy logs are gone (which was surprisingly hard to accomplish)
+- WeightedPrompts let you smash together separate prompts (cat-dog)
+- Prompt metadata saved into image file metadata
+- Have AI generate captions for images `aimg describe <filename-or-url>`
+- Interactive prompt: just run `aimg`
+
 ## How To
 
 For full command line instructions run `aimg --help`
 
 ```python
-from imaginairy import imagine, imagine_image_files, ImaginePrompt, WeightedPrompt, LazyLoadingImage
+from viziax import imagine, imagine_image_files, ImaginePrompt, WeightedPrompt, LazyLoadingImage
 
 url = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Thomas_Cole_-_Architect%E2%80%99s_Dream_-_Google_Art_Project.jpg/540px-Thomas_Cole_-_Architect%E2%80%99s_Dream_-_Google_Art_Project.jpg"
 prompts = [
@@ -537,11 +560,11 @@ prompts = [
         WeightedPrompt("dog", weight=1),
     ]),
     ImaginePrompt(
-        "a spacious building", 
+        "a spacious building",
         init_image=LazyLoadingImage(url=url)
     ),
     ImaginePrompt(
-        "a bowl of strawberries", 
+        "a bowl of strawberries",
         init_image=LazyLoadingImage(filepath="mypath/to/bowl_of_fruit.jpg"),
         mask_prompt="fruit OR stem{*2}",  # amplify the stem mask x2
         mask_mode="replace",
@@ -560,41 +583,42 @@ imagine_image_files(prompts, outdir="./my-art")
 ```
 
 ## Requirements
+
 - ~10 gb space for models to download
 - A CUDA supported graphics card with >= 11gb VRAM (and CUDA installed) or an M1 processor.
-- Python installed. Preferably Python 3.10.  (not conda)
+- Python installed. Preferably Python 3.10. (not conda)
 - For macOS [rust](https://www.rust-lang.org/tools/install) and setuptools-rust must be installed to compile the `tokenizer` library.
-They can be installed via: `curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh` and `pip install setuptools-rust`
-    
+  They can be installed via: `curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh` and `pip install setuptools-rust`
 
 ## Running in Docker
+
 See example Dockerfile (works on machine where you can pass the gpu into the container)
+
 ```bash
-docker build . -t imaginairy
+docker build . -t viziax
 # you really want to map the cache or you end up wasting a lot of time and space redownloading the model weights
-docker run -it --gpus all -v $HOME/.cache/huggingface:/root/.cache/huggingface -v $HOME/.cache/torch:/root/.cache/torch -v `pwd`/outputs:/outputs imaginairy /bin/bash
+docker run -it --gpus all -v $HOME/.cache/huggingface:/root/.cache/huggingface -v $HOME/.cache/torch:/root/.cache/torch -v `pwd`/outputs:/outputs viziax /bin/bash
 ```
 
 ## Running on Google Colab
+
 [Example Colab](https://colab.research.google.com/drive/1rOvQNs0Cmn_yU1bKWjCOHzGVDgZkaTtO?usp=sharing)
 
 ## Q&A
 
 #### Q: How do I change the cache directory for where models are stored?
 
-A: Set the `HUGGINGFACE_HUB_CACHE` environment variable. 
+A: Set the `HUGGINGFACE_HUB_CACHE` environment variable.
 
 #### Q: How do I free up disk space?
 
 A: The AI models are cached in `~/.cache/` (or `HUGGINGFACE_HUB_CACHE`). To delete the cache remove the following folders:
- - ~/.cache/imaginairy
- - ~/.cache/clip
- - ~/.cache/torch
- - ~/.cache/huggingface
 
-
+- ~/.cache/viziax
+- ~/.cache/clip
+- ~/.cache/torch
+- ~/.cache/huggingface
 
 ## Not Supported
- - exploratory features that don't work well
 
-
+- exploratory features that don't work well

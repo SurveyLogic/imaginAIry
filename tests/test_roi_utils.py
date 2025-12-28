@@ -1,7 +1,7 @@
 import itertools
 import random
 
-from imaginairy.utils.roi_utils import (
+from viziax.utils.roi_utils import (
     RoiNotInBoundsError,
     resize_roi_coordinates,
     square_roi_coordinate,

@@ -1,7 +1,7 @@
 import pytest
 from pydantic import ValidationError
 
-from imaginairy.schema import ControlInput, LazyLoadingImage
+from viziax.schema import ControlInput, LazyLoadingImage
 from tests import TESTS_FOLDER
 
 

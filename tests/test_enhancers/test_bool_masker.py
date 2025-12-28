@@ -1,6 +1,6 @@
 import pytest
 
-from imaginairy.enhancers.bool_masker import MASK_PROMPT
+from viziax.enhancers.bool_masker import MASK_PROMPT
 
 boolean_mask_test_cases = [
     (

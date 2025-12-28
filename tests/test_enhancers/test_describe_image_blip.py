@@ -1,8 +1,8 @@
 import pytest
 from PIL import Image
 
-from imaginairy.enhancers.describe_image_blip import generate_caption
-from imaginairy.utils import get_device, seed_everything
+from viziax.enhancers.describe_image_blip import generate_caption
+from viziax.utils import get_device, seed_everything
 from tests import TESTS_FOLDER
 
 

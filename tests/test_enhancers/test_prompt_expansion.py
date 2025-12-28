@@ -1,4 +1,4 @@
-from imaginairy.enhancers.prompt_expansion import category_list, expand_prompts
+from viziax.enhancers.prompt_expansion import category_list, expand_prompts
 
 
 def test_prompt_expander_basic():

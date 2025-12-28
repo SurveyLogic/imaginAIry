@@ -1,8 +1,8 @@
 import pytest
 from PIL import Image
 
-from imaginairy.enhancers.face_restoration_codeformer import enhance_faces
-from imaginairy.utils import get_device, seed_everything
+from viziax.enhancers.face_restoration_codeformer import enhance_faces
+from viziax.utils import get_device, seed_everything
 from tests import TESTS_FOLDER
 from tests.utils import assert_image_similar_to_expectation
 

@@ -7,7 +7,7 @@ import pytest
 import torch.backends.mps
 import torch.cuda
 
-from imaginairy.utils import (
+from viziax.utils import (
     get_device,
     get_hardware_description,
     get_obj_from_str,

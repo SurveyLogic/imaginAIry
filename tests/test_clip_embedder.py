@@ -3,8 +3,8 @@ import hashlib
 import pytest
 from safetensors import safe_open
 
-from imaginairy.modules.clip_embedders import FrozenCLIPEmbedder
-from imaginairy.utils import get_device
+from viziax.modules.clip_embedders import FrozenCLIPEmbedder
+from viziax.utils import get_device
 from tests import TESTS_FOLDER
 
 

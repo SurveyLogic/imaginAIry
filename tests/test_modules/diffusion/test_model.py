@@ -1,6 +1,6 @@
 import torch
 
-from imaginairy.utils import get_device
+from viziax.utils import get_device
 from tests.utils import Timer
 
 

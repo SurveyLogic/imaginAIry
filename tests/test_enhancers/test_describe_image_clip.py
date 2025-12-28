@@ -1,8 +1,8 @@
 import pytest
 from PIL import Image
 
-from imaginairy.enhancers.describe_image_clip import find_img_text_similarity
-from imaginairy.utils import get_device
+from viziax.enhancers.describe_image_clip import find_img_text_similarity
+from viziax.utils import get_device
 from tests import TESTS_FOLDER
 
 

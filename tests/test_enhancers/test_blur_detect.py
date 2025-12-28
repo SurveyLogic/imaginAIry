@@ -1,7 +1,7 @@
 import pytest
 from PIL import Image
 
-from imaginairy.enhancers.blur_detect import is_blurry
+from viziax.enhancers.blur_detect import is_blurry
 from tests import TESTS_FOLDER
 
 blur_params = [

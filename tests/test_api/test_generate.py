@@ -2,11 +2,11 @@ import os.path
 
 import pytest
 
-from imaginairy.api import imagine, imagine_image_files
-from imaginairy.img_processors.control_modes import CONTROL_MODES
-from imaginairy.schema import ControlInput, ImaginePrompt, LazyLoadingImage, MaskMode
-from imaginairy.utils import get_device
-from imaginairy.utils.img_utils import pillow_fit_image_within
+from viziax.api import imagine, imagine_image_files
+from viziax.img_processors.control_modes import CONTROL_MODES
+from viziax.schema import ControlInput, ImaginePrompt, LazyLoadingImage, MaskMode
+from viziax.utils import get_device
+from viziax.utils.img_utils import pillow_fit_image_within
 from tests import TESTS_FOLDER
 from tests.utils import assert_image_similar_to_expectation
 

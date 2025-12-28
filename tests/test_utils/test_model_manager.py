@@ -1,8 +1,8 @@
 import pytest
 
-from imaginairy import config
-from imaginairy.utils.downloads import parse_diffusers_repo_url, resolve_path_or_url
-from imaginairy.utils.model_manager import (
+from viziax import config
+from viziax.utils.downloads import parse_diffusers_repo_url, resolve_path_or_url
+from viziax.utils.model_manager import (
     resolve_model_weights_config,
 )
 

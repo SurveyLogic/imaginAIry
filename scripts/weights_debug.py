@@ -1,4 +1,4 @@
-from imaginairy.utils.model_manager import load_tensors
+from viziax.utils.model_manager import load_tensors
 
 
 def dotstrings_to_nested_dictionaries(list_of_dotstrings):

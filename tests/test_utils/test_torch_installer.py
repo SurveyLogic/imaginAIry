@@ -1,7 +1,7 @@
 import pytest
 from packaging.version import Version
 
-from imaginairy.utils.torch_installer import determine_torch_index
+from viziax.utils.torch_installer import determine_torch_index
 
 index_base = "https://download.pytorch.org/whl/"
 index_cu118 = f"{index_base}cu118"

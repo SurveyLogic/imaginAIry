@@ -1,14 +1,14 @@
 import pytest
 from pydantic import ValidationError
 
-from imaginairy import config
-from imaginairy.schema import (
+from viziax import config
+from viziax.schema import (
     ControlInput,
     ImaginePrompt,
     LazyLoadingImage,
     WeightedPrompt,
 )
-from imaginairy.utils.data_distorter import DataDistorter
+from viziax.utils.data_distorter import DataDistorter
 from tests import TESTS_FOLDER
 
 

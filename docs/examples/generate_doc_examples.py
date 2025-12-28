@@ -1,5 +1,5 @@
-from imaginairy.api import imagine_image_files
-from imaginairy.schema import ImaginePrompt, LazyLoadingImage
+from viziax.api import imagine_image_files
+from viziax.schema import ImaginePrompt, LazyLoadingImage
 
 
 def main():

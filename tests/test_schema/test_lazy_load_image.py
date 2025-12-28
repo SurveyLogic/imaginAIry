@@ -5,7 +5,7 @@ import pytest
 from PIL import Image
 from pydantic import BaseModel
 
-from imaginairy.schema import InvalidUrlError, LazyLoadingImage
+from viziax.schema import InvalidUrlError, LazyLoadingImage
 from tests import TESTS_FOLDER
 
 

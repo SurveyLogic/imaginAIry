@@ -1,5 +1,5 @@
-from imaginairy.utils.img_utils import create_halo_effect
-from imaginairy.utils.text_image import generate_word_image
+from viziax.utils.img_utils import create_halo_effect
+from viziax.utils.text_image import generate_word_image
 from tests import TESTS_FOLDER
 
 

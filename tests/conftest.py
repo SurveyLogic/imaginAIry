@@ -13,16 +13,16 @@ import torch.cuda
 from tqdm import tqdm
 from urllib3 import HTTPConnectionPool
 
-from imaginairy import api
-from imaginairy.api import imagine
-from imaginairy.schema import ImaginePrompt
-from imaginairy.utils import (
+from viziax import api
+from viziax.api import imagine
+from viziax.schema import ImaginePrompt
+from viziax.utils import (
     fix_torch_group_norm,
     fix_torch_nn_layer_norm,
     get_device,
     platform_appropriate_autocast,
 )
-from imaginairy.utils.log_utils import (
+from viziax.utils.log_utils import (
     configure_logging,
     suppress_annoying_logs_and_warnings,
 )
@@ -191,7 +191,7 @@ def pytest_collection_modifyitems(config, items):
 
 
 def pytest_sessionstart(session):
-    from imaginairy.utils.debug_info import get_debug_info
+    from viziax.utils.debug_info import get_debug_info
 
     debug_info = get_debug_info()
 

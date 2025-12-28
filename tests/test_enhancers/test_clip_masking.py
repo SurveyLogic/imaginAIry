@@ -1,10 +1,10 @@
 import pytest
 from PIL import Image
 
-from imaginairy.api import imagine
-from imaginairy.enhancers.clip_masking import get_img_mask
-from imaginairy.schema import ImaginePrompt
-from imaginairy.utils import get_device
+from viziax.api import imagine
+from viziax.enhancers.clip_masking import get_img_mask
+from viziax.schema import ImaginePrompt
+from viziax.utils import get_device
 from tests import TESTS_FOLDER
 from tests.utils import assert_image_similar_to_expectation
 

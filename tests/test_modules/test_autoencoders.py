@@ -3,15 +3,15 @@ import pytest
 from PIL import Image
 from torch.nn.functional import interpolate
 
-from imaginairy.enhancers.upscale_riverwing import upscale_latent
-from imaginairy.schema import LazyLoadingImage
-from imaginairy.utils import get_device
-from imaginairy.utils.img_utils import (
+from viziax.enhancers.upscale_riverwing import upscale_latent
+from viziax.schema import LazyLoadingImage
+from viziax.utils import get_device
+from viziax.utils.img_utils import (
     pillow_fit_image_within,
     pillow_img_to_torch_image,
     torch_img_to_pillow_img,
 )
-from imaginairy.utils.model_manager import get_diffusion_model
+from viziax.utils.model_manager import get_diffusion_model
 from tests import TESTS_FOLDER
 
 strat_combos = [

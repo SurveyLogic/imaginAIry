@@ -1,9 +1,9 @@
 import pytest
 
-from imaginairy.api import imagine
-from imaginairy.schema import ImaginePrompt, LazyLoadingImage
-from imaginairy.utils import get_device
-from imaginairy.utils.outpaint import outpaint_arg_str_parse
+from viziax.api import imagine
+from viziax.schema import ImaginePrompt, LazyLoadingImage
+from viziax.utils import get_device
+from viziax.utils.outpaint import outpaint_arg_str_parse
 from tests import TESTS_FOLDER
 from tests.utils import assert_image_similar_to_expectation
 

@@ -1,6 +1,6 @@
 import pytest
 
-from imaginairy.utils.named_resolutions import normalize_image_size
+from viziax.utils.named_resolutions import normalize_image_size
 
 valid_cases = [
     ("HD", (1280, 720)),

@@ -1,8 +1,8 @@
 import pytest
 from PIL import Image
 
-from imaginairy.utils import get_device
-from imaginairy.utils.safety import create_safety_score
+from viziax.utils import get_device
+from viziax.utils.safety import create_safety_score
 from tests import TESTS_FOLDER
 
 

@@ -3,8 +3,8 @@ import os
 import torch
 from safetensors.torch import load_file, save_file
 
-from imaginairy.utils.downloads import get_cached_url_path
-from imaginairy.utils.paths import PKG_ROOT
+from viziax.utils.downloads import get_cached_url_path
+from viziax.utils.paths import PKG_ROOT
 
 sd15_url = "https://huggingface.co/stable-diffusion-v1-5/stable-diffusion-v1-5/resolve/f03de327dd89b501a01da37fc5240cf4fdba85a1/v1-5-pruned-emaonly.ckpt"
 

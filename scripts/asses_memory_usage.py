@@ -1,9 +1,9 @@
 import torch
 from torch.cuda import OutOfMemoryError
 
-from imaginairy.api import imagine_image_files
-from imaginairy.schema import ImaginePrompt
-from imaginairy.utils import get_device
+from viziax.api import imagine_image_files
+from viziax.schema import ImaginePrompt
+from viziax.utils import get_device
 
 
 def assess_memory_usage():

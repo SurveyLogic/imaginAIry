@@ -4,14 +4,14 @@ from unittest import mock
 import pytest
 from click.testing import CliRunner
 
-from imaginairy.cli.edit import edit_cmd
-from imaginairy.cli.edit_demo import edit_demo_cmd
-from imaginairy.cli.imagine import imagine_cmd
-from imaginairy.cli.main import aimg
-from imaginairy.cli.upscale import upscale_cmd
-from imaginairy.schema import ImaginePrompt, LazyLoadingImage
-from imaginairy.utils import surprise_me
-from imaginairy.utils.model_cache import GPUModelCache
+from viziax.cli.edit import edit_cmd
+from viziax.cli.edit_demo import edit_demo_cmd
+from viziax.cli.imagine import imagine_cmd
+from viziax.cli.main import aimg
+from viziax.cli.upscale import upscale_cmd
+from viziax.schema import ImaginePrompt, LazyLoadingImage
+from viziax.utils import surprise_me
+from viziax.utils.model_cache import GPUModelCache
 from tests import PROJECT_FOLDER, TESTS_FOLDER
 from tests.utils import Timer
 
@@ -144,7 +144,7 @@ def test_edit_demo(monkeypatch):
 
 
 def test_upscale(monkeypatch):
-    from imaginairy.enhancers import upscale_realesrgan
+    from viziax.enhancers import upscale_realesrgan
 
     def mock_upscale_image(*args, **kwargs):
         return LazyLoadingImage(filepath=f"{TESTS_FOLDER}/data/dog.jpg")
